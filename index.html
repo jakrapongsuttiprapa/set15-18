@@ -1,0 +1,2432 @@
+<!DOCTYPE html>
+<html lang="th" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="google" content="notranslate">
+<meta name="theme-color" content="#07060f">
+<title>VOCAB BEAT ADVANCE • Set 15–18 + Final Exam</title>
+<style>
+:root{
+  --bg:#06050d; --ink:#fff; --muted:rgba(255,255,255,.64); --line:rgba(255,255,255,.12);
+  --glass:rgba(255,255,255,.055); --a1:#ff3df2; --a2:#ffd23f; --ok:#2ee59d; --bad:#ff5470; --tint:#160b2c;
+  --font:"Sukhumvit Set","Noto Sans Thai","Leelawadee UI","Thonburi",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+body[data-theme="s15"]{--a1:#b388ff;--a2:#6ee7ff;--tint:#1d0b36}
+body[data-theme="s16"]{--a1:#22e5e5;--a2:#f5c451;--tint:#03201a}
+body[data-theme="s17"]{--a1:#ffd23f;--a2:#ff8a1f;--tint:#1c1606}
+body[data-theme="s18"]{--a1:#ff4d5e;--a2:#ffd23f;--tint:#260808}
+body[data-theme="boss"]{--a1:#ff3df2;--a2:#ffd23f;--tint:#160733}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{min-height:100vh;overflow-x:hidden;font-family:var(--font)}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+input,select{font:inherit}
+.hidden{display:none!important}
+
+/* ================= BACKGROUND ================= */
+#bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(130% 85% at 50% -15%,var(--tint) 0%,var(--bg) 62%);transition:background 1s}
+#bgc{position:absolute;inset:0;width:100%;height:100%}
+.beam{position:absolute;top:-35%;width:62vmax;height:150vmax;opacity:.2;filter:blur(10px);transform-origin:50% 0;
+  clip-path:polygon(46% 0,54% 0,100% 100%,0 100%);transition:opacity .3s}
+.beam.b1{left:-14vmax;background:linear-gradient(180deg,var(--a1),transparent 70%);animation:sw1 9s ease-in-out infinite alternate}
+.beam.b2{right:-14vmax;background:linear-gradient(180deg,var(--a2),transparent 70%);animation:sw2 11s ease-in-out infinite alternate}
+.beam.b3{left:30%;opacity:.12;background:linear-gradient(180deg,#fff,transparent 60%);animation:sw3 13s ease-in-out infinite alternate}
+@keyframes sw1{from{transform:rotate(-30deg)}to{transform:rotate(10deg)}}
+@keyframes sw2{from{transform:rotate(28deg)}to{transform:rotate(-12deg)}}
+@keyframes sw3{from{transform:rotate(-12deg)}to{transform:rotate(14deg)}}
+#bg.pulse .beam{opacity:.42}
+.eq{position:absolute;left:0;right:0;bottom:0;height:20vh;display:flex;align-items:flex-end;gap:.55vw;padding:0 1vw;opacity:.16}
+.eq i{flex:1;height:100%;border-radius:6px 6px 0 0;background:linear-gradient(0deg,var(--a1),var(--a2));transform-origin:bottom;animation:eq 1.1s ease-in-out infinite alternate}
+@keyframes eq{0%{transform:scaleY(.1)}100%{transform:scaleY(1)}}
+.floor{position:absolute;left:-20%;right:-20%;bottom:-10vh;height:36vh;transform:perspective(500px) rotateX(62deg);opacity:.22;
+  background-image:linear-gradient(var(--a1) 1px,transparent 1px),linear-gradient(90deg,var(--a1) 1px,transparent 1px);background-size:60px 60px;
+  mask-image:linear-gradient(0deg,#000,transparent);-webkit-mask-image:linear-gradient(0deg,#000,transparent);animation:floor 3s linear infinite}
+@keyframes floor{to{background-position:0 60px,0 0}}
+#flash{position:fixed;inset:0;pointer-events:none;z-index:65;opacity:0}
+#flash.ok{animation:flash .5s ease-out;background:radial-gradient(circle at 50% 45%,rgba(46,229,157,.28),transparent 60%)}
+#flash.bad{animation:flash .55s ease-out;background:radial-gradient(circle at 50% 50%,transparent 40%,rgba(255,84,112,.38))}
+@keyframes flash{0%{opacity:1}100%{opacity:0}}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:70}
+
+/* ================= TOP BAR ================= */
+.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:8px;padding:10px 16px;padding-top:max(10px,env(safe-area-inset-top));
+  background:linear-gradient(180deg,rgba(6,5,13,.94),rgba(6,5,13,.55));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.5px;cursor:default}
+.mk{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;font-size:14px;font-weight:900;color:#111;flex:none;
+  background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 0 22px -2px var(--a1);animation:mkpulse 2.2s ease-in-out infinite}
+@keyframes mkpulse{50%{box-shadow:0 0 34px 2px var(--a1)}}
+.logo small{display:block;font-size:9px;letter-spacing:5px;color:var(--muted);font-weight:800}
+.top .sp{flex:1}
+.chip{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--glass);font-size:13px;white-space:nowrap;color:#fff}
+select.chip,input.chip{outline:none}
+select.chip option{background:#111}
+.rankchip{font-weight:900;color:var(--a2)}
+.kbtn{white-space:nowrap;flex:none;padding:9px 14px;border-radius:12px;font-weight:900;font-size:13px;letter-spacing:1.5px;color:#111;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#ffd23f,#ff9f1c);box-shadow:0 4px 18px rgba(255,190,40,.35)}
+.kbtn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-20deg);animation:gl 3.5s infinite}
+@keyframes gl{0%,70%{left:-60%}100%{left:130%}}
+.icobtn{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:var(--glass);font-size:17px;flex:none}
+.icobtn.on{border-color:var(--a2);box-shadow:0 0 14px -2px var(--a2)}
+#userChip{max-width:34vw;overflow:hidden;text-overflow:ellipsis}
+
+/* ================= LAYOUT ================= */
+main{max-width:940px;margin:0 auto;padding:18px 16px 90px}
+.screen{animation:rise .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:24px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.pad{padding:22px}
+h1,h2,h3{margin:0}
+.muted{color:var(--muted)}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:15px;font-weight:800;
+  transition:transform .15s,box-shadow .25s,opacity .2s;overflow:hidden;text-decoration:none;color:inherit}
+.btn:active{transform:scale(.96)}
+.btn.pri{color:#111;background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 10px 30px -8px var(--a1)}
+.btn.pri::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:gl 4s infinite}
+.btn.pri:hover{box-shadow:0 14px 40px -8px var(--a1)}
+.btn.ghost{border:1px solid var(--line);background:var(--glass)}
+.btn.danger{background:rgba(255,84,112,.14);border:1px solid rgba(255,84,112,.5);color:#ffb3c1}
+.btn:disabled{opacity:.35;pointer-events:none}
+.xs{padding:6px 11px;border-radius:10px;font-size:12px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.center{text-align:center}
+
+/* animated neon frame */
+.neon{position:relative;overflow:hidden;border-radius:26px;padding:2px;isolation:isolate}
+.neon::before{content:"";position:absolute;inset:-100%;z-index:-1;background:conic-gradient(from 0deg,var(--a1),transparent 25%,var(--a2) 50%,transparent 75%,var(--a1));animation:spin 6s linear infinite}
+.neon>.in{position:relative;border-radius:24px;background:linear-gradient(160deg,rgba(22,16,40,.96),rgba(9,8,18,.97))}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ================= SPLASH ================= */
+#splash{position:fixed;inset:0;z-index:90;display:grid;place-items:center;background:radial-gradient(120% 90% at 50% 30%,#1c0b38,#05040b 70%);cursor:pointer;transition:opacity .6s,transform .6s}
+#splash.out{opacity:0;transform:scale(1.08);pointer-events:none}
+#splash .wrap{text-align:center;padding:20px}
+#splash .adv{letter-spacing:16px;font-weight:800;color:var(--muted);font-size:clamp(12px,3vw,18px);margin-left:16px;opacity:0;animation:fadeIn .6s .2s forwards}
+.bigtitle{font-weight:900;font-size:clamp(58px,15vw,140px);line-height:.92;letter-spacing:-2px;display:flex;flex-direction:column;align-items:center}
+.bigtitle .ln{display:flex}
+.bigtitle span{display:inline-block;background:linear-gradient(180deg,#fff 20%,var(--a1) 60%,var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 6px 26px rgba(255,61,242,.45));opacity:0;transform:translateY(-80px) rotate(-8deg);animation:drop .7s cubic-bezier(.3,1.6,.5,1) forwards}
+@keyframes drop{to{opacity:1;transform:none}}
+@keyframes fadeIn{to{opacity:1}}
+#splash .tap{margin-top:26px;font-weight:800;letter-spacing:4px;color:var(--a2);opacity:0;animation:fadeIn .5s 1.5s forwards,blink 1.4s 2s infinite}
+@keyframes blink{50%{opacity:.35}}
+#splash .sub{margin-top:12px;color:var(--muted);opacity:0;animation:fadeIn .6s 1.2s forwards}
+
+/* ================= REGISTRATION ================= */
+.hero{text-align:center;padding:18px 0 6px}
+.hero .adv{letter-spacing:14px;font-weight:800;font-size:clamp(11px,2.4vw,16px);color:var(--muted);margin-left:14px}
+.hero .title{font-weight:900;font-size:clamp(46px,12vw,100px);line-height:.95;letter-spacing:-1px;
+  background:linear-gradient(100deg,var(--a1) 10%,#fff 45%,var(--a2) 80%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:220% 100%;animation:shine 6s linear infinite;filter:drop-shadow(0 6px 30px rgba(255,61,242,.3))}
+@keyframes shine{from{background-position:0% 0}to{background-position:220% 0}}
+.hero .sets{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+.hero .sets span{padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:1px;border:1px solid currentColor;background:rgba(0,0,0,.25)}
+.hero .tag{margin-top:10px;color:var(--a2);font-weight:800}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.form .full{grid-column:1/-1}
+.field label{display:block;font-size:13px;color:var(--muted);margin:0 0 6px 4px}
+.field input,.field select{width:100%;padding:13px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.4);color:#fff;outline:none;font-size:16px;transition:border-color .2s,box-shadow .2s}
+.field input:focus,.field select:focus{border-color:var(--a1);box-shadow:0 0 0 3px rgba(255,61,242,.25)}
+.field select option{background:#111}
+.err{color:#ff9fb0;font-size:14px;min-height:20px;margin-top:8px}
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.feat div{padding:10px;border-radius:14px;background:rgba(0,0,0,.28);border:1px solid var(--line);font-size:12px;text-align:center;color:var(--muted)}
+.feat b{display:block;font-size:20px;margin-bottom:2px}
+
+/* ================= HUB ================= */
+.hubhead{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.rankbox{display:flex;align-items:center;gap:12px;margin-top:12px}
+.rankic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:26px;background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 0 22px -4px var(--a1);flex:none}
+.xpbar{height:10px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:6px;min-width:160px}
+.xpbar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--a1),var(--a2));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.tot{text-align:right}
+.tot b{font-size:46px;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--a1),var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.resume{margin-top:14px;padding:14px 16px;border-radius:18px;border:1px dashed var(--a2);background:rgba(255,210,63,.06);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.stages{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;margin-top:16px;perspective:900px}
+.st{position:relative;overflow:hidden;border-radius:24px;padding:18px;min-height:200px;border:1px solid var(--line);
+  display:flex;flex-direction:column;gap:6px;text-align:left;transition:transform .2s ease-out,box-shadow .3s;isolation:isolate;
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;animation:cardIn .6s backwards}
+@keyframes cardIn{from{opacity:0;transform:translateY(30px) rotateX(18deg)}}
+.st:hover{box-shadow:0 18px 50px -14px var(--sta)}
+.st::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--stbg)}
+.st::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(260px circle at var(--mx,80%) var(--my,0%),color-mix(in srgb,var(--sta) 40%,transparent),transparent 60%);opacity:.75;transition:opacity .3s}
+.st .ico{font-size:32px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4))}
+.st .nm{font-weight:900;font-size:28px;letter-spacing:.5px}
+.st .lv{font-size:12px;font-weight:800;letter-spacing:2px;color:var(--sta)}
+.st .ds{font-size:13px;color:var(--muted)}
+.st .ft{margin-top:auto;display:flex;align-items:center;gap:8px}
+.st .best{font-weight:900;font-size:21px}
+.st .stars{color:#ffd23f;letter-spacing:2px}
+.st .go{margin-left:auto;padding:9px 16px;border-radius:12px;font-weight:900;color:#111;background:var(--sta);box-shadow:0 6px 18px -6px var(--sta)}
+.st .ring{position:absolute;right:14px;top:14px;width:46px;height:46px}
+.st .crown{position:absolute;right:16px;top:64px;font-size:12px;font-weight:900;color:#111;background:#ffd23f;border-radius:8px;padding:2px 6px}
+.st[data-k="s15"]{--sta:#b388ff;--stbg:linear-gradient(150deg,#271046,#110720)}
+.st[data-k="s16"]{--sta:#22e5e5;--stbg:linear-gradient(150deg,#073630,#03120f)}
+.st[data-k="s17"]{--sta:#ffd23f;--stbg:repeating-linear-gradient(135deg,#16130a 0 22px,#1b170b 22px 44px)}
+.st[data-k="s18"]{--sta:#ff4d5e;--stbg:linear-gradient(150deg,#2e0b0f,#120606)}
+.st[data-k="boss"]{--sta:#ffd23f;--stbg:linear-gradient(135deg,#3f0b55,#0d0a2a 55%,#402c05)}
+.st[data-k="boss"] .nm{background:linear-gradient(90deg,#ff3df2,#ffd23f,#22e5e5,#ff3df2);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite}
+.sect{margin:22px 0 10px;display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:1px}
+.sect::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(102px,1fr));gap:10px}
+.bdg{padding:12px 8px;border-radius:18px;text-align:center;background:rgba(0,0,0,.3);border:1px solid var(--line);transition:transform .2s}
+.bdg .e{font-size:32px;display:block;filter:grayscale(1) brightness(.5);opacity:.5}
+.bdg .n{font-size:12px;font-weight:800;margin-top:4px;color:var(--muted)}
+.bdg.on{border-color:rgba(255,210,63,.55);background:linear-gradient(160deg,rgba(255,210,63,.14),rgba(255,61,242,.08));box-shadow:0 0 24px -10px #ffd23f}
+.bdg.on .e{filter:none;opacity:1;animation:bob 2.6s ease-in-out infinite}
+.bdg.on .n{color:#fff}
+.bdg:hover{transform:translateY(-3px)}
+@keyframes bob{50%{transform:translateY(-4px)}}
+.hubfoot{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+/* ================= PLAY ================= */
+.phead{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.phead .snm{font-weight:900;font-size:17px}
+.phead .sp{flex:1}
+.pill{padding:6px 12px;border-radius:999px;background:rgba(0,0,0,.4);border:1px solid var(--line);font-weight:800;font-size:14px;white-space:nowrap}
+.pill.xp{color:var(--a2)}
+.track{display:grid;grid-template-columns:repeat(20,1fr);gap:4px;margin:12px 0 8px}
+.track i{height:8px;border-radius:4px;background:rgba(255,255,255,.1);transition:background .3s,transform .3s}
+.track i.ok{background:var(--ok);box-shadow:0 0 8px -1px var(--ok)} .track i.bad{background:var(--bad)}
+.track i.cur{background:var(--a2);box-shadow:0 0 12px var(--a2);transform:scaleY(1.5)}
+.combobar{display:flex;align-items:center;gap:10px;margin-bottom:10px;min-height:24px}
+.combobar .meter{flex:1;height:6px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden}
+.combobar .meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff9f1c,#ff3d3d,#ffd23f);transition:width .4s;box-shadow:0 0 10px #ff9f1c}
+.combobar .lbl{font-weight:900;font-size:13px;color:#ffb020;min-width:110px;text-align:right}
+.combobar .lbl.hot{animation:hot .6s ease-in-out infinite alternate;color:#ff6b3d}
+@keyframes hot{to{text-shadow:0 0 14px #ff6b3d;transform:scale(1.08)}}
+.qcard .in{padding:22px}
+.qtop{display:flex;align-items:center;gap:8px}
+.qtype{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:900;letter-spacing:2px;padding:6px 12px;border-radius:999px;color:#111;background:linear-gradient(135deg,var(--a1),var(--a2))}
+.qnum{margin-left:auto;color:var(--muted);font-weight:800}
+.beat{height:4px;border-radius:3px;background:rgba(255,255,255,.08);margin-top:12px;overflow:hidden}
+.beat i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--a2),var(--a1));transform-origin:left;box-shadow:0 0 10px var(--a1)}
+.beat i.run{animation:beat linear forwards}
+@keyframes beat{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.prompt{margin:22px 0 6px;text-align:center}
+.prompt .big{font-size:clamp(36px,8.5vw,62px);font-weight:900;letter-spacing:.5px;word-break:break-word;background:linear-gradient(180deg,#fff 40%,var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent;animation:pop .45s cubic-bezier(.3,1.5,.5,1)}
+.prompt .th{font-size:clamp(26px,6vw,42px);font-weight:800;animation:pop .45s cubic-bezier(.3,1.5,.5,1)}
+@keyframes pop{from{transform:scale(.6);opacity:0}}
+.prompt .pos{display:inline-block;margin-top:8px;font-size:13px;color:var(--a2);font-weight:800;letter-spacing:1px;padding:3px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.15)}
+.prompt .sent{font-size:clamp(19px,4.2vw,27px);line-height:1.65;font-weight:600}
+.blank{display:inline-block;min-width:110px;border-bottom:3px dashed var(--a2);color:var(--a2);font-weight:900;padding:0 6px;animation:bl 1.2s ease-in-out infinite}
+@keyframes bl{50%{border-bottom-color:transparent}}
+.blank.fill{border-bottom-style:solid;animation:pop .4s}
+.hint{font-size:14px;color:var(--muted);margin-top:8px}
+.hintbox{margin:12px auto 0;max-width:620px;padding:10px 14px;border-radius:14px;background:rgba(255,210,63,.1);border:1px dashed rgba(255,210,63,.55);color:#ffe9a6;font-weight:700;animation:pop .35s}
+.speak{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);font-size:17px;vertical-align:middle;margin-left:6px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.opt{position:relative;display:flex;align-items:center;gap:12px;padding:16px;border-radius:17px;border:1px solid var(--line);background:rgba(0,0,0,.34);
+  text-align:left;font-size:18px;font-weight:700;transition:transform .15s,border-color .2s,background .2s,opacity .3s;min-height:66px;overflow:hidden;animation:optIn .4s backwards}
+.opt:nth-child(2){animation-delay:.05s}.opt:nth-child(3){animation-delay:.1s}.opt:nth-child(4){animation-delay:.15s}
+@keyframes optIn{from{opacity:0;transform:translateY(14px)}}
+.opt:hover{border-color:var(--a1);transform:translateY(-2px);background:rgba(255,255,255,.05)}
+.opt .k{flex:none;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-weight:900;font-size:14px;background:rgba(255,255,255,.1)}
+.opt.correct{border-color:var(--ok);background:rgba(46,229,157,.16);box-shadow:0 0 0 2px rgba(46,229,157,.35),0 0 30px -8px var(--ok)}
+.opt.correct .k{background:var(--ok);color:#052}
+.opt.wrong{border-color:var(--bad);background:rgba(255,84,112,.16);animation:shake .4s}
+.opt.wrong .k{background:var(--bad)}
+.opt.dim{opacity:.35}
+.opt.gone{opacity:.12;pointer-events:none;filter:grayscale(1);transform:scale(.96)}
+.opts.locked .opt{pointer-events:none}
+body.reveal .opt[data-c="1"]{outline:2px dashed #ffd23f;outline-offset:2px}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.qcard.shake{animation:shake .45s}
+.slots{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin:20px 0 6px}
+.slot{width:40px;height:52px;border-radius:12px;border:2px solid var(--line);display:grid;place-items:center;font-size:24px;font-weight:900;
+  background:rgba(0,0,0,.35);transition:border-color .2s,transform .2s}
+.slot.f{border-color:var(--a1);transform:translateY(-3px);box-shadow:0 6px 16px -6px var(--a1)}
+.slot.h{border-color:#ffd23f;color:#ffd23f}
+.slot.ok{border-color:var(--ok);color:var(--ok);animation:pop .3s backwards}
+.slot.bad{border-color:var(--bad);color:var(--bad)}
+.tiles{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:16px}
+.tile{width:48px;height:54px;border-radius:14px;font-size:24px;font-weight:900;background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.05));
+  border:1px solid var(--line);box-shadow:0 5px 0 rgba(0,0,0,.45);transition:transform .12s,opacity .2s;animation:optIn .35s backwards}
+.tile:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.45)}
+.tile.used{opacity:.12;pointer-events:none}
+.spellbar{display:flex;justify-content:center;gap:10px;margin-top:18px;flex-wrap:wrap}
+.locked .tile,.locked .slot{pointer-events:none}
+.ll{display:flex;gap:8px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.llb{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);font-weight:800;font-size:14px;transition:transform .15s,opacity .2s}
+.llb:hover{transform:translateY(-2px);border-color:var(--a2)}
+.llb b{display:inline-grid;place-items:center;min-width:20px;height:20px;border-radius:10px;background:var(--a2);color:#111;font-size:12px}
+.llb:disabled{opacity:.3;pointer-events:none}
+.fb{margin-top:18px;padding:16px 18px;border-radius:18px;display:flex;gap:14px;align-items:flex-start;animation:slideUp .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}}
+.fb.ok{background:rgba(46,229,157,.11);border:1px solid rgba(46,229,157,.45)}
+.fb.bad{background:rgba(255,84,112,.11);border:1px solid rgba(255,84,112,.45)}
+.fb .em{font-size:32px;line-height:1}
+.fb .w{font-weight:900;font-size:19px}
+.fb .ex{margin-top:4px;color:#eee;line-height:1.55}
+.fb .hl{color:var(--a2);font-weight:900}
+.fb .gain{margin-left:auto;font-weight:900;color:var(--a2);white-space:nowrap;font-size:18px}
+.nextbar{display:flex;justify-content:flex-end;margin-top:14px}
+.floatxp{position:absolute;left:50%;top:38%;transform:translateX(-50%);font-weight:900;font-size:34px;pointer-events:none;z-index:5;
+  background:linear-gradient(180deg,#fff,var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent;animation:floatUp 1.1s forwards}
+@keyframes floatUp{0%{transform:translate(-50%,10px) scale(.6);opacity:0}20%{transform:translate(-50%,0) scale(1.15);opacity:1}100%{transform:translate(-50%,-70px) scale(1);opacity:0}}
+#banner{position:fixed;left:0;right:0;top:40%;z-index:75;pointer-events:none;text-align:center;opacity:0}
+#banner.show{animation:banner 1.5s cubic-bezier(.2,.8,.2,1) forwards}
+#banner span{display:inline-block;padding:10px 34px;font-weight:900;font-size:clamp(30px,7vw,60px);letter-spacing:2px;font-style:italic;color:#111;
+  background:linear-gradient(90deg,#ffd23f,#ff6b3d,#ff3df2);transform:skewX(-12deg);box-shadow:0 0 60px rgba(255,107,61,.6)}
+@keyframes banner{0%{opacity:0;transform:translateX(-100%)}18%{opacity:1;transform:translateX(0)}78%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(100%)}}
+
+/* countdown */
+#cd{position:fixed;inset:0;z-index:85;display:grid;place-items:center;background:rgba(5,4,12,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#cd .inner{text-align:center}
+#cd .lbl{font-weight:900;letter-spacing:6px;color:var(--a2);font-size:clamp(14px,3vw,20px)}
+#cd .stg{font-weight:900;font-size:clamp(30px,7vw,54px);margin:6px 0 10px}
+#cd .n{font-weight:900;font-size:clamp(120px,30vw,240px);line-height:1;background:linear-gradient(180deg,#fff,var(--a1));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 40px var(--a1))}
+#cd .n.go{animation:cdn .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes cdn{from{transform:scale(2.4);opacity:0}}
+
+/* ================= RESULT ================= */
+.res{text-align:center}
+.bigring{width:220px;height:220px;margin:12px auto;position:relative}
+.bigring svg{transform:rotate(-90deg)}
+.bigring .v{position:absolute;inset:0;display:grid;place-items:center;align-content:center}
+.bigring .v b{font-size:72px;font-weight:900;line-height:1}
+.bigring .v span{color:var(--muted);font-weight:700}
+.bigstars{font-size:46px;letter-spacing:8px;min-height:56px}
+.bigstars .s{display:inline-block;color:rgba(255,255,255,.12)}
+.bigstars .s.on{color:#ffd23f;text-shadow:0 0 22px rgba(255,210,63,.7);animation:starpop .55s cubic-bezier(.3,1.8,.5,1)}
+@keyframes starpop{from{transform:scale(0) rotate(-120deg)}}
+.rankline{display:inline-flex;align-items:center;gap:10px;margin:6px 0;padding:8px 16px;border-radius:999px;background:rgba(255,210,63,.1);border:1px solid rgba(255,210,63,.4);font-weight:900;color:#ffd23f}
+.msg{font-size:21px;font-weight:800;margin:8px 0 12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.stat{padding:14px 8px;border-radius:16px;background:rgba(0,0,0,.32);border:1px solid var(--line)}
+.stat b{display:block;font-size:22px;font-weight:900}
+.stat span{font-size:12px;color:var(--muted)}
+.tbars{display:grid;gap:9px;margin:16px 0;text-align:left}
+.tbar{display:grid;grid-template-columns:130px 1fr 48px;align-items:center;gap:10px;font-size:14px}
+.tbar .tr{height:10px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden}
+.tbar .tr i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a1),var(--a2));border-radius:6px;transition:width 1.2s .3s cubic-bezier(.2,.8,.2,1)}
+.newb{margin:16px 0;padding:16px;border-radius:20px;background:linear-gradient(135deg,rgba(255,210,63,.16),rgba(255,61,242,.12));border:1px solid rgba(255,210,63,.5)}
+.newb .list{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:10px}
+.newb .it{padding:10px 14px;border-radius:16px;background:rgba(0,0,0,.35);animation:starpop .6s cubic-bezier(.3,1.8,.5,1) backwards;font-weight:800}
+.newb .it span{font-size:30px;display:block}
+.review{text-align:left;margin-top:16px}
+.review h3{margin-bottom:10px}
+.rv{padding:12px 14px;border-radius:14px;background:rgba(0,0,0,.3);border:1px solid var(--line);margin-bottom:8px;font-size:15px;line-height:1.55}
+.rv .x{color:#ff9fb0;text-decoration:line-through} .rv .c{color:var(--ok);font-weight:900}
+
+/* ================= SCORE CARD ================= */
+.scard .in{padding:26px;background:radial-gradient(120% 70% at 100% 0%,rgba(255,61,242,.26),transparent 60%),radial-gradient(90% 60% at 0% 100%,rgba(255,210,63,.18),transparent 60%),linear-gradient(160deg,#17102e,#0a0814)}
+.scard .hd{display:flex;align-items:center;gap:12px}
+.scard .hd .t{font-weight:900;font-size:26px;line-height:1}
+.scard .hd .t small{display:block;font-size:11px;letter-spacing:6px;color:var(--muted);margin-top:4px}
+.scard .who{margin:18px 0;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid var(--line);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.scard .who b{font-size:22px}
+.scard .who .rk{margin-left:auto;font-weight:900;color:#ffd23f}
+.srow{display:grid;grid-template-columns:120px 1fr 72px;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed rgba(255,255,255,.1)}
+.srow .tr{height:12px;border-radius:7px;background:rgba(255,255,255,.08);overflow:hidden}
+.srow .tr i{display:block;height:100%;border-radius:7px}
+.srow .sc{text-align:right;font-weight:900}
+.scard .total{display:flex;align-items:center;gap:16px;margin-top:18px;flex-wrap:wrap}
+.scard .total .n{font-size:60px;font-weight:900;line-height:1;background:linear-gradient(135deg,#ff3df2,#ffd23f);-webkit-background-clip:text;background-clip:text;color:transparent}
+.scard .grade{margin-left:auto;text-align:center;padding:10px 18px;border-radius:18px;background:linear-gradient(135deg,#ffd23f,#ff9f1c);color:#111}
+.scard .grade b{display:block;font-size:34px;line-height:1}
+.scard .bdgrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;font-size:24px}
+.scard .bdgrow span{opacity:.18;filter:grayscale(1)} .scard .bdgrow span.on{opacity:1;filter:none}
+.scard .meta{margin-top:12px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+
+/* ================= ADMIN ================= */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.tab{padding:9px 14px;border-radius:12px;border:1px solid var(--line);background:var(--glass);font-weight:800;font-size:14px}
+.tab.on{color:#111;background:linear-gradient(135deg,#ffd23f,#ff9f1c);border-color:transparent}
+.tblwrap{overflow:auto;border-radius:16px;border:1px solid var(--line);max-height:62vh}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;white-space:nowrap}
+th{position:sticky;top:0;background:#151226;font-size:12px;letter-spacing:1px;color:var(--muted)}
+td.n{text-align:center;font-weight:800}
+.warn{color:#ffb020;font-weight:900}
+.note{padding:14px 16px;border-radius:14px;background:rgba(255,210,63,.08);border:1px solid rgba(255,210,63,.35);line-height:1.65;font-size:14px}
+.kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.kv div{padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid var(--line);font-size:14px}
+.kv b{color:var(--a2)}
+.toggle{display:flex;align-items:center;gap:10px;font-weight:700}
+.toggle input{width:22px;height:22px;accent-color:#ffd23f}
+
+/* ================= MODALS ================= */
+.modal{position:fixed;inset:0;z-index:80;display:flex;overflow-y:auto;padding:16px;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.modal .box{margin:auto;width:min(420px,100%);padding:24px;border-radius:24px;background:#141026;border:1px solid var(--line);animation:rise .3s}
+.modal .box.wide{width:min(560px,100%)}
+.pinin{width:100%;text-align:center;font-size:30px;letter-spacing:14px;padding:12px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.4);color:#fff;margin:14px 0;outline:none}
+#imgOut{max-width:100%;max-height:62vh;border-radius:14px;margin:12px auto;display:block}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(30px);opacity:0;z-index:95;padding:12px 18px;border-radius:14px;
+  background:#1d1834;border:1px solid var(--line);font-weight:700;transition:all .3s;max-width:90vw;text-align:center;pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin-top:26px;letter-spacing:2px}
+.kbd{display:inline-block;padding:1px 6px;border-radius:5px;border:1px solid var(--line);font-size:11px;color:var(--muted)}
+
+/* ================= EXAM (gold royal hall) ================= */
+body[data-theme="exam"]{--a1:#ffd23f;--a2:#ff9f1c;--tint:#2b1a03}
+body.examlock{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+body.examlock input{-webkit-user-select:text;user-select:text}
+body.examlock .top #adminBtn,body.examlock .top #musBtn{display:none}
+.st[data-k="exam"]{--sta:#ffd23f;--stbg:linear-gradient(135deg,#3a2604 0%,#120b02 45%,#2b0a3d 100%);border-color:rgba(255,210,63,.45);box-shadow:0 0 0 1px rgba(255,210,63,.15),0 18px 50px -24px #ffd23f}
+.st[data-k="exam"] .nm{background:linear-gradient(90deg,#fff3c4,#ffd23f,#ff9f1c,#fff3c4);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite}
+.st .tagx{position:absolute;right:14px;top:14px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:1px}
+.tag-ok{background:#2ee59d;color:#052}.tag-bad{background:#ff5470;color:#fff}.tag-rem{background:#ff9f1c;color:#111}.tag-new{background:#ffd23f;color:#111}.tag-run{background:#22e5e5;color:#012}
+
+/* lobby */
+.lobhero{text-align:center;padding:8px 0 4px}
+.lobhero .crown{font-size:62px;filter:drop-shadow(0 8px 24px rgba(255,210,63,.6));animation:bob 2.6s ease-in-out infinite}
+.lobhero h1{font-size:clamp(34px,8vw,64px);font-weight:900;letter-spacing:1px;line-height:1;margin-top:4px;
+  background:linear-gradient(180deg,#fff7d6 10%,#ffd23f 55%,#ff9f1c);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 24px rgba(255,159,28,.35))}
+.lobhero .sub{color:var(--muted);margin-top:8px;letter-spacing:3px;font-weight:800;font-size:12px}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+.spec{padding:14px 8px;border-radius:18px;text-align:center;background:linear-gradient(180deg,rgba(255,210,63,.12),rgba(0,0,0,.25));border:1px solid rgba(255,210,63,.3)}
+.spec b{display:block;font-size:30px;font-weight:900;color:#ffd23f;line-height:1.1}
+.spec span{font-size:12px;color:var(--muted)}
+.tchips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 14px}
+.tchip{padding:7px 12px;border-radius:999px;background:rgba(0,0,0,.35);border:1px solid var(--line);font-size:13px;font-weight:700}
+.tchip b{color:#ffd23f}
+.rules{display:grid;gap:8px;margin:12px 0}
+.rule{display:flex;gap:12px;align-items:flex-start;padding:11px 14px;border-radius:14px;background:rgba(0,0,0,.28);border:1px solid var(--line);font-size:14px;line-height:1.5}
+.rule .i{font-size:20px;flex:none}
+.agree{display:flex;align-items:center;gap:10px;margin:14px 0;font-weight:800;cursor:pointer}
+.agree input{width:22px;height:22px;accent-color:#ffd23f;flex:none}
+.btn.gold{color:#111;background:linear-gradient(135deg,#fff1b3,#ffd23f 40%,#ff9f1c);box-shadow:0 12px 34px -10px #ffb020}
+.btn.gold::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-20deg);animation:gl 3s infinite}
+.btn.big{font-size:19px;padding:16px 28px;width:100%}
+
+/* stamp + remedial path */
+.stamp{display:inline-block;margin:10px 0;padding:10px 26px;border-radius:14px;font-weight:900;font-size:clamp(26px,6vw,40px);letter-spacing:3px;transform:rotate(-6deg);
+  border:5px solid currentColor;animation:stampIn .6s cubic-bezier(.3,1.7,.5,1) backwards;text-shadow:0 0 20px currentColor}
+.stamp.pass{color:#2ee59d}.stamp.fail{color:#ff5470}.stamp.rem{color:#ffb020}
+@keyframes stampIn{from{transform:rotate(-6deg) scale(3);opacity:0}}
+.rpath{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;margin:16px 0}
+.rnode{min-width:74px;padding:10px 8px;border-radius:16px;text-align:center;background:rgba(0,0,0,.35);border:2px solid var(--line);font-size:12px;font-weight:800}
+.rnode b{display:block;font-size:20px}
+.rnode.done{border-color:#2ee59d;background:rgba(46,229,157,.12)}
+.rnode.cur{border-color:#ffd23f;box-shadow:0 0 18px -4px #ffd23f;animation:hot .8s ease-in-out infinite alternate}
+.rnode.goal{border-color:#ffd23f;background:rgba(255,210,63,.12)}
+.rarrow{color:var(--muted);font-weight:900}
+.rlog{font-size:13px;color:var(--muted);text-align:center;margin-top:4px}
+.big-ring{width:200px;height:200px;margin:8px auto;position:relative}
+.big-ring svg{transform:rotate(-90deg)}
+.big-ring .v{position:absolute;inset:0;display:grid;place-items:center;align-content:center}
+.big-ring .v b{font-size:64px;font-weight:900;line-height:1}
+
+/* face scan */
+.scanwrap{display:grid;gap:16px}
+.scanbox{position:relative;width:min(340px,100%);aspect-ratio:3/4;border-radius:30px;overflow:hidden;margin:0 auto;background:#000;border:2px solid rgba(255,210,63,.35);box-shadow:0 20px 60px -20px rgba(255,210,63,.4)}
+.scanbox video,.scanbox img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.scanbox .oval{position:absolute;left:17%;right:17%;top:13%;bottom:20%;border-radius:50%;border:3px dashed rgba(255,255,255,.7);box-shadow:0 0 0 999px rgba(0,0,0,.5);transition:border-color .3s,box-shadow .3s}
+.scanbox .oval.on{border:3px solid #2ee59d;box-shadow:0 0 0 999px rgba(0,0,0,.45),0 0 30px #2ee59d inset}
+.scanbox .line{position:absolute;left:17%;right:17%;height:3px;top:13%;background:linear-gradient(90deg,transparent,#ffd23f,transparent);box-shadow:0 0 14px #ffd23f;animation:scanl 2s ease-in-out infinite alternate}
+@keyframes scanl{to{top:80%}}
+.scanbox .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted);font-weight:700}
+.scanbox .ph b{display:block;font-size:56px;margin-bottom:8px}
+.scanbar{height:10px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden;width:min(340px,100%);margin:0 auto}
+.scanbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd23f,#2ee59d);transition:width .2s}
+.scanmsg{text-align:center;font-weight:800;min-height:24px}
+.codebox{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.codebox input{width:160px;text-align:center;font-size:22px;letter-spacing:8px;padding:10px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.4);color:#fff;outline:none}
+.verified{text-align:center;animation:rise .4s}
+.verified .shot{width:150px;height:150px;border-radius:50%;object-fit:cover;border:4px solid #2ee59d;box-shadow:0 0 34px -4px #2ee59d;margin:6px auto 10px;display:block;transform:scaleX(-1)}
+.verified .shot.none{display:grid;place-items:center;font-size:60px;background:rgba(255,255,255,.06);transform:none}
+
+/* exam taking */
+.ehead{position:sticky;top:58px;z-index:20;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 12px;margin:-6px -4px 10px;border-radius:18px;
+  background:rgba(12,9,3,.86);border:1px solid rgba(255,210,63,.3);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.ehead .ttl{font-weight:900;color:#ffd23f;letter-spacing:1px}
+.ehead .sp{flex:1}
+.etimer{font-variant-numeric:tabular-nums;font-weight:900;font-size:18px;padding:6px 14px;border-radius:999px;background:rgba(0,0,0,.45);border:1px solid rgba(255,210,63,.45)}
+.etimer.warn{color:#ff5470;border-color:#ff5470;animation:hot .5s ease-in-out infinite alternate}
+.etbar{height:4px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;flex-basis:100%}
+.etbar i{display:block;height:100%;background:linear-gradient(90deg,#ffd23f,#ff9f1c);transition:width 1s linear}
+.vpill{padding:6px 12px;border-radius:999px;font-weight:800;font-size:13px;background:rgba(0,0,0,.4);border:1px solid var(--line)}
+.vpill.hot{color:#ff9fb0;border-color:#ff5470}
+.part{display:flex;align-items:center;gap:8px;font-weight:900;color:#ffd23f;font-size:14px;letter-spacing:1px;margin:4px 2px 10px}
+.part::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,210,63,.5),transparent)}
+.eq-card .in{padding:22px;min-height:340px}
+.opt.sel{border-color:#ffd23f;background:rgba(255,210,63,.14);box-shadow:0 0 0 2px rgba(255,210,63,.35),0 0 26px -8px #ffd23f}
+.opt.sel .k{background:#ffd23f;color:#111}
+.tfrow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.tfbtn{padding:22px 12px;border-radius:20px;border:2px solid var(--line);background:rgba(0,0,0,.34);font-size:22px;font-weight:900;transition:transform .15s,border-color .2s,background .2s}
+.tfbtn:hover{transform:translateY(-2px)}
+.tfbtn.t.sel{border-color:#2ee59d;background:rgba(46,229,157,.16);box-shadow:0 0 26px -8px #2ee59d}
+.tfbtn.f.sel{border-color:#ff5470;background:rgba(255,84,112,.16);box-shadow:0 0 26px -8px #ff5470}
+.tfstate{font-size:clamp(22px,5vw,32px);font-weight:800;line-height:1.5}
+.tfstate .w{font-size:clamp(34px,8vw,52px);font-weight:900;color:#fff}
+.tfstate .m{color:#ffd23f}
+.tybox{display:flex;justify-content:center;margin-top:20px}
+.tybox input{width:min(420px,100%);font-size:26px;font-weight:800;text-align:center;letter-spacing:2px;padding:14px;border-radius:18px;border:2px solid rgba(255,210,63,.45);background:rgba(0,0,0,.45);color:#fff;outline:none}
+.tybox input:focus{border-color:#ffd23f;box-shadow:0 0 0 4px rgba(255,210,63,.2)}
+.tyhint{text-align:center;color:var(--muted);margin-top:10px;font-weight:700;letter-spacing:2px}
+.enav{display:flex;gap:8px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.enav .sp{flex:1}
+.flagbtn.on{border-color:#ff9f1c;color:#ffb020;background:rgba(255,159,28,.12)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:6px;margin-top:14px}
+.gq{height:40px;border-radius:11px;border:1px solid var(--line);background:rgba(0,0,0,.35);font-weight:800;font-size:13px;position:relative}
+.gq.ans{background:rgba(46,229,157,.18);border-color:rgba(46,229,157,.6)}
+.gq.cur{outline:2px solid #ffd23f;outline-offset:1px}
+.gq.flag::after{content:"";position:absolute;right:3px;top:3px;width:8px;height:8px;border-radius:50%;background:#ff9f1c}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:middle}
+#wm{position:fixed;inset:-30%;z-index:24;pointer-events:none;display:none;flex-wrap:wrap;align-content:flex-start;gap:60px 80px;transform:rotate(-22deg);opacity:.055;font-weight:900;font-size:18px;color:#fff;overflow:hidden}
+body.examlock #wm{display:flex}
+#guard{position:fixed;inset:0;z-index:88;display:grid;place-items:center;padding:16px;background:rgba(40,0,8,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+#guard .box{width:min(460px,100%);text-align:center;padding:28px;border-radius:26px;background:#1a0710;border:2px solid #ff5470;box-shadow:0 0 60px -10px #ff5470;animation:rise .3s}
+#guard .ic{font-size:64px;animation:shake .5s}
+#guard h2{color:#ff9fb0;margin:6px 0}
+#guard .cnt{display:inline-block;margin:10px 0;padding:6px 14px;border-radius:999px;background:#ff5470;color:#fff;font-weight:900}
+@media (max-width:640px){
+  .specs{grid-template-columns:repeat(2,1fr)}
+  .ehead{top:54px}
+  .ehead .ttl{display:none}
+  .eq-card .in{padding:16px;min-height:300px}
+  .tfbtn{font-size:19px;padding:18px 8px}
+  .enav{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .enav .sp{display:none}
+  .enav #eNext{grid-column:1/-1}
+}
+
+@media (max-width:640px){
+  .form{grid-template-columns:1fr}
+  .feat{grid-template-columns:repeat(2,1fr)}
+  .opts{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .tbar{grid-template-columns:100px 1fr 42px}
+  .srow{grid-template-columns:92px 1fr 60px}
+  .slot{width:31px;height:44px;font-size:20px}
+  .tile{width:42px;height:48px;font-size:21px}
+  .logo .nm{display:none}
+  .qcard .in{padding:18px}
+  .hubhead{grid-template-columns:1fr}
+  .tot{text-align:left}
+  .hidem{display:none}
+  #userChip{max-width:30vw;font-size:12px;padding:6px 10px}
+  .top{gap:6px;padding-left:12px;padding-right:12px}
+  .icobtn{width:34px;height:34px;font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body data-theme="boss">
+<div id="bg"><canvas id="bgc"></canvas><div class="beam b1"></div><div class="beam b2"></div><div class="beam b3"></div><div class="floor"></div><div class="eq" id="eq"></div></div>
+<div id="flash"></div>
+<canvas id="fx"></canvas>
+<div id="banner"><span id="bannerTxt"></span></div>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="wrap">
+    <div class="adv">ADVANCE</div>
+    <div class="bigtitle" id="splashTitle"></div>
+    <div class="sub">SET 15 • 16 • 17 • 18 • BOSS MIX — Academic Year 2026</div>
+    <div class="tap">▶ แตะเพื่อเริ่ม</div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="logo"><div class="mk">VB</div><div class="nm">VOCAB BEAT<small>ADVANCE</small></div></div>
+  <div class="sp"></div>
+  <span class="chip rankchip hidden hidem" id="rankChip"></span>
+  <span class="chip hidden" id="userChip"></span>
+  <button class="icobtn" id="musBtn" title="เพลงประกอบ" aria-label="เปิด/ปิดเพลง">🎵</button>
+  <button class="icobtn" id="sndBtn" title="เสียงเอฟเฟกต์" aria-label="เปิด/ปิดเสียง">🔊</button>
+  <button class="kbtn" id="adminBtn" title="สำหรับครู">K OAT</button>
+</header>
+
+<main id="app">
+
+<!-- ===== Registration ===== -->
+<section class="screen hidden" id="scr-reg">
+  <div class="hero">
+    <div class="adv">ADVANCE</div>
+    <div class="title">VOCAB BEAT</div>
+    <div class="tag">🎧 แบบฝึกหัดหลังเรียน • Grade 10–11</div>
+    <div class="sets">
+      <span style="color:#b388ff">SET 15</span><span style="color:#22e5e5">SET 16</span>
+      <span style="color:#ffd23f">SET 17</span><span style="color:#ff4d5e">SET 18</span><span style="color:#ff3df2">👑 BOSS</span>
+    </div>
+  </div>
+  <div class="neon" style="margin-top:16px"><div class="in pad">
+    <h2 style="font-size:20px">ลงทะเบียนขึ้นเวที 🎤</h2>
+    <p class="muted" style="margin:6px 0 14px">ด่านฝึก 4 ด่าน (ด่านละ 20 ข้อ เล่นซ้ำได้) • ด่าน 5 สอบจริงเก็บคะแนน 30 คะแนน</p>
+    <div class="form">
+      <div class="field"><label>ชื่อ</label><input id="fName" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="40" placeholder="ชื่อจริง"></div>
+      <div class="field"><label>นามสกุล</label><input id="fSur" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="40" placeholder="นามสกุล"></div>
+      <div class="field"><label>ชั้น</label><select id="fCls"><option value="">— เลือก —</option><option>ม.4</option><option>ม.5</option><option>ม.6</option></select></div>
+      <div class="field"><label>ห้อง</label><select id="fRoom"><option value="">— เลือก —</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+      <div class="field full"><label>เลขที่</label><input id="fNo" type="number" inputmode="numeric" min="1" max="50" placeholder="1–50"></div>
+    </div>
+    <div class="err" id="regErr"></div>
+    <button class="btn pri" id="regBtn" style="width:100%;margin-top:6px;font-size:18px">เข้าสู่เวที ▶</button>
+    <div class="feat">
+      <div><b>🔥</b>ฝึก 4 เซ็ต</div><div><b>👑</b>สอบจริง 30 คะแนน</div><div><b>📷</b>สแกนหน้าก่อนสอบ</div><div><b>📸</b>Score Card</div>
+    </div>
+  </div></div>
+  <div class="foot">BY T.OAT • GSB SCHOOL</div>
+</section>
+
+<!-- ===== Hub ===== -->
+<section class="screen hidden" id="scr-hub">
+  <div class="neon"><div class="in pad hubhead">
+    <div>
+      <div class="muted" style="font-size:13px">ยินดีต้อนรับสู่เวที 👋</div>
+      <h2 id="hubName" style="font-size:25px"></h2>
+      <div class="muted" id="hubInfo" style="font-size:14px"></div>
+      <div class="rankbox"><div class="rankic" id="rankIc">🎤</div>
+        <div style="flex:1"><b id="rankName"></b> <span class="muted" id="rankXP" style="font-size:13px"></span>
+          <div class="xpbar"><i id="rankBar" style="width:0"></i></div>
+          <div class="muted" id="rankNext" style="font-size:12px;margin-top:4px"></div></div></div>
+    </div>
+    <div class="tot"><div class="muted" style="font-size:12px">คะแนนฝึก (ดีที่สุด)</div><b id="hubTotal">0</b><span class="muted"> / 80</span></div>
+  </div></div>
+  <div class="resume hidden" id="resumeBox">
+    <span>⏸️ มีด่านที่ทำค้างไว้: <b id="resumeTxt"></b></span>
+    <span style="flex:1"></span>
+    <button class="btn pri" id="resumeBtn">ทำต่อ ▶</button>
+    <button class="btn ghost" id="resumeDrop">ทิ้ง</button>
+  </div>
+  <div class="sect">🎚️ ด่านฝึก 1–4 (เล่นซ้ำได้ไม่จำกัด) + 👑 สอบจริง</div>
+  <div class="stages" id="stageGrid"></div>
+  <div class="sect">🏅 เหรียญรางวัล <span class="muted" id="bdgCount" style="font-weight:700;font-size:13px"></span></div>
+  <div class="badges" id="bdgGrid"></div>
+  <div class="hubfoot">
+    <button class="btn pri" id="cardBtn">🏆 Score Card สำหรับแคป</button>
+    <button class="btn ghost" id="logoutBtn">เปลี่ยนผู้ใช้</button>
+  </div>
+</section>
+
+<!-- ===== Play ===== -->
+<section class="screen hidden" id="scr-play">
+  <div class="phead">
+    <button class="btn ghost xs" id="quitBtn">✕ ออก</button>
+    <span class="snm" id="pStage"></span>
+    <span class="sp"></span>
+    <span class="pill">⭐ <span id="pScore">0</span>/20</span>
+    <span class="pill xp">⚡ <span id="pXP">0</span></span>
+    <span class="pill">⏱ <span id="pTime">0:00</span></span>
+  </div>
+  <div class="track" id="track"></div>
+  <div class="combobar"><div class="meter"><i id="cMeter"></i></div><span class="lbl" id="cLbl"></span></div>
+  <div class="neon qcard" id="qwrap"><div class="in" id="qcard"></div></div>
+  <p class="center muted hidem" style="font-size:12px;margin-top:12px">คีย์ลัด: <span class="kbd">1–4</span> เลือก • <span class="kbd">Enter</span> ถัดไป • <span class="kbd">F</span> 50:50 • <span class="kbd">H</span> คำใบ้ • พิมพ์ตัวอักษรในข้อสะกดคำ</p>
+</section>
+
+<!-- ===== Result ===== -->
+<section class="screen hidden" id="scr-result">
+  <div class="neon"><div class="in pad res" id="resBox"></div></div>
+</section>
+
+<!-- ===== Score card ===== -->
+<section class="screen hidden" id="scr-card">
+  <div class="neon scard" id="cardWrap"></div>
+  <p class="center muted" style="margin:14px 0 6px">📸 แคปหน้าจอการ์ดนี้ หรือกด “บันทึกเป็นรูป” แล้วส่งครู</p>
+  <div class="hubfoot">
+    <button class="btn pri" id="saveImgBtn">💾 บันทึกเป็นรูป</button>
+    <button class="btn ghost" id="cardBack">← กลับหน้าด่าน</button>
+  </div>
+</section>
+
+<!-- ===== Admin ===== -->
+<section class="screen hidden" id="scr-admin">
+  <div class="glass pad">
+    <div class="row" style="align-items:center">
+      <h2>🛠️ แผงควบคุมครู (K OAT)</h2>
+      <span style="flex:1"></span>
+      <button class="btn ghost xs" id="admExit">ออกจากโหมดครู</button>
+    </div>
+    <div class="tabs" id="admTabs">
+      <button class="tab on" data-t="live">📡 คะแนนสด</button>
+      <button class="tab" data-t="device">📱 เครื่องนี้</button>
+      <button class="tab" data-t="bank">🔑 คลังคำ/เฉลย</button>
+      <button class="tab" data-t="set">⚙️ ตั้งค่า</button>
+    </div>
+    <div id="admBody"></div>
+  </div>
+</section>
+
+<!-- ===== Exam lobby ===== -->
+<section class="screen hidden" id="scr-lobby">
+  <div class="neon"><div class="in pad" id="lobbyBox"></div></div>
+</section>
+
+<!-- ===== Face scan ===== -->
+<section class="screen hidden" id="scr-scan">
+  <div class="neon"><div class="in pad" id="scanBox"></div></div>
+</section>
+
+<!-- ===== Exam taking ===== -->
+<section class="screen hidden" id="scr-exam">
+  <div class="ehead">
+    <span class="ttl" id="eTitle">👑 FINAL EXAM</span>
+    <span class="vpill" id="eAns">ตอบแล้ว 0/30</span>
+    <span class="sp"></span>
+    <span class="vpill" id="eViol">🛡️ 0/3</span>
+    <span class="etimer" id="eTimer">40:00</span>
+    <div class="etbar"><i id="eTbar" style="width:100%"></i></div>
+  </div>
+  <div class="part" id="ePart"></div>
+  <div class="neon eq-card" id="eqWrap"><div class="in" id="eqCard"></div></div>
+  <div class="enav">
+    <button class="btn ghost" id="ePrev">◀ ก่อนหน้า</button>
+    <button class="btn ghost flagbtn" id="eFlag">🚩 ทำเครื่องหมาย</button>
+    <span class="sp"></span>
+    <button class="btn gold" id="eNext">ถัดไป ▶</button>
+  </div>
+  <div class="glass pad" style="margin-top:14px;padding:16px">
+    <div class="row" style="align-items:center"><b>🗺️ แผนที่ข้อสอบ</b><span style="flex:1"></span><button class="btn pri" id="eSubmit">📤 ส่งข้อสอบ</button></div>
+    <div class="grid" id="eGrid"></div>
+    <div class="legend"><span><i style="background:rgba(46,229,157,.6)"></i>ตอบแล้ว</span><span><i style="background:rgba(255,255,255,.15)"></i>ยังไม่ตอบ</span><span><i style="background:#ff9f1c;border-radius:50%"></i>ทำเครื่องหมาย</span></div>
+  </div>
+</section>
+
+<!-- ===== Exam result ===== -->
+<section class="screen hidden" id="scr-exres">
+  <div class="neon"><div class="in pad center" id="exresBox"></div></div>
+</section>
+</main>
+
+<div id="cd" class="hidden"><div class="inner"><div class="lbl">GET READY</div><div class="stg" id="cdStage"></div><div class="n" id="cdN">3</div></div></div>
+
+<div class="modal hidden" id="pinModal"><div class="box center">
+  <h2>🔐 สำหรับครูโอ๊ต</h2>
+  <p class="muted">ใส่รหัส PIN เพื่อเข้าแผงควบคุม</p>
+  <input class="pinin" id="pinIn" type="password" inputmode="numeric" maxlength="8" autocomplete="off">
+  <div class="err" id="pinErr"></div>
+  <div class="row" style="justify-content:center"><button class="btn ghost" id="pinCancel">ยกเลิก</button><button class="btn pri" id="pinOk">เข้าสู่ระบบ</button></div>
+</div></div>
+<div class="modal hidden" id="cfmModal"><div class="box center">
+  <h2 id="cfmTitle">ยืนยัน</h2><p class="muted" id="cfmText"></p>
+  <div class="row" style="justify-content:center;margin-top:10px"><button class="btn ghost" id="cfmNo">ยกเลิก</button><button class="btn pri" id="cfmYes">ตกลง</button></div>
+</div></div>
+<div class="modal hidden" id="imgModal"><div class="box wide center">
+  <h3>💾 รูป Score Card</h3>
+  <p class="muted" style="margin:6px 0 0">iPad/มือถือ: กดค้างที่รูป → “บันทึกรูปภาพ” • Chromebook: กดดาวน์โหลด</p>
+  <img id="imgOut" alt="Score card">
+  <div class="row" style="justify-content:center"><a class="btn pri" id="imgDl" download="vocab-beat-scorecard.png">⬇️ ดาวน์โหลด</a><button class="btn ghost" id="imgClose">ปิด</button></div>
+</div></div>
+<div id="toast"></div>
+<div id="wm" aria-hidden="true"></div>
+<div id="guard" class="hidden"></div>
+
+<script>
+'use strict';
+/* ===================== CONFIG ===================== */
+const CONFIG = {
+  GAS_URL: 'https://script.google.com/macros/s/AKfycbxP8qOYMEXf9C-25biJWdEB9uKhuky2vZI2ZqGep8bQwSY2oj_WGf3_jzGBwNHqWN4NSg/exec',
+  PIN: '7846',          // PIN สำรองเมื่อเชื่อม GAS ไม่ได้
+  APP: 'VOCAB BEAT ADVANCE • SET 15-18',
+  VERSION: '3.0'
+};
+/* ===== การสอบจริง (ด่าน 5) — ครูแก้ค่าได้ที่นี่ ===== */
+const EXAM_CFG = {
+  N: 30, PASS: 18, MINUTES: 40,          // 30 ข้อ = 30 คะแนน • ผ่าน 18 • เวลา 40 นาที
+  MAX_VIOL: 3,                           // ละเมิดครบกี่ครั้ง = ส่งข้อสอบอัตโนมัติ
+  FACE_CODE: '1112',                     // รหัสสำรองเมื่อสแกนหน้าไม่ได้
+  PLAN: [['gap',7],['en2th',5],['th2en',5],['tf',4],['spell',4],['type',5]],
+  REM: { N: 10, PASS: 7, MINUTES: 12,    // สอบซ่อม: 10 ข้อ ต้องได้ ≥7 จึงนับ 1 ครั้ง (+1 คะแนน)
+         PLAN: [['gap',3],['en2th',2],['th2en',1],['tf',1],['spell',1],['type',2]] }
+};
+
+/* ===================== WORD BANK  [english, pos, thai, sentence with ____] ===================== */
+const BANK = {
+15: [
+ ["compound","n","สารประกอบ","Salt is a chemical ____ made of sodium and chlorine."],
+ ["cautious","adj","รอบคอบ, ระมัดระวัง","Be ____ when you cross a busy road."],
+ ["furious","adj","โกรธมาก","My dad was ____ when he saw the broken window."],
+ ["poverty","n","ความยากจน","Many families in the village live in ____."],
+ ["risky","adj","เสี่ยงอันตราย","Swimming in the sea during a storm is very ____."],
+ ["authorize","v","ให้อำนาจ, อนุญาต","Only the principal can ____ a school trip."],
+ ["canvas","n","ผ้าใบ","The artist painted a beautiful picture on a large ____."],
+ ["affection","n","ความรักใคร่","The grandmother hugged the child with great ____."],
+ ["abstract","adj","เป็นนามธรรม","Love and freedom are ____ ideas; you cannot touch them."],
+ ["fracture","n","รอยแตก, รอยร้าว","The X-ray showed a small ____ in his arm."],
+ ["activist","n","นักกิจกรรม","The young ____ asked people to stop using plastic bags."],
+ ["accomplish","v","ทำสำเร็จ, บรรลุผล","If you work hard, you can ____ your goals."],
+ ["anonymous","adj","นิรนาม, ไม่ระบุชื่อ","The donor wanted to stay ____, so nobody knows who gave the money."],
+ ["adverse","adj","ไม่เป็นผลดี, เป็นปฏิปักษ์","This medicine may have ____ effects, such as headaches."],
+ ["assert","v","ยืนยัน, ยืนกราน","She continued to ____ that she was innocent."],
+ ["acute","adj","เฉียบพลัน, รุนแรง","He went to hospital with ____ stomach pain."],
+ ["beneficial","adj","เป็นประโยชน์","Regular exercise is ____ to your health."],
+ ["accusation","n","การกล่าวโทษ","He denied the ____ that he stole the phone."],
+ ["aftermath","n","ควันหลง, ผลที่ตามมา","Many people needed help in the ____ of the flood."],
+ ["adhere","v","แนบติด, ยึดติด","This tape does not ____ well to wet surfaces."],
+ ["acid","n","กรด (รสเปรี้ยว)","Lemon juice contains ____, so it tastes sour."],
+ ["mourning","n","การไว้ทุกข์, ความเศร้าสลด","The family wore black because they were in ____."],
+ ["blessing","n","การให้พร, พร","The monk gave a ____ to the new couple."],
+ ["consent","n","ความยินยอม","Students need their parents' ____ to join the camp."]
+],
+16: [
+ ["allocate","v","จัดสรร","The school will ____ more money for new computers."],
+ ["assemble","v","ประกอบ (เข้าด้วยกัน)","It took us two hours to ____ the new bookshelf."],
+ ["disabled","adj","พิการ","The building has a special entrance for ____ people."],
+ ["apprenticeship","n","การฝึกงาน","He did a three-year ____ to become a chef."],
+ ["perceive","v","รับรู้","Dogs can ____ sounds that humans cannot hear."],
+ ["insult","v","ดูหมิ่น, ด่าว่า","It is rude to ____ people by calling them stupid."],
+ ["alter","v","เปลี่ยนแปลง, ดัดแปลง","The tailor will ____ my trousers because they are too long."],
+ ["arid","adj","แห้งแล้ง","Very few plants can grow in this ____ desert."],
+ ["drought","n","ภัยแล้ง","The long ____ killed many farmers' crops."],
+ ["alignment","n","การเรียงเป็นเส้นตรง, การจัดแนว","The mechanic checked the wheel ____ of my car."],
+ ["articulate","adj","พูด/สื่อสารได้ชัดเจน","She is very ____ and always explains her ideas clearly."],
+ ["adequate","adj","เพียงพอ","Make sure you get ____ sleep before the exam."],
+ ["affordable","adj","ราคาไม่แพง","This shop sells ____ clothes for students."],
+ ["appoint","v","แต่งตั้ง","The company will ____ a new manager next month."],
+ ["exploit","v","เอาเปรียบ","Some bosses ____ workers by paying them very little."],
+ ["disorganized","adj","ไม่เป็นระเบียบ","His desk is so ____ that he can never find his pen."],
+ ["approximate","adj","โดยประมาณ, ใกล้เคียง","The ____ cost of the trip is 3,000 baht."],
+ ["advocate","v","สนับสนุน","Doctors ____ eating more fruit and vegetables."],
+ ["smolder","v","คุกรุ่น","The fire was out, but the wood continued to ____."],
+ ["anchor","n","สมอเรือ","The sailors dropped the ____ to stop the boat."],
+ ["absurd","adj","ไร้สาระ, ไม่น่าเชื่อ","It is ____ to wear a winter coat on a hot day."],
+ ["exert","v","ใช้ (แรง/ความพยายาม)","You need to ____ a lot of effort to win the race."],
+ ["comply","v","ยอมทำตาม","All students must ____ with the school rules."],
+ ["adoption","n","การนำมาใช้","The ____ of online learning changed the way we study."]
+],
+17: [
+ ["extravagance","n","ความฟุ่มเฟือย, ความสิ้นเปลือง","Buying a new phone every month is pure ____."],
+ ["tolerance","n","ความอดกลั้น, ความอดทน","We should show ____ for people with different opinions."],
+ ["transformation","n","การเปลี่ยนแปลงครั้งใหญ่, การปฏิรูป","The old factory went through a complete ____ into a modern café."],
+ ["usage","n","การใช้","Water ____ is higher in the hot season."],
+ ["utilize","v","ใช้ประโยชน์","We can ____ solar energy to make electricity."],
+ ["accusation","n","การกล่าวโทษ","The ____ against the football player was not true."],
+ ["abundant","adj","มากมาย, อุดมสมบูรณ์","Fruit is ____ in Thailand during the summer."],
+ ["resign","v","ลาออก","The manager decided to ____ from his job."],
+ ["toxic","adj","มีพิษ","Some mushrooms are ____, so don't eat them."],
+ ["crisis","n","วิกฤติ","The country faced an economic ____ last year."],
+ ["tissue","n","เนื้อเยื่อ","The doctor took a small piece of ____ to test it."],
+ ["hospitality","n","ความเอื้อเฟื้อ, การต้อนรับอย่างอบอุ่น","Thai people are famous for their warm ____."],
+ ["stability","n","ความมั่นคง","A good job gives you financial ____."],
+ ["voluntary","adj","โดยสมัครใจ","Joining the cleaning activity is ____; you don't have to do it."],
+ ["willingness","n","ความเต็มใจ","The teacher liked his ____ to help others."],
+ ["ultimate","adj","สูงสุด, ที่สุด","Winning the gold medal was her ____ goal."],
+ ["corrupt","adj","ทุจริต, คอร์รัปชัน","The ____ officer took money from businesses."],
+ ["arrest","v","จับกุม","The police came to ____ the thief."],
+ ["respectively","adv","ตามลำดับ","Tom and Jane are 15 and 16 years old, ____."],
+ ["cope","v","รับมือ (cope with)","It's hard to ____ with stress during exam week."],
+ ["handle","v","จัดการ, รับมือ","Can you ____ this problem by yourself?"],
+ ["subtle","adj","ละเอียดอ่อน, แนบเนียน","The difference between the two colors is very ____; look carefully."],
+ ["vibrant","adj","มีชีวิตชีวา, สดใส","Bangkok is a busy and ____ city."],
+ ["valid","adj","ใช้ได้, ถูกต้องตามกฎหมาย","Your passport must be ____ when you travel abroad."],
+ ["testify","v","ให้การ (ในศาล)","The witness agreed to ____ in court."]
+],
+18: [
+ ["compensate","v","ชดเชย","The airline will ____ you for the lost bag."],
+ ["defendant","n","จำเลย","The ____ told the judge that he was not guilty."],
+ ["deprive","v","กีดกัน, ทำให้ขาด","Don't ____ yourself of sleep before an exam."],
+ ["decisive","adj","เด็ดเดี่ยว, เด็ดขาด","A good leader must be ____ in difficult times."],
+ ["initial","adj","ในตอนแรก, เริ่มแรก","My ____ idea was to go by bus, but we took a taxi."],
+ ["discriminate","v","แบ่งแยก, เลือกปฏิบัติ","It is wrong to ____ against people because of their skin color."],
+ ["devastate","v","ทำลายล้าง","Strong storms can ____ whole villages."],
+ ["devise","v","วางแผน, คิดค้น","We need to ____ a new plan to reduce waste at school."],
+ ["diagnose","v","วินิจฉัย","The doctor can ____ the illness with a blood test."],
+ ["disclose","v","เปิดเผย, เปิดโปง","The company refused to ____ the price of the new phone."],
+ ["carriage","n","การขนส่ง; รถม้า","The cost of ____ is included, so delivery is free."],
+ ["allocate","v","จัดสรร","The teacher will ____ a topic to each group."],
+ ["alliance","n","พันธมิตร","The two countries formed a strong ____."],
+ ["allowance","n","เบี้ยเลี้ยง, เงินค่าขนม","My parents give me a weekly ____ of 500 baht."],
+ ["adoption","n","การรับเลี้ยง (บุตรบุญธรรม)","The couple chose ____ and welcomed a baby girl into their family."],
+ ["coincide","v","เกิดขึ้นพร้อมกัน","My birthday will ____ with the school holiday this year."],
+ ["accessible","adj","เข้าถึงได้","The library is ____ to all students, even on weekends."],
+ ["assemble","v","รวมตัว, ประกอบกัน","All students must ____ in the hall at 8 a.m."],
+ ["allergic","adj","เป็นภูมิแพ้","I'm ____ to cats, so I start sneezing near them."],
+ ["beware","v","ระวัง, เฝ้าระวัง","____ of the dog! It bites."],
+ ["detain","v","กักขัง, กักตัว","The police can ____ a suspect for 48 hours."],
+ ["ascertain","v","สืบให้แน่ใจ","The police are trying to ____ the cause of the fire."],
+ ["appetite","n","ความอยากอาหาร","Exercise always gives me a big ____."],
+ ["suburban","adj","ชานเมือง","They moved from the city center to a quiet ____ area."]
+]};
+
+/* pairs that must never be answer + distractor together (both could fit / same meaning) */
+const AVOID = [["cope","handle"],["arid","drought"],["appoint","allocate"],["diagnose","ascertain"],["cautious","decisive"],
+  ["comply","cope"],["comply","adhere"],["adoption","usage"],["utilize","exploit"],["arrest","detain"],["tolerance","affection"],
+  ["aftermath","crisis"],["disclose","assert"],["accomplish","exert"],["assemble","allocate"]];
+const AVOID_SET = new Set(AVOID.flatMap(([a,b])=>[a+'|'+b,b+'|'+a]));
+
+const TYPES = {
+  en2th:{label:'EN → TH',icon:'🔤',name:'ความหมายภาษาไทย',limit:15},
+  th2en:{label:'TH → EN',icon:'🇹🇭',name:'เลือกคำศัพท์',limit:15},
+  gap:  {label:'FILL THE GAP',icon:'🧩',name:'เติมคำในประโยค',limit:20},
+  spell:{label:'SPELL IT',icon:'⌨️',name:'สะกดคำ',limit:30}
+};
+const STAGES = [
+  {id:1,key:'s15',set:15,ico:'⚖️',name:'SET 15',lv:'BASIC ENGLISH',ds:'compound • cautious • aftermath …',plan:[['en2th',5],['th2en',5],['gap',5],['spell',5]]},
+  {id:2,key:'s16',set:16,ico:'🎭',name:'SET 16',lv:'A2 LEVEL',ds:'allocate • perceive • comply …',plan:[['en2th',5],['th2en',5],['gap',5],['spell',5]]},
+  {id:3,key:'s17',set:17,ico:'⚡',name:'SET 17',lv:'A2 LEVEL',ds:'tolerance • crisis • testify …',plan:[['en2th',5],['th2en',5],['gap',5],['spell',5]]},
+  {id:4,key:'s18',set:18,ico:'🎬',name:'SET 18',lv:'C1 LEVEL',ds:'compensate • diagnose • suburban …',plan:[['en2th',5],['th2en',5],['gap',5],['spell',5]]}
+];
+const QN = 20;
+const RANKS = [
+  {xp:0,name:'ROOKIE',ic:'🎤'},{xp:3000,name:'RISING STAR',ic:'🌟'},{xp:8000,name:'HEADLINER',ic:'🎸'},
+  {xp:15000,name:'SUPERSTAR',ic:'💫'},{xp:25000,name:'LEGEND',ic:'👑'}
+];
+const BADGES = [
+  {id:'first',e:'🎯',n:'First Beat',d:'จบด่านแรก'},
+  {id:'perfect',e:'💯',n:'Perfect 20',d:'ได้ 20/20 ในด่านใดก็ได้'},
+  {id:'combo10',e:'🔥',n:'On Fire ×10',d:'ตอบถูกติดกัน 10 ข้อ'},
+  {id:'speed',e:'⚡',n:'Speedster',d:'ได้ ≥16 คะแนน ภายใน 2:30 นาที'},
+  {id:'pure',e:'🧠',n:'No Help',d:'ได้ ≥18 โดยไม่ใช้ตัวช่วย'},
+  {id:'boss',e:'👑',n:'Exam Ace',d:'สอบจริงได้ ≥ 24/30'},
+  {id:'allclear',e:'🌈',n:'All Clear',d:'ฝึกครบ 4 เซ็ต + สอบผ่าน'},
+  {id:'century',e:'🏆',n:'Hall of Fame',d:'คะแนนฝึกรวม ≥ 72/80'}
+];
+
+/* ===================== UTIL ===================== */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function hashStr(str){let h1=0xdeadbeef^0,h2=0x41c6ce57;for(let i=0;i<str.length;i++){const c=str.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677);}
+  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return (4294967296*(2097151&h2)+(h1>>>0));}
+function rng(seedStr){let a=hashStr(seedStr)>>>0;return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function shuffle(arr,r){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const fmtTime = s => { s=Math.max(0,Math.round(s)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
+const nowTH = () => new Date().toLocaleString('th-TH',{dateStyle:'medium',timeStyle:'short'});
+const nfmt = n => Number(n||0).toLocaleString('en-US');
+const REDUCED = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+function toast(msg,ms){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),ms||2400);}
+const LS = {
+  get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v);}catch(e){return d;}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}},
+  del(k){try{localStorage.removeItem(k);}catch(e){}}
+};
+const SS = {
+  get(k){try{return sessionStorage.getItem(k);}catch(e){return null;}},
+  set(k,v){try{sessionStorage.setItem(k,v);}catch(e){}},
+  del(k){try{sessionStorage.removeItem(k);}catch(e){}}
+};
+function countUp(el,to,ms,fmt){
+  if(!el) return; const from=0,t0=performance.now(); fmt=fmt||(v=>String(v));
+  if(REDUCED||ms<=0){el.textContent=fmt(to);return;}
+  (function step(t){const p=Math.min(1,(t-t0)/ms);const e=1-Math.pow(1-p,3);el.textContent=fmt(Math.round(from+(to-from)*e));if(p<1)requestAnimationFrame(step);})(t0);
+}
+
+/* ===================== WORD POOLS / BUILDER ===================== */
+function wordObj(a,set){return {en:a[0],pos:a[1],th:a[2],ex:a[3],set:set};}
+function poolFor(stage){
+  if(stage.set) return BANK[stage.set].map(a=>wordObj(a,stage.set));
+  const seen=new Set(),out=[];
+  [15,16,17,18].forEach(s=>BANK[s].forEach(a=>{if(!seen.has(a[0])){seen.add(a[0]);out.push(wordObj(a,s));}}));
+  return out;
+}
+function fillSentence(ex,word,cls){
+  const parts=ex.split('____');
+  let w=word; if(parts[0].trim()==='') w=word.charAt(0).toUpperCase()+word.slice(1);
+  return esc(parts[0])+'<span class="'+cls+'">'+esc(w)+'</span>'+esc(parts.slice(1).join('____'));
+}
+function pickDistractors(target,pool,r,n,field){
+  const bad=w=> w.en===target.en || w.th===target.th || AVOID_SET.has(w.en+'|'+target.en);
+  const same=shuffle(pool.filter(w=>!bad(w)&&w.pos===target.pos),r);
+  const other=shuffle(pool.filter(w=>!bad(w)&&w.pos!==target.pos),r);
+  const out=[],used=new Set();
+  for(const w of same.concat(other)){
+    if(out.length>=n) break;
+    if(used.has(w[field])) continue;
+    if(out.some(o=>AVOID_SET.has(o.en+'|'+w.en))) continue;
+    used.add(w[field]);out.push(w);
+  }
+  return out;
+}
+function buildQuestions(stage,seed){
+  const r=rng(seed);
+  const pool=poolFor(stage);
+  const order=shuffle(pool,r);
+  const qs=[];let cur=0;
+  stage.plan.forEach(([type,count])=>{
+    for(let i=0;i<count;i++){
+      const w=order[cur++%order.length];
+      const q={type,w};
+      if(type==='spell'){
+        const dp='aeioulnrstcdm'.split('');
+        q.tiles=shuffle(w.en.split('').concat([dp[Math.floor(r()*dp.length)],dp[Math.floor(r()*dp.length)]]),r);
+      }else{
+        const field=type==='en2th'?'th':'en';
+        const opts=shuffle([w].concat(pickDistractors(w,pool,r,3,field)),r);
+        q.opts=opts.map(o=>o[field]);q.ans=opts.indexOf(w);
+        // order in which 50:50 removes wrong options (deterministic)
+        q.cut=shuffle([0,1,2,3].filter(i=>i!==q.ans),r).slice(0,2);
+      }
+      qs.push(q);
+    }
+  });
+  return shuffle(qs,r);
+}
+
+/* ===================== STATE ===================== */
+let PROFILE = LS.get('vbx_profile',null);
+let S = null;
+let timerId = null, adminPoll = null;
+const DB_KEY='vbx_db';
+const clean = s => String(s||'').replace(/[|<>]/g,'').trim();
+function profKey(p){return [p.cls,p.room,p.no,p.name,p.sur].join('|');}
+function db(){return LS.get(DB_KEY,{profiles:{},records:[]});}
+function saveDb(d){LS.set(DB_KEY,d);}
+function myRec(){const d=db();return d.profiles[profKey(PROFILE)]||{stages:{},violations:0,xp:0,badges:{}};}
+function totalBest(prog){return STAGES.reduce((s,st)=>s+((prog&&prog[st.id]&&prog[st.id].best)||0),0);}
+function rankOf(xp){let r=RANKS[0],next=null;for(let i=0;i<RANKS.length;i++){if(xp>=RANKS[i].xp){r=RANKS[i];next=RANKS[i+1]||null;}}return {r,next};}
+function getGasUrl(){return (LS.get('vbx_gas','')||CONFIG.GAS_URL||'').trim();}
+function isAdmin(){return SS.get('vbx_admin')==='1';}
+function playing(){return !!S && !S.finished && !$('#scr-play').classList.contains('hidden');}
+
+/* ===================== BACKEND ===================== */
+async function gas(action,data){
+  const url=getGasUrl();
+  if(!url) return {ok:false,offline:true};
+  try{
+    const res=await fetch(url,{method:'POST',body:JSON.stringify(Object.assign({action},data||{}))});
+    return await res.json();
+  }catch(e){return {ok:false,net:true,error:String(e)};}
+}
+function studentPayload(){return {key:profKey(PROFILE),name:PROFILE.name,sur:PROFILE.sur,cls:PROFILE.cls,room:PROFILE.room,no:PROFILE.no};}
+
+/* ===================== AUDIO ===================== */
+let AC=null; let SOUND=LS.get('vbx_sound',true); let MUSIC=LS.get('vbx_music',false);
+function ac(){ try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==='suspended') AC.resume(); }catch(e){AC=null;} return AC; }
+function tone(f,d,type,v,delay,slideTo){
+  if(!SOUND) return; const C=ac(); if(!C) return;
+  try{
+    const t=C.currentTime+(delay||0),o=C.createOscillator(),g=C.createGain();
+    o.type=type||'sine';o.frequency.setValueAtTime(f,t); if(slideTo) o.frequency.exponentialRampToValueAtTime(slideTo,t+d);
+    g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(v||0.16,t+0.015);g.gain.exponentialRampToValueAtTime(0.0001,t+d);
+    o.connect(g).connect(C.destination);o.start(t);o.stop(t+d+0.05);
+  }catch(e){}
+}
+const SFX={
+  ok(){tone(660,.11,'triangle');tone(990,.2,'triangle',.15,.08);},
+  bad(){tone(200,.3,'sawtooth',.1,0,90);},
+  tap(){tone(560,.05,'square',.04);},
+  combo(){[784,988,1175,1568].forEach((f,i)=>tone(f,.13,'triangle',.13,i*.06));},
+  win(){[523,659,784,1047,1319].forEach((f,i)=>tone(f,.24,'triangle',.15,i*.11));},
+  tick(){tone(880,.08,'square',.07);},
+  go(){tone(440,.35,'sawtooth',.09,0,1760);tone(1320,.3,'triangle',.12,.05);},
+  star(i){tone(880+i*220,.25,'triangle',.15);},
+  power(){tone(300,.25,'sine',.14,0,1200);},
+  badge(){[1047,1319,1568,2093].forEach((f,i)=>tone(f,.3,'sine',.12,i*.09));}
+};
+/* procedural beat (optional) */
+let beatTimer=null,beatStep=0,beatNext=0;
+const BASS=[55,55,65.4,49];
+function noiseBuf(){const C=ac();if(!C) return null;if(noiseBuf.b) return noiseBuf.b;const b=C.createBuffer(1,C.sampleRate*0.2,C.sampleRate);const d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;return (noiseBuf.b=b);}
+function schedBeat(t,step){
+  const C=AC; if(!C) return;
+  const g=C.createGain();g.connect(C.destination);
+  if(step%4===0){const o=C.createOscillator();o.frequency.setValueAtTime(140,t);o.frequency.exponentialRampToValueAtTime(42,t+.18);const kg=C.createGain();kg.gain.setValueAtTime(.32,t);kg.gain.exponentialRampToValueAtTime(.001,t+.22);o.connect(kg).connect(C.destination);o.start(t);o.stop(t+.25);}
+  if(step%2===1){const nb=noiseBuf();if(nb){const s=C.createBufferSource();s.buffer=nb;const f=C.createBiquadFilter();f.type='highpass';f.frequency.value=7000;const hg=C.createGain();hg.gain.setValueAtTime(.05,t);hg.gain.exponentialRampToValueAtTime(.001,t+.05);s.connect(f).connect(hg).connect(C.destination);s.start(t);s.stop(t+.06);}}
+  if(step%8===4){const nb=noiseBuf();if(nb){const s=C.createBufferSource();s.buffer=nb;const f=C.createBiquadFilter();f.type='bandpass';f.frequency.value=1800;const sg=C.createGain();sg.gain.setValueAtTime(.09,t);sg.gain.exponentialRampToValueAtTime(.001,t+.14);s.connect(f).connect(sg).connect(C.destination);s.start(t);s.stop(t+.15);}}
+  if(step%2===0){const o=C.createOscillator();o.type='triangle';o.frequency.value=BASS[Math.floor(step/16)%4]*(step%8===6?2:1);const bg=C.createGain();bg.gain.setValueAtTime(.07,t);bg.gain.exponentialRampToValueAtTime(.001,t+.2);o.connect(bg).connect(C.destination);o.start(t);o.stop(t+.22);}
+}
+function musicStart(){
+  if(!MUSIC||beatTimer||!playing()) return; const C=ac(); if(!C) return;
+  const stepDur=60/112/2; beatNext=C.currentTime+.05;
+  beatTimer=setInterval(()=>{ if(!AC) return; while(beatNext<AC.currentTime+.15){schedBeat(beatNext,beatStep);beatStep=(beatStep+1)%64;beatNext+=stepDur;} },40);
+}
+function musicStop(){clearInterval(beatTimer);beatTimer=null;}
+function updAudioBtns(){$('#sndBtn').textContent=SOUND?'🔊':'🔇';$('#musBtn').classList.toggle('on',MUSIC);$('#musBtn').style.opacity=MUSIC?1:.55;}
+/* text-to-speech */
+let VOICE=null;
+function pickVoice(){try{const vs=speechSynthesis.getVoices();VOICE=vs.find(v=>/en[-_]US/i.test(v.lang)&&/Samantha|Google|Female|Aria|Jenny/i.test(v.name))||vs.find(v=>/en[-_](US|GB)/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;}catch(e){}}
+function speak(text){
+  try{ if(!('speechSynthesis' in window)) {toast('อุปกรณ์นี้ไม่รองรับการอ่านออกเสียง');return;}
+    speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=.88; if(VOICE) u.voice=VOICE; speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ===================== PARTICLES / FX ===================== */
+const FX={amb:[],burst:[],conf:[],w:0,h:0,mx:.5,my:.5,running:false,col:['#ff3df2','#ffd23f']};
+function fxColors(){const cs=getComputedStyle(document.body);FX.col=[cs.getPropertyValue('--a1').trim()||'#ff3df2',cs.getPropertyValue('--a2').trim()||'#ffd23f'];}
+function fxResize(){FX.w=innerWidth;FX.h=innerHeight;['#bgc','#fx'].forEach(id=>{const c=$(id);if(c){c.width=FX.w;c.height=FX.h;}});}
+function fxInit(){
+  fxResize();fxColors();
+  const n=REDUCED?0:(innerWidth<700?22:42);const glyphs=['♪','♫','✦','·','♩','✧'];
+  FX.amb=Array.from({length:n},()=>({x:Math.random()*FX.w,y:Math.random()*FX.h,z:.3+Math.random()*.9,vy:-(.15+Math.random()*.45),
+    g:glyphs[Math.floor(Math.random()*glyphs.length)],s:10+Math.random()*16,c:Math.random()<.5?0:1,a:Math.random()*Math.PI*2}));
+  addEventListener('resize',fxResize);
+  addEventListener('pointermove',e=>{FX.mx=e.clientX/Math.max(1,FX.w);FX.my=e.clientY/Math.max(1,FX.h);},{passive:true});
+  fxLoop();
+}
+function fxLoop(){
+  if(FX.running) return; FX.running=true;
+  const bg=$('#bgc'),fg=$('#fx');
+  const bx=bg&&bg.getContext?bg.getContext('2d'):null, fx=fg&&fg.getContext?fg.getContext('2d'):null;
+  if(!bx||!fx){FX.running=false;return;}
+  (function loop(){
+    if(document.hidden){FX.running=false;return;}
+    bx.clearRect(0,0,FX.w,FX.h);
+    const ox=(FX.mx-.5)*30,oy=(FX.my-.5)*20;
+    for(const p of FX.amb){
+      p.y+=p.vy*p.z;p.a+=.01;if(p.y<-30){p.y=FX.h+20;p.x=Math.random()*FX.w;}
+      bx.globalAlpha=.18+.35*p.z;bx.fillStyle=FX.col[p.c];bx.font=(p.s*p.z)+'px sans-serif';
+      bx.fillText(p.g,p.x+Math.sin(p.a)*12+ox*p.z,p.y+oy*p.z);
+    }
+    bx.globalAlpha=1;
+    fx.clearRect(0,0,FX.w,FX.h);
+    FX.burst=FX.burst.filter(p=>p.life>0);
+    for(const p of FX.burst){p.x+=p.vx;p.y+=p.vy;p.vx*=.96;p.vy=p.vy*.96+.12;p.life-=1;
+      fx.globalAlpha=Math.max(0,p.life/p.max);fx.fillStyle=p.c;
+      if(p.g){fx.font=p.s+'px sans-serif';fx.fillText(p.g,p.x,p.y);}else{fx.beginPath();fx.arc(p.x,p.y,p.s*(p.life/p.max)+.5,0,7);fx.fill();}}
+    FX.conf=FX.conf.filter(p=>p.y<FX.h+40);
+    for(const p of FX.conf){p.x+=p.vx;p.y+=p.vy;p.vy+=.04;p.r+=p.vr;fx.globalAlpha=1;fx.save();fx.translate(p.x,p.y);fx.rotate(p.r);fx.fillStyle=p.c;fx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);fx.restore();}
+    fx.globalAlpha=1;
+    requestAnimationFrame(loop);
+  })();
+}
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) fxLoop(); else musicStop(); if(!document.hidden && playing()) musicStart(); });
+function burst(x,y,n,glyph){
+  const cols=FX.col.concat(['#ffffff']);
+  for(let i=0;i<(REDUCED?Math.min(n,8):n);i++){const a=Math.random()*Math.PI*2,sp=2+Math.random()*7;
+    FX.burst.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2,s:glyph?14+Math.random()*12:2+Math.random()*4,c:cols[i%cols.length],life:40+Math.random()*30,max:70,g:glyph&&Math.random()<.5?glyph:null});}
+  fxLoop();
+}
+function confetti(n){
+  const cols=['#ff3df2','#ffd23f','#22e5e5','#ff4d5e','#b388ff','#2ee59d'];
+  for(let i=0;i<(REDUCED?20:(n||140));i++) FX.conf.push({x:Math.random()*FX.w,y:-20-Math.random()*FX.h*.6,vx:(Math.random()-.5)*4,vy:2+Math.random()*4,s:6+Math.random()*8,r:Math.random()*6,vr:(Math.random()-.5)*.3,c:cols[i%cols.length]});
+  fxLoop();
+}
+function flash(kind){const f=$('#flash');f.className='';void f.offsetWidth;f.className=kind;const b=$('#bg');b.classList.add('pulse');setTimeout(()=>b.classList.remove('pulse'),350);}
+function banner(txt){const b=$('#banner');$('#bannerTxt').textContent=txt;b.classList.remove('show');void b.offsetWidth;b.classList.add('show');}
+function centerOf(el){if(!el) return {x:FX.w/2,y:FX.h/2};const r=el.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2};}
+
+/* ===================== SCREENS ===================== */
+function show(id){
+  $$('.screen').forEach(s=>s.classList.add('hidden'));
+  const el=$('#scr-'+id);el.classList.remove('hidden');
+  el.style.animation='none';void el.offsetWidth;el.style.animation='';
+  if(id!=='admin'&&adminPoll){clearInterval(adminPoll);adminPoll=null;}
+  if(id!=='play') musicStop();
+  window.scrollTo(0,0);
+}
+function setTheme(k){document.body.setAttribute('data-theme',k||'boss');requestAnimationFrame(fxColors);}
+function updChip(){
+  const c=$('#userChip'),rc=$('#rankChip');
+  if(PROFILE){c.textContent=PROFILE.name+' • '+PROFILE.cls+'/'+PROFILE.room+' #'+PROFILE.no;c.classList.remove('hidden');
+    const {r}=rankOf(myRec().xp||0);rc.textContent=r.ic+' '+r.name;rc.classList.remove('hidden');}
+  else{c.classList.add('hidden');rc.classList.add('hidden');}
+}
+
+/* ===================== REGISTRATION ===================== */
+function register(){
+  const p={name:clean($('#fName').value),sur:clean($('#fSur').value),cls:$('#fCls').value,room:$('#fRoom').value,no:String(parseInt($('#fNo').value,10)||'')};
+  const n=parseInt(p.no,10);let err='';
+  if(!p.name) err='กรุณากรอกชื่อ';
+  else if(!p.sur) err='กรุณากรอกนามสกุล';
+  else if(!p.cls) err='กรุณาเลือกชั้น';
+  else if(!p.room) err='กรุณาเลือกห้อง';
+  else if(!(n>=1&&n<=50)) err='เลขที่ต้องอยู่ระหว่าง 1–50';
+  $('#regErr').textContent=err;
+  if(err){SFX.bad();return false;}
+  PROFILE=p;LS.set('vbx_profile',p);
+  const d=db();const k=profKey(p);
+  if(!d.profiles[k]) d.profiles[k]={profile:p,stages:{},violations:0,xp:0,badges:{},created:Date.now()};
+  saveDb(d);
+  SFX.win();burst(FX.w/2,FX.h*.6,40,'♪');updChip();renderHub();
+  gas('register',studentPayload());
+  return true;
+}
+
+/* ===================== HUB ===================== */
+function starsFor(score){return score>=18?3:score>=14?2:score>=10?1:0;}
+function starStr(n){return '★'.repeat(n)+'<span style="opacity:.22">'+'★'.repeat(3-n)+'</span>';}
+function miniRing(v,col){const C=2*Math.PI*19;return '<svg class="ring" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" stroke="rgba(255,255,255,.12)" stroke-width="5" fill="none"/>'+
+  '<circle cx="23" cy="23" r="19" stroke="'+col+'" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+(C*(1-v/20))+'" transform="rotate(-90 23 23)"/>'+
+  '<text x="23" y="27.5" text-anchor="middle" font-size="12" font-weight="900" fill="#fff">'+v+'</text></svg>';}
+const STAGE_COL={1:'#b388ff',2:'#22e5e5',3:'#ffd23f',4:'#ff4d5e',5:'#ff3df2'};
+function renderHub(){
+  setTheme('boss');
+  const rec=myRec();const prog=rec.stages||{};
+  $('#hubName').textContent=PROFILE.name+' '+PROFILE.sur;
+  $('#hubInfo').textContent='ชั้น '+PROFILE.cls+'/'+PROFILE.room+' • เลขที่ '+PROFILE.no;
+  countUp($('#hubTotal'),totalBest(prog),900);
+  const xp=rec.xp||0,{r,next}=rankOf(xp);
+  $('#rankIc').textContent=r.ic;$('#rankName').textContent=r.name;$('#rankXP').textContent='⚡ '+nfmt(xp)+' XP';
+  const pct=next?((xp-r.xp)/(next.xp-r.xp)*100):100;
+  $('#rankBar').style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>$('#rankBar').style.width=pct+'%'));
+  $('#rankNext').textContent=next?('อีก '+nfmt(next.xp-xp)+' XP สู่ '+next.ic+' '+next.name):'ระดับสูงสุดแล้ว! 👑';
+  $('#stageGrid').innerHTML=STAGES.map((st,i)=>{
+    const p=prog[st.id];
+    return '<button class="st" data-k="'+st.key+'" data-id="'+st.id+'" style="animation-delay:'+(i*.07)+'s">'+
+      (p?miniRing(p.best,STAGE_COL[st.id]):'')+(p&&p.best===20?'<span class="crown">PERFECT</span>':'')+
+      '<div class="ico">'+st.ico+'</div><div class="lv">ด่าน '+st.id+' • '+esc(st.lv)+'</div>'+
+      '<div class="nm">'+esc(st.name)+'</div><div class="ds">'+esc(st.ds)+'</div>'+
+      '<div class="ft">'+(p?'<span class="best">'+p.best+'/20</span><span class="stars">'+starStr(starsFor(p.best))+'</span><span class="muted" style="font-size:12px">×'+p.attempts+'</span>'
+        :'<span class="muted" style="font-size:13px">ยังไม่ได้เล่น</span>')+
+      '<span class="go">'+(p?'เล่นอีก ↻':'เริ่ม ▶')+'</span></div></button>';
+  }).join('');
+  $('#stageGrid').insertAdjacentHTML('beforeend',examCardHTML(STAGES.length));
+  $$('#stageGrid .st').forEach(b=>{
+    b.onclick=()=>{SFX.tap(); if(b.dataset.id==='exam') openLobby(); else startStage(+b.dataset.id);};
+    b.onpointermove=e=>{if(e.pointerType!=='mouse'||REDUCED) return;const rc=b.getBoundingClientRect();const x=(e.clientX-rc.left)/rc.width,y=(e.clientY-rc.top)/rc.height;
+      b.style.setProperty('--ry',((x-.5)*12)+'deg');b.style.setProperty('--rx',((.5-y)*10)+'deg');b.style.setProperty('--mx',(x*100)+'%');b.style.setProperty('--my',(y*100)+'%');};
+    b.onpointerleave=()=>{b.style.setProperty('--rx','0deg');b.style.setProperty('--ry','0deg');};
+  });
+  const bd=rec.badges||{};
+  $('#bdgCount').textContent='('+Object.keys(bd).filter(k=>BADGES.some(b=>b.id===k)).length+'/'+BADGES.length+')';
+  $('#bdgGrid').innerHTML=BADGES.map(b=>'<div class="bdg'+(bd[b.id]?' on':'')+'" title="'+esc(b.d)+'"><span class="e">'+b.e+'</span><div class="n">'+esc(b.n)+'</div><div class="muted" style="font-size:10px;margin-top:2px">'+esc(b.d)+'</div></div>').join('');
+  const sess=LS.get('vbx_sess',null);
+  if(sess&&sess.key===profKey(PROFILE)&&STAGES.some(s=>s.id===sess.stageId)){
+    const st=STAGES.find(s=>s.id===sess.stageId);
+    $('#resumeTxt').textContent=st.name+(sess.idx>=QN?' (ทำครบแล้ว — กดเพื่อบันทึกผล)':' (ข้อ '+(sess.idx+1)+'/20)');
+    $('#resumeBox').classList.remove('hidden');
+  }else $('#resumeBox').classList.add('hidden');
+  updChip();
+  show('hub');
+  if(Date.now()-(renderHub._sync||0)>15000){ renderHub._sync=Date.now();
+    const sig=examSig(); syncExamStatus().then(()=>{ if(examSig()!==sig && !$('#scr-hub').classList.contains('hidden')) renderHub(); }); }
+}
+function examCardHTML(i){
+  const ex=myExam(); const L=examLabel(ex); const fin=examFinal(ex);
+  const go= ex.state==='done' ? (examPassed(ex)?'ดูผล 🏆':'สอบซ่อม 🔁') : ex.state==='started' ? 'ทำต่อ ▶' : 'เข้าห้องสอบ 👑';
+  return '<button class="st" data-k="exam" data-id="exam" style="animation-delay:'+(i*.07)+'s"><span class="tagx '+L.c+'">'+L.t+'</span>'+
+    '<div class="ico">👑</div><div class="lv">ด่าน 5 • FINAL EXAM • เก็บคะแนน</div><div class="nm">BOSS MIX</div>'+
+    '<div class="ds">'+EXAM_CFG.N+' ข้อ • 6 รูปแบบ • ผ่าน '+EXAM_CFG.PASS+' • สแกนหน้า + ป้องกันทุจริต</div>'+
+    '<div class="ft">'+(fin!=null?'<span class="best">'+fin+'/'+EXAM_CFG.N+'</span>':'<span class="muted" style="font-size:13px">สอบจริงได้ 1 ครั้ง</span>')+'<span class="go">'+go+'</span></div></button>';
+}
+
+/* ===================== PLAY ===================== */
+function countdown(st,done){
+  if(REDUCED||window.__NO_CD){done();return;}
+  const cd=$('#cd'),n=$('#cdN');$('#cdStage').textContent=st.ico+' ด่าน '+st.id+' • '+st.name;
+  cd.classList.remove('hidden');let i=3;
+  const tick=()=>{
+    n.classList.remove('go');void n.offsetWidth;n.classList.add('go');
+    if(i>0){n.textContent=String(i);SFX.tick();i--;setTimeout(tick,650);}
+    else{n.textContent='BEAT!';SFX.go();burst(FX.w/2,FX.h/2,50,'♪');setTimeout(()=>{cd.classList.add('hidden');done();},520);}
+  };
+  tick();
+}
+function startStage(id,resume){
+  const st=STAGES.find(s=>s.id===id);
+  const key=profKey(PROFILE);
+  if(resume){
+    const sess=LS.get('vbx_sess',null);
+    if(!sess){renderHub();return;}
+    S=Object.assign({ll:{fifty:1,hint:2},xp:0,usedAnyLL:false},sess);
+  }else{
+    const d=db();const pr=d.profiles[key]||{stages:{}};
+    const attempt=((pr.stages[id]&&pr.stages[id].attempts)||0)+1;
+    S={key,stageId:id,attempt,seed:key+'#'+id+'#'+attempt+'#'+Date.now(),idx:0,answers:[],combo:0,maxCombo:0,xp:0,
+       ll:{fifty:1,hint:2},usedAnyLL:false,startAt:Date.now()};
+    persistSess();
+    gas('start',Object.assign(studentPayload(),{stage:id,attempt}));
+  }
+  S.stage=st;S.qs=buildQuestions(st,S.seed);S.locked=false;S.finished=false;
+  if(S.idx>=QN){finishStage();return;}
+  setTheme(st.key);
+  $('#pStage').textContent=st.ico+' ด่าน '+st.id+' • '+st.name;
+  $('#track').innerHTML=Array.from({length:QN},()=>'<i></i>').join('');
+  document.body.classList.toggle('reveal',isAdmin()&&SS.get('vbx_reveal')==='1');
+  show('play');
+  renderQ(true);
+  countdown(st,()=>{
+    if(!S||S.finished) return;
+    if(resume) S.startAt=Date.now()-(S.elapsed||0);
+    S.qStart=Date.now();startBeatBar();
+    clearInterval(timerId);
+    timerId=setInterval(()=>{ if(S&&!S.finished) $('#pTime').textContent=fmtTime((Date.now()-S.startAt)/1000); },500);
+    musicStart();
+  });
+}
+function score(){return S.answers.filter(a=>a.ok).length;}
+function comboMult(c){return c>=10?3:c>=5?2:c>=3?1.5:1;}
+function renderHUD(){
+  const items=$('#track').children;
+  for(let i=0;i<QN;i++) items[i].className = i<S.answers.length ? (S.answers[i].ok?'ok':'bad') : (i===S.idx?'cur':'');
+  $('#pScore').textContent=score();
+  $('#pXP').textContent=nfmt(S.xp);
+  const c=S.combo;
+  $('#cMeter').style.width=Math.min(100,c*10)+'%';
+  const l=$('#cLbl');
+  l.textContent=c>=2?('🔥 COMBO ×'+c+(comboMult(c)>1?'  (XP ×'+comboMult(c)+')':'')):'';
+  l.classList.toggle('hot',c>=5);
+}
+function startBeatBar(){
+  const b=$('#beatBar');if(!b||!S) return;const q=S.qs[S.idx];
+  b.classList.remove('run');void b.offsetWidth;b.style.animationDuration=TYPES[q.type].limit+'s';b.classList.add('run');
+}
+function renderQ(noBar){
+  const q=S.qs[S.idx];const T=TYPES[q.type];
+  S.locked=false;S.qLL=false;S.qStart=Date.now();
+  renderHUD();
+  let h='<div class="qtop"><span class="qtype">'+T.icon+' '+T.label+'</span><span class="qnum">ข้อ '+(S.idx+1)+' / '+QN+'</span></div>'+
+    '<div class="beat"><i id="beatBar"></i></div>';
+  if(q.type==='en2th'){
+    h+='<div class="prompt"><div class="big">'+esc(q.w.en)+'<button class="speak" id="sayBtn" title="ฟังเสียง">🔊</button></div><div class="pos">'+q.w.pos+'</div><div class="hint">คำนี้แปลว่าอะไร?</div></div>';
+  }else if(q.type==='th2en'){
+    h+='<div class="prompt"><div class="th">'+esc(q.w.th)+'</div><div class="pos">'+q.w.pos+'</div><div class="hint">ตรงกับคำศัพท์ใด?</div></div>';
+  }else if(q.type==='gap'){
+    const parts=q.w.ex.split('____');
+    h+='<div class="prompt"><div class="sent" id="sent">'+esc(parts[0])+'<span class="blank">&nbsp;?&nbsp;</span>'+esc(parts.slice(1).join('____'))+'</div><div class="hint">เลือกคำที่เหมาะสมที่สุดเติมในช่องว่าง</div></div>';
+  }else{
+    h+='<div class="prompt"><div class="th">'+esc(q.w.th)+'</div><div class="pos">'+q.w.pos+' • '+q.w.en.length+' ตัวอักษร</div></div>';
+  }
+  h+='<div id="hintArea"></div>';
+  if(q.type!=='spell'){
+    h+='<div class="opts" id="opts">'+q.opts.map((o,i)=>'<button class="opt" data-i="'+i+'" data-c="'+(i===q.ans?1:0)+'"><span class="k">'+'ABCD'[i]+'</span><span>'+esc(o)+'</span></button>').join('')+'</div>';
+  }else{
+    h+='<div id="spellArea"><div class="slots" id="slots"></div><div class="tiles" id="tiles"></div>'+
+      '<div class="spellbar"><button class="btn ghost" id="spBack">⌫ ลบ</button><button class="btn ghost" id="spClear">ล้าง</button><button class="btn pri" id="spCheck" disabled>ตรวจคำตอบ ✓</button></div></div>';
+  }
+  h+='<div class="ll" id="llBar">'+
+    (q.type!=='spell'?'<button class="llb" id="llFifty">✂️ 50:50 <b>'+S.ll.fifty+'</b></button>':'')+
+    '<button class="llb" id="llHint">💡 คำใบ้ <b>'+S.ll.hint+'</b></button></div>';
+  h+='<div id="fbArea"></div>';
+  $('#qcard').innerHTML=h;
+  if($('#sayBtn')) $('#sayBtn').onclick=()=>speak(q.w.en);
+  if(q.type!=='spell'){
+    $$('#opts .opt').forEach(b=>b.onclick=()=>chooseOpt(+b.dataset.i));
+    $('#llFifty').disabled=S.ll.fifty<=0; $('#llFifty').onclick=useFifty;
+  }else{
+    S.spell=[];S.hintLetters=0;renderSpell();
+    $('#spBack').onclick=()=>{if(S.locked)return;if(S.spell.length>S.hintLetters){S.spell.pop();SFX.tap();renderSpell();}};
+    $('#spClear').onclick=()=>{if(S.locked)return;S.spell=S.spell.slice(0,S.hintLetters);renderSpell();};
+    $('#spCheck').onclick=checkSpell;
+  }
+  $('#llHint').disabled=S.ll.hint<=0; $('#llHint').onclick=useHint;
+  if(!noBar) startBeatBar();
+}
+function useFifty(){
+  if(S.locked||S.ll.fifty<=0) return; const q=S.qs[S.idx]; if(q.type==='spell') return;
+  S.ll.fifty--;S.qLL=true;S.usedAnyLL=true;SFX.power();
+  q.cut.forEach(i=>$$('#opts .opt')[i].classList.add('gone'));
+  $('#llFifty').disabled=true;$('#llFifty').querySelector('b').textContent=S.ll.fifty;
+  persistSess();
+}
+function useHint(){
+  if(S.locked||S.ll.hint<=0) return; const q=S.qs[S.idx];
+  if(q.type==='spell'){
+    // lock in the next correct letter
+    const w=q.w.en;let k=0;while(k<S.spell.length&&q.tiles[S.spell[k]]===w[k])k++;
+    if(k>=w.length) return;
+    S.spell=S.spell.slice(0,k);
+    const used=new Set(S.spell);const ti=q.tiles.findIndex((t,j)=>t===w[k]&&!used.has(j));
+    if(ti<0) return;
+    S.spell.push(ti);S.hintLetters=k+1;renderSpell();
+  }else{
+    let msg='';
+    if(q.type==='en2th') msg='💡 ตัวอย่าง: '+fillSentence(q.w.ex,q.w.en,'hl');
+    else if(q.type==='th2en') msg='💡 ขึ้นต้นด้วย “'+esc(q.w.en[0].toUpperCase())+'” • '+q.w.en.length+' ตัวอักษร: '+esc(q.w.en[0]+' _'.repeat(q.w.en.length-1));
+    else msg='💡 คำที่หายไปแปลว่า “'+esc(q.w.th)+'”';
+    $('#hintArea').innerHTML='<div class="hintbox">'+msg+'</div>';
+    $('#llHint').disabled=true;
+  }
+  S.ll.hint--;S.qLL=true;S.usedAnyLL=true;SFX.power();
+  $('#llHint').querySelector('b').textContent=S.ll.hint;
+  if(S.ll.hint<=0) $('#llHint').disabled=true;
+  persistSess();
+}
+function renderSpell(){
+  const q=S.qs[S.idx];
+  let s='';for(let i=0;i<q.w.en.length;i++){const ti=S.spell[i];s+='<div class="slot'+(ti!=null?(i<S.hintLetters?' f h':' f'):'')+'" data-s="'+i+'">'+(ti!=null?esc(q.tiles[ti]):'')+'</div>';}
+  $('#slots').innerHTML=s;
+  $('#tiles').innerHTML=q.tiles.map((ch,i)=>'<button class="tile'+(S.spell.includes(i)?' used':'')+'" data-t="'+i+'" style="animation-delay:'+(i*.025)+'s">'+esc(ch)+'</button>').join('');
+  $$('#tiles .tile').forEach(b=>b.onclick=()=>addTile(+b.dataset.t));
+  $$('#slots .slot').forEach(el=>el.onclick=()=>{
+    if(S.locked) return; const i=+el.dataset.s; if(i>=S.hintLetters&&i<S.spell.length){S.spell.splice(i,1);renderSpell();}
+  });
+  $('#spCheck').disabled = S.spell.length!==q.w.en.length;
+}
+function addTile(i){
+  const q=S.qs[S.idx]; if(S.locked) return;
+  if(S.spell.includes(i)||S.spell.length>=q.w.en.length) return;
+  S.spell.push(i);SFX.tap();renderSpell();
+  if(S.spell.length===q.w.en.length) $('#spCheck').focus({preventScroll:true});
+}
+function checkSpell(){
+  if(S.locked) return; const q=S.qs[S.idx];
+  if(S.spell.length!==q.w.en.length) return;
+  const given=S.spell.map(i=>q.tiles[i]).join('');
+  const ok=given===q.w.en;
+  S.locked=true;
+  $('#spellArea').classList.add('locked');
+  $$('#slots .slot').forEach((el,i)=>{el.classList.add(given[i]===q.w.en[i]?'ok':'bad');el.style.animationDelay=(i*.04)+'s';});
+  ['spBack','spClear','spCheck'].forEach(id=>$('#'+id).disabled=true);
+  answer(ok,given,$('#slots'));
+}
+function chooseOpt(i){
+  if(S.locked) return; const q=S.qs[S.idx];
+  const btns=$$('#opts .opt'); if(btns[i].classList.contains('gone')) return;
+  S.locked=true;
+  const ok=i===q.ans;
+  $('#opts').classList.add('locked');
+  btns.forEach((b,j)=>{ if(j===q.ans) b.classList.add('correct'); else if(j===i) b.classList.add('wrong'); else b.classList.add('dim'); });
+  if(q.type==='gap'){const s=$('#sent');if(s) s.innerHTML=fillSentence(q.w.ex,q.w.en,'blank fill');}
+  answer(ok,q.opts[i],btns[ok?i:q.ans]);
+}
+function answer(ok,given,anchor){
+  const q=S.qs[S.idx];
+  const el=(Date.now()-(S.qStart||Date.now()))/1000;
+  let gain=0;
+  if(ok){
+    S.combo++;S.maxCombo=Math.max(S.maxCombo,S.combo);
+    const speed=Math.round(50*Math.max(0,1-el/TYPES[q.type].limit));
+    gain=Math.round((100+speed)*comboMult(S.combo)*(S.qLL?0.5:1));
+    S.xp+=gain;
+    const c=centerOf(anchor);burst(c.x,c.y,S.combo>=5?46:26,S.combo>=3?'🔥':'✦');flash('ok');
+    if(S.combo===5){banner('ON FIRE! 🔥');SFX.combo();}
+    else if(S.combo===10){banner('UNSTOPPABLE ⚡');SFX.combo();confetti(80);}
+    else if(S.combo===15){banner('LEGENDARY 👑');SFX.combo();confetti(120);}
+    else if(S.combo>=3&&S.combo%3===0) SFX.combo(); else SFX.ok();
+    const f=document.createElement('div');f.className='floatxp';f.textContent='+'+gain+' XP';$('#qcard').appendChild(f);
+  }else{
+    S.combo=0;SFX.bad();flash('bad');
+    const w=$('#qwrap');w.classList.remove('shake');void w.offsetWidth;w.classList.add('shake');
+    try{navigator.vibrate&&navigator.vibrate(120);}catch(e){}
+  }
+  S.answers.push({type:q.type,en:q.w.en,th:q.w.th,ok,given,ll:!!S.qLL,xp:gain});
+  S.idx++;
+  persistSess();
+  renderHUD();
+  const b=$('#beatBar');if(b) b.style.animationPlayState='paused';
+  $$('#llBar .llb').forEach(x=>x.disabled=true);
+  const last=S.idx>=QN;
+  $('#fbArea').innerHTML='<div class="fb '+(ok?'ok':'bad')+'"><div class="em">'+(ok?'✅':'❌')+'</div><div style="flex:1">'+
+    '<div class="w">'+esc(q.w.en)+' <button class="speak" id="fbSay" title="ฟังเสียง">🔊</button> <span class="muted" style="font-size:14px">('+q.w.pos+')</span> = '+esc(q.w.th)+'</div>'+
+    (ok?'':'<div class="muted" style="font-size:14px">คำตอบของคุณ: '+esc(given)+'</div>')+
+    '<div class="ex">'+fillSentence(q.w.ex,q.w.en,'hl')+'</div></div>'+(ok?'<div class="gain">+'+gain+'</div>':'')+'</div>'+
+    '<div class="nextbar"><button class="btn pri" id="nextBtn">'+(last?'ดูผลคะแนน 🏁':'ข้อต่อไป →')+'</button></div>';
+  $('#fbSay').onclick=()=>speak(q.w.ex.replace('____',q.w.en));
+  const nb=$('#nextBtn');nb.onclick=next;
+  try{nb.focus({preventScroll:true});}catch(e){}
+  if(innerWidth<700) setTimeout(()=>{try{$('#fbArea').scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}},60);
+  if(!last) gas('progress',Object.assign(studentPayload(),{stage:S.stageId,q:S.idx,score:score()}));
+}
+function persistSess(){
+  LS.set('vbx_sess',{key:S.key,stageId:S.stageId,attempt:S.attempt,seed:S.seed,idx:S.idx,answers:S.answers,combo:S.combo,maxCombo:S.maxCombo,
+    xp:S.xp,ll:S.ll,usedAnyLL:S.usedAnyLL,startAt:S.startAt,elapsed:Date.now()-S.startAt});
+}
+function next(){
+  if(!S||!S.locked||S.finished) return;
+  if(S.idx>=QN) finishStage(); else {SFX.tap();renderQ();if(scrollY>40){try{window.scrollTo({top:0,behavior:REDUCED?'auto':'smooth'});}catch(e){window.scrollTo(0,0);}}}
+}
+function checkBadges(rec,run){
+  const got=rec.badges||(rec.badges={});const fresh=[];
+  const give=id=>{if(!got[id]){got[id]=Date.now();fresh.push(id);}};
+  const prog=rec.stages||{};
+  if(Object.keys(prog).length) give('first');
+  if(run.score===20) give('perfect');
+  if(run.maxCombo>=10) give('combo10');
+  if(run.score>=16&&run.time<=150) give('speed');
+  if(run.score>=18&&!run.usedLL) give('pure');
+  const ex=Object.assign(blankExam(),rec.exam||{});
+  if(ex.state==='done'&&ex.raw>=24) give('boss');
+  if(STAGES.every(s=>prog[s.id])&&examPassed(ex)) give('allclear');
+  if(totalBest(prog)>=72) give('century');
+  return fresh;
+}
+function finishStage(){
+  if(!S||S.finished) return;
+  S.finished=true;
+  clearInterval(timerId);musicStop();
+  document.body.classList.remove('reveal');
+  const sc=score();const secs=Math.round((Date.now()-S.startAt)/1000);
+  const st=S.stage;
+  const d=db();const k=S.key;
+  if(!d.profiles[k]) d.profiles[k]={profile:PROFILE,stages:{},violations:0,xp:0,badges:{},created:Date.now()};
+  const rec=d.profiles[k];
+  const prevXP=rec.xp||0;
+  const prev=rec.stages[st.id];
+  const isBest=!prev||sc>prev.best||(sc===prev.best&&(prev.bestTime==null||secs<prev.bestTime));
+  rec.stages[st.id]={best:Math.max(prev?prev.best:0,sc),last:sc,attempts:Math.max(prev?prev.attempts:0,S.attempt),
+    bestTime:isBest?secs:prev.bestTime,bestXP:Math.max((prev&&prev.bestXP)||0,S.xp),lastAt:Date.now()};
+  rec.xp=prevXP+S.xp;
+  const fresh=checkBadges(rec,{score:sc,time:secs,maxCombo:S.maxCombo,usedLL:S.usedAnyLL});
+  d.records.push({key:k,name:PROFILE.name,sur:PROFILE.sur,cls:PROFILE.cls,room:PROFILE.room,no:PROFILE.no,stage:st.id,score:sc,time:secs,xp:S.xp,at:Date.now(),attempt:S.attempt});
+  if(d.records.length>800) d.records=d.records.slice(-800);
+  saveDb(d);
+  LS.del('vbx_sess');
+  gas('finish',Object.assign(studentPayload(),{stage:st.id,score:sc,time:secs,attempt:S.attempt,best:rec.stages[st.id].best,xp:S.xp}));
+  renderResult(sc,secs,isBest&&!!prev,fresh,prevXP,rec.xp);
+}
+function quitStage(){
+  confirmBox('ออกจากด่านนี้?','ความคืบหน้าจะถูกเก็บไว้ กด “ทำต่อ” ที่หน้าด่านเพื่อเล่นต่อได้',()=>{
+    if(S&&!S.finished) persistSess();
+    clearInterval(timerId);musicStop();document.body.classList.remove('reveal');S=null;renderHub();
+  });
+}
+
+/* ===================== RESULT ===================== */
+function renderResult(sc,secs,newBest,fresh,prevXP,newXP){
+  const st=S.stage;const pct=Math.round(sc/QN*100);const stars=starsFor(sc);
+  const msg= sc===20?'PERFECT! สุดยอดมาก 🏆': sc>=18?'ยอดเยี่ยม! เกือบเต็ม 🔥': sc>=14?'เก่งมาก! ทบทวนอีกนิด ✨': sc>=10?'ผ่าน! ลองอีกรอบให้ได้ 3 ดาว 💪':'สู้ ๆ! ทบทวนคำศัพท์แล้วลองใหม่ 📚';
+  const byType={};S.answers.forEach(a=>{byType[a.type]=byType[a.type]||{ok:0,n:0};byType[a.type].n++;if(a.ok)byType[a.type].ok++;});
+  const C=2*Math.PI*92;const wrong=S.answers.filter(a=>!a.ok);
+  const before=rankOf(prevXP).r,after=rankOf(newXP).r;const rankUp=after.xp>before.xp;
+  $('#resBox').innerHTML=
+    '<div class="qtype">'+st.ico+' ด่าน '+st.id+' • '+esc(st.name)+'</div>'+
+    '<div class="bigring"><svg width="220" height="220"><defs><linearGradient id="rg" x1="0" x2="1"><stop offset="0" stop-color="'+getComputedStyle(document.body).getPropertyValue('--a1').trim()+'"/><stop offset="1" stop-color="'+getComputedStyle(document.body).getPropertyValue('--a2').trim()+'"/></linearGradient></defs>'+
+    '<circle cx="110" cy="110" r="92" stroke="rgba(255,255,255,.1)" stroke-width="16" fill="none"/>'+
+    '<circle id="ringArc" cx="110" cy="110" r="92" stroke="url(#rg)" stroke-width="16" fill="none" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1.5s cubic-bezier(.2,.8,.2,1)"/></svg>'+
+    '<div class="v"><b id="resN">0</b><span>จาก 20 คะแนน</span></div></div>'+
+    '<div class="bigstars">'+[0,1,2].map(i=>'<span class="s" data-s="'+i+'">★</span>').join('')+'</div>'+
+    '<div class="msg">'+msg+(newBest?' <span class="chip" style="color:#ffd23f;border-color:#ffd23f">NEW BEST!</span>':'')+'</div>'+
+    '<div class="rankline">'+after.ic+' '+after.name+' • ⚡ <span id="resXP">0</span> XP รอบนี้'+(rankUp?' • 🎉 RANK UP!':'')+'</div>'+
+    '<div class="muted" style="margin-top:6px">'+esc(PROFILE.name+' '+PROFILE.sur)+' • '+esc(PROFILE.cls+'/'+PROFILE.room)+' เลขที่ '+esc(PROFILE.no)+' • ครั้งที่ '+S.attempt+' • '+nowTH()+'</div>'+
+    '<div class="stats"><div class="stat"><b>'+pct+'%</b><span>ความแม่นยำ</span></div><div class="stat"><b>'+fmtTime(secs)+'</b><span>เวลาที่ใช้</span></div>'+
+    '<div class="stat"><b>×'+S.maxCombo+'</b><span>คอมโบสูงสุด</span></div><div class="stat"><b>'+S.answers.filter(a=>a.ll).length+'</b><span>ข้อที่ใช้ตัวช่วย</span></div></div>'+
+    (fresh.length?'<div class="newb"><b>🏅 ปลดล็อกเหรียญใหม่!</b><div class="list">'+fresh.map((id,i)=>{const b=BADGES.find(x=>x.id===id);return '<div class="it" style="animation-delay:'+(1.6+i*.25)+'s"><span>'+b.e+'</span>'+esc(b.n)+'</div>';}).join('')+'</div></div>':'')+
+    '<div class="tbars">'+Object.keys(TYPES).filter(t=>byType[t]).map(t=>{const b=byType[t];return '<div class="tbar"><span>'+TYPES[t].icon+' '+TYPES[t].name+'</span><div class="tr"><i data-w="'+(b.ok/b.n*100)+'"></i></div><b>'+b.ok+'/'+b.n+'</b></div>';}).join('')+'</div>'+
+    '<div class="row" style="justify-content:center;margin-top:8px">'+
+      '<button class="btn pri" id="rRetry">↻ เล่นด่านนี้อีกครั้ง</button><button class="btn ghost" id="rHub">กลับหน้าด่าน</button><button class="btn ghost" id="rCard">🏆 Score Card</button></div>'+
+    (wrong.length?'<div class="review"><h3>📌 ทบทวนข้อที่ผิด ('+wrong.length+' ข้อ)</h3>'+wrong.map(a=>
+      '<div class="rv"><b>'+esc(a.en)+'</b> = '+esc(a.th)+'<br><span class="muted">'+TYPES[a.type].name+' • ตอบ:</span> <span class="x">'+esc(a.given)+'</span> → <span class="c">'+esc(a.type==='en2th'?a.th:a.en)+'</span></div>').join('')+'</div>'
+     :'<div class="review center"><h3>🎉 ไม่มีข้อผิดเลย!</h3></div>');
+  show('result');
+  countUp($('#resN'),sc,1300);countUp($('#resXP'),S.xp,1500,nfmt);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    const arc=$('#ringArc');if(arc) arc.style.strokeDashoffset=String(C*(1-sc/QN));
+    $$('.tbar .tr i').forEach(i=>i.style.width=i.dataset.w+'%');
+  }));
+  for(let i=0;i<stars;i++) setTimeout(()=>{const s=$('.bigstars .s[data-s="'+i+'"]');if(s){s.classList.add('on');SFX.star(i);const c=centerOf(s);burst(c.x,c.y,18,'★');}},1100+i*320);
+  if(sc>=14) setTimeout(()=>{SFX.win();confetti(sc===20?240:130);},1100+stars*320);
+  if(fresh.length) setTimeout(()=>SFX.badge(),1700);
+  if(rankUp) setTimeout(()=>banner('RANK UP! '+after.ic+' '+after.name),2300);
+  const sid=st.id;
+  $('#rRetry').onclick=()=>startStage(sid);
+  $('#rHub').onclick=()=>{S=null;renderHub();};
+  $('#rCard').onclick=()=>{S=null;renderCard();};
+}
+
+/* ===================== SCORE CARD ===================== */
+function gradeOf(t){return t>=80?'4':t>=75?'3.5':t>=70?'3':t>=65?'2.5':t>=60?'2':t>=55?'1.5':t>=50?'1':'0';}
+function cardData(){
+  const rec=myRec();const prog=rec.stages||{};
+  return {prog,total:totalBest(prog),done:STAGES.filter(s=>prog[s.id]).length,violations:rec.violations||0,xp:rec.xp||0,badges:rec.badges||{},
+    tries:STAGES.reduce((a,s)=>a+((prog[s.id]&&prog[s.id].attempts)||0),0)};
+}
+function renderCard(){
+  setTheme('boss');
+  const c=cardData();const {r}=rankOf(c.xp);
+  $('#cardWrap').innerHTML='<div class="in" id="scard">'+
+    '<div class="hd"><div class="mk" style="width:48px;height:48px;font-size:18px">VB</div><div class="t">VOCAB BEAT<small>ADVANCE • SET 15–18</small></div>'+
+    '<span style="margin-left:auto" class="chip hidem">Academic Year 2026</span></div>'+
+    '<div class="who"><div><b>'+esc(PROFILE.name+' '+PROFILE.sur)+'</b><div class="muted">ชั้น '+esc(PROFILE.cls+'/'+PROFILE.room)+' • เลขที่ '+esc(PROFILE.no)+'</div></div>'+
+    '<div class="rk">'+r.ic+' '+r.name+'<div class="muted" style="font-size:12px;text-align:right">⚡ '+nfmt(c.xp)+' XP</div></div></div>'+
+    STAGES.map(st=>{const p=c.prog[st.id];const v=p?p.best:0;
+      return '<div class="srow"><b style="color:'+STAGE_COL[st.id]+'">'+st.ico+' '+esc(st.name)+'</b><div class="tr"><i style="width:'+(v/20*100)+'%;background:'+STAGE_COL[st.id]+'"></i></div>'+
+      '<span class="sc">'+(p?v+'/20':'<span class="muted" style="font-weight:600;font-size:12px">ยังไม่ทำ</span>')+'</span></div>';}).join('')+
+    (()=>{const ex=myExam();const fin=examFinal(ex);const L=examLabel(ex);
+      return '<div class="srow" style="border-bottom:0"><b style="color:#ffd23f">👑 FINAL EXAM</b><div class="tr"><i style="width:'+((fin||0)/EXAM_CFG.N*100)+'%;background:linear-gradient(90deg,#ffd23f,#ff9f1c)"></i></div>'+
+      '<span class="sc">'+(fin!=null?fin+'/'+EXAM_CFG.N:'<span class="muted" style="font-weight:600;font-size:12px">ยังไม่สอบ</span>')+'</span></div>'+
+      '<div class="total"><div><div class="muted" style="font-size:13px">คะแนนฝึกรวม</div><div class="n">'+c.total+'<span style="font-size:22px;color:#aaa;-webkit-text-fill-color:#aaa"> /80</span></div></div>'+
+      '<div class="grade"><span style="font-size:12px;font-weight:800">คะแนนสอบ</span><b>'+(fin!=null?fin:'–')+'<span style="font-size:16px">/'+EXAM_CFG.N+'</span></b><span style="font-size:12px;font-weight:900">'+L.t+'</span></div></div>';})()+
+    '<div class="bdgrow">'+BADGES.map(b=>'<span class="'+(c.badges[b.id]?'on':'')+'" title="'+esc(b.n)+'">'+b.e+'</span>').join('')+'</div>'+
+    '<div class="meta"><span>✅ ฝึกแล้ว '+c.done+'/4 ด่าน • เล่นรวม '+c.tries+' ครั้ง</span><span>'+(c.violations?'<span class="warn">⚠ สลับแท็บ/แปลภาษา '+c.violations+' ครั้ง</span>':'🛡️ ไม่พบการสลับแท็บ')+'</span></div>'+
+    '<div class="meta"><span>🕒 '+nowTH()+'</span><span>BY T.OAT • GSB SCHOOL</span></div></div>';
+  show('card');
+  if(c.total>=72) setTimeout(()=>confetti(100),300);
+}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function drawCardPNG(){
+  const c=cardData();const {r}=rankOf(c.xp);
+  const cv=document.createElement('canvas');cv.width=1080;cv.height=1520;
+  let ctx=null;try{ctx=cv.getContext&&cv.getContext('2d');}catch(e){}
+  if(!ctx) return null;
+  const F='"Sukhumvit Set","Noto Sans Thai","Leelawadee UI","Thonburi",system-ui,sans-serif';
+  let g=ctx.createLinearGradient(0,0,1080,1520);g.addColorStop(0,'#1f1240');g.addColorStop(1,'#07060f');ctx.fillStyle=g;ctx.fillRect(0,0,1080,1520);
+  let rg=ctx.createRadialGradient(1000,60,10,1000,60,640);rg.addColorStop(0,'rgba(255,61,242,.45)');rg.addColorStop(1,'rgba(255,61,242,0)');ctx.fillStyle=rg;ctx.fillRect(0,0,1080,1520);
+  rg=ctx.createRadialGradient(60,1480,10,60,1480,640);rg.addColorStop(0,'rgba(255,210,63,.3)');rg.addColorStop(1,'rgba(255,210,63,0)');ctx.fillStyle=rg;ctx.fillRect(0,0,1080,1520);
+  ctx.fillStyle='rgba(255,255,255,.07)';for(let x=40;x<1080;x+=44)for(let y=40;y<300;y+=44){ctx.beginPath();ctx.arc(x,y,2,0,7);ctx.fill();}
+  // frame
+  g=ctx.createLinearGradient(0,0,1080,1520);g.addColorStop(0,'#ff3df2');g.addColorStop(.5,'#ffd23f');g.addColorStop(1,'#22e5e5');ctx.strokeStyle=g;ctx.lineWidth=6;roundRect(ctx,18,18,1044,1484,40);ctx.stroke();
+  g=ctx.createLinearGradient(70,70,150,150);g.addColorStop(0,'#ff3df2');g.addColorStop(1,'#ffd23f');ctx.fillStyle=g;roundRect(ctx,70,70,96,96,24);ctx.fill();
+  ctx.fillStyle='#111';ctx.font='900 40px '+F;ctx.textAlign='center';ctx.fillText('VB',118,133);
+  ctx.textAlign='left';ctx.fillStyle='#fff';ctx.font='900 64px '+F;ctx.fillText('VOCAB BEAT',196,128);
+  ctx.fillStyle='rgba(255,255,255,.6)';ctx.font='800 22px '+F;ctx.fillText('A D V A N C E   •   S E T  1 5 – 1 8',200,164);
+  ctx.fillStyle='rgba(255,255,255,.07)';roundRect(ctx,70,210,940,150,28);ctx.fill();
+  ctx.fillStyle='#fff';ctx.font='800 48px '+F;ctx.fillText(PROFILE.name+' '+PROFILE.sur,104,275);
+  ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='600 30px '+F;ctx.fillText('ชั้น '+PROFILE.cls+'/'+PROFILE.room+'   •   เลขที่ '+PROFILE.no,104,326);
+  ctx.textAlign='right';ctx.fillStyle='#ffd23f';ctx.font='900 32px '+F;ctx.fillText(r.ic+' '+r.name,980,275);
+  ctx.fillStyle='rgba(255,255,255,.65)';ctx.font='700 24px '+F;ctx.fillText('⚡ '+nfmt(c.xp)+' XP',980,320);ctx.textAlign='left';
+  let y=430;
+  STAGES.forEach(st=>{
+    const p=c.prog[st.id];const v=p?p.best:0;
+    ctx.fillStyle=STAGE_COL[st.id];ctx.font='900 34px '+F;ctx.fillText(st.name,80,y+12);
+    ctx.fillStyle='rgba(255,255,255,.1)';roundRect(ctx,330,y-12,520,28,14);ctx.fill();
+    if(v>0){ctx.fillStyle=STAGE_COL[st.id];roundRect(ctx,330,y-12,Math.max(28,520*v/20),28,14);ctx.fill();}
+    ctx.textAlign='right';ctx.fillStyle=p?'#fff':'rgba(255,255,255,.45)';ctx.font=(p?'900 36px ':'600 26px ')+F;ctx.fillText(p?v+'/20':'ยังไม่ทำ',1000,y+12);ctx.textAlign='left';
+    if(p){ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='600 20px '+F;ctx.fillText('เล่น '+p.attempts+' ครั้ง'+(p.best===20?'  •  PERFECT':''),80,y+44);}
+    y+=118;
+  });
+  { const ex=myExam();const fin=examFinal(ex);const L=examLabel(ex);
+    ctx.fillStyle='#ffd23f';ctx.font='900 34px '+F;ctx.fillText('👑 EXAM',80,y+12);
+    ctx.fillStyle='rgba(255,255,255,.1)';roundRect(ctx,330,y-12,520,28,14);ctx.fill();
+    if(fin){ctx.fillStyle='#ffb020';roundRect(ctx,330,y-12,Math.max(28,520*fin/EXAM_CFG.N),28,14);ctx.fill();}
+    ctx.textAlign='right';ctx.fillStyle=fin!=null?'#fff':'rgba(255,255,255,.45)';ctx.font=(fin!=null?'900 36px ':'600 26px ')+F;ctx.fillText(fin!=null?fin+'/'+EXAM_CFG.N:'ยังไม่สอบ',1000,y+12);ctx.textAlign='left';
+    ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='600 20px '+F;ctx.fillText(L.t+(ex.state==='done'&&ex.raw<EXAM_CFG.PASS?'  •  สอบจริง '+ex.raw+'/'+EXAM_CFG.N:''),80,y+44);
+    ctx.fillStyle='rgba(255,255,255,.65)';ctx.font='700 30px '+F;ctx.fillText('คะแนนฝึกรวม',80,1060);
+    g=ctx.createLinearGradient(80,1080,500,1200);g.addColorStop(0,'#ff3df2');g.addColorStop(1,'#ffd23f');ctx.fillStyle=g;ctx.font='900 150px '+F;ctx.fillText(String(c.total),74,1210);
+    const tw=ctx.measureText(String(c.total)).width;ctx.fillStyle='rgba(255,255,255,.55)';ctx.font='800 48px '+F;ctx.fillText('/80',90+tw,1210);
+    g=ctx.createLinearGradient(760,1040,1000,1230);g.addColorStop(0,'#ffd23f');g.addColorStop(1,'#ff9f1c');ctx.fillStyle=g;roundRect(ctx,770,1040,230,190,34);ctx.fill();
+    ctx.fillStyle='#111';ctx.textAlign='center';ctx.font='800 26px '+F;ctx.fillText('คะแนนสอบ',885,1088);ctx.font='900 84px '+F;ctx.fillText(fin!=null?String(fin):'–',885,1180);
+    ctx.font='800 22px '+F;ctx.fillText(L.t,885,1215);ctx.textAlign='left'; }
+  ctx.font='52px sans-serif';BADGES.forEach((b,i)=>{ctx.globalAlpha=c.badges[b.id]?1:.15;ctx.fillText(b.e,80+i*78,1310);});ctx.globalAlpha=1;
+  ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='600 26px '+F;
+  ctx.fillText('ฝึกแล้ว '+c.done+'/4 ด่าน  •  เล่นรวม '+c.tries+' ครั้ง  •  '+(c.violations?'สลับแท็บ '+c.violations+' ครั้ง':'ไม่พบการสลับแท็บ'),80,1390);
+  ctx.fillText(nowTH(),80,1440);ctx.textAlign='right';ctx.fillStyle='rgba(255,255,255,.5)';ctx.fillText('BY T.OAT • GSB SCHOOL',1000,1440);
+  return cv;
+}
+function saveCardImage(){
+  const cv=drawCardPNG();
+  if(!cv){toast('อุปกรณ์นี้สร้างรูปไม่ได้ — ใช้การแคปหน้าจอแทนนะ');return;}
+  let url;try{url=cv.toDataURL('image/png');}catch(e){toast('สร้างรูปไม่สำเร็จ — ใช้การแคปหน้าจอแทน');return;}
+  $('#imgOut').src=url;$('#imgDl').href=url;
+  $('#imgDl').setAttribute('download','vocabbeat_'+PROFILE.cls.replace('.','')+'-'+PROFILE.room+'_'+PROFILE.no+'_'+PROFILE.name+'.png');
+  $('#imgModal').classList.remove('hidden');SFX.badge();
+}
+
+/* ===================== ANTI-CHEAT ===================== */
+function addViolation(kind){
+  if(!PROFILE) return;
+  const d=db();const k=profKey(PROFILE);
+  if(d.profiles[k]){d.profiles[k].violations=(d.profiles[k].violations||0)+1;saveDb(d);}
+  gas('violation',Object.assign(studentPayload(),{kind,stage:S?S.stageId:0}));
+}
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden && playing() && !isAdmin()){
+    addViolation('tab');
+    setTimeout(()=>toast('⚠️ ตรวจพบการสลับแท็บ/แอป — ระบบบันทึกไว้แล้ว',3200),300);
+  }
+});
+let transFlagged=false;
+try{
+  new MutationObserver(muts=>{
+    if(transFlagged) return;
+    if(muts.some(m=>m.type==='characterData')){
+      transFlagged=true;
+      if(playing() && !isAdmin()){addViolation('translate');toast('⚠️ ตรวจพบการใช้ระบบแปลภาษา — ระบบบันทึกไว้แล้ว',3500);}
+      setTimeout(()=>transFlagged=false,8000);
+    }
+  }).observe(document.body,{subtree:true,characterData:true});
+}catch(e){}
+
+/* ===================== MODALS ===================== */
+function confirmBox(title,text,yes){
+  $('#cfmTitle').textContent=title;$('#cfmText').textContent=text;
+  $('#cfmModal').classList.remove('hidden');
+  $('#cfmYes').onclick=()=>{$('#cfmModal').classList.add('hidden');yes();};
+  $('#cfmNo').onclick=()=>$('#cfmModal').classList.add('hidden');
+}
+
+/* ===================== ADMIN ===================== */
+let pinBusy=false;
+function openPin(){
+  if(isAdmin()){openAdmin();return;}
+  if(playing()){toast('ออกจากด่านก่อนเข้าโหมดครูนะ');return;}
+  $('#pinIn').value='';$('#pinErr').textContent='';$('#pinModal').classList.remove('hidden');
+  setTimeout(()=>{try{$('#pinIn').focus();}catch(e){}},50);
+}
+async function submitPin(){
+  if(pinBusy) return;
+  const v=$('#pinIn').value.trim();
+  if(!v){$('#pinErr').textContent='กรุณาใส่ PIN';return;}
+  pinBusy=true;$('#pinOk').disabled=true;$('#pinErr').textContent='กำลังตรวจสอบ…';
+  let ok=false;
+  if(getGasUrl()){ const r=await gas('checkPin',{pin:v}); ok = r && r.ok ? !!r.valid : (v===CONFIG.PIN); }
+  else ok = v===CONFIG.PIN;
+  pinBusy=false;$('#pinOk').disabled=false;
+  if(!ok){$('#pinErr').textContent='PIN ไม่ถูกต้อง';SFX.bad();return;}
+  SS.set('vbx_admin','1');SS.set('vbx_pin',v);
+  $('#pinModal').classList.add('hidden');SFX.ok();openAdmin();
+}
+let admTab='live';
+function openAdmin(){
+  setTheme('boss');
+  $$('#admTabs .tab').forEach(t=>t.classList.toggle('on',t.dataset.t===admTab));
+  show('admin');renderAdmTab();
+}
+function renderAdmTab(){
+  if(adminPoll){clearInterval(adminPoll);adminPoll=null;}
+  const b=$('#admBody');
+  if(admTab==='live'){
+    if(!getGasUrl()){
+      b.innerHTML='<div class="note"><b>ยังไม่ได้เชื่อม Google Sheets</b><br>1) Google Sheets → ส่วนขยาย → Apps Script → วางโค้ด <b>Code.gs</b><br>'+
+        '2) Deploy → New deployment → Web app → Execute as: <b>Me</b> • Who has access: <b>Anyone</b><br>3) คัดลอก URL มาใส่ที่แท็บ ⚙️ ตั้งค่า หรือ CONFIG.GAS_URL ในไฟล์</div>';
+      return;
+    }
+    b.innerHTML='<div class="row" style="align-items:center;margin-bottom:10px">'+
+      '<select id="lvCls" class="chip"><option value="">ทุกชั้น</option><option>ม.4</option><option>ม.5</option><option>ม.6</option></select>'+
+      '<select id="lvRoom" class="chip"><option value="">ทุกห้อง</option><option>1</option><option>2</option><option>3</option><option>4</option></select>'+
+      '<input id="lvQ" class="chip" placeholder="ค้นหาชื่อ/เลขที่" style="min-width:160px">'+
+      '<span style="flex:1"></span><span class="muted" id="lvStat">กำลังโหลด…</span><button class="btn ghost xs" id="lvCsv">⬇️ CSV</button></div>'+
+      '<div class="kv" id="lvSum" style="margin-bottom:10px"></div>'+
+      '<div class="tblwrap"><table><thead><tr><th>ชั้น</th><th>เลขที่</th><th>ชื่อ-สกุล</th><th>S15</th><th>S16</th><th>S17</th><th>S18</th><th>ฝึก/80</th><th>สอบจริง</th><th>สุทธิ/30</th><th>ผลสอบ</th><th>ซ่อม</th><th>ยืนยัน</th><th>⚠สอบ</th><th>รูป</th><th>สถานะล่าสุด</th><th>⚠ฝึก</th><th></th></tr></thead><tbody id="lvBody"></tbody></table></div>';
+    ['lvCls','lvRoom'].forEach(id=>$('#'+id).onchange=drawLive);$('#lvQ').oninput=drawLive;
+    $('#lvCsv').onclick=()=>downloadCSV('vocabbeat_live.csv',[['ชั้น','ห้อง','เลขที่','ชื่อ','นามสกุล','S15','S16','S17','S18','ฝึกรวม/80','สอบจริง/30','สุทธิ/30','ผลสอบ','ซ่อมผ่าน','ต้องซ่อม','ประวัติซ่อม','ยืนยันตัวตน','ละเมิดขณะสอบ','เวลาสอบ','ส่งสอบเมื่อ','รูปล่าสุด','สลับแท็บ(ฝึก)','อัปเดต']].concat(
+      liveFiltered().map(r=>[r.cls,r.room,r.no,r.name,r.sur,r.s1,r.s2,r.s3,r.s4,r.total,r.exRaw,r.exFinal,r.exResult,r.remDone,r.remNeed,r.remLog,r.verify,r.exViol,r.exTime,r.exAt,r.photo,r.violations,r.updated])));
+    loadLive();adminPoll=setInterval(loadLive,3000);
+  }else if(admTab==='device'){
+    const d=db();const profs=Object.values(d.profiles);
+    b.innerHTML='<p class="muted">ข้อมูลที่เล่นบนอุปกรณ์เครื่องนี้ ('+profs.length+' คน, '+d.records.length+' รอบ)</p>'+
+      '<div class="tblwrap"><table><thead><tr><th>ชั้น</th><th>เลขที่</th><th>ชื่อ-สกุล</th>'+STAGES.map(s=>'<th>'+s.name+'</th>').join('')+'<th>ฝึก/80</th><th>สอบจริง</th><th>สุทธิ</th><th>ซ่อม</th><th>XP</th><th>🏅</th><th>⚠</th></tr></thead><tbody>'+
+      (profs.length?profs.map(p=>'<tr><td>'+esc(p.profile.cls+'/'+p.profile.room)+'</td><td class="n">'+esc(p.profile.no)+'</td><td>'+esc(p.profile.name+' '+p.profile.sur)+'</td>'+
+        STAGES.map(s=>'<td class="n">'+(p.stages[s.id]?p.stages[s.id].best+'<span class="muted" style="font-size:11px"> ×'+p.stages[s.id].attempts+'</span>':'–')+'</td>').join('')+
+        '<td class="n" style="color:#ffd23f">'+totalBest(p.stages)+'</td>'+(()=>{const ex=Object.assign(blankExam(),p.exam||{});return '<td class="n">'+(ex.state==='done'?ex.raw:ex.state==='started'?'📝':'–')+'</td><td class="n">'+(examFinal(ex)==null?'–':examFinal(ex))+'</td><td class="n">'+(ex.need?ex.remDone+'/'+ex.need:'–')+'</td>';})()+'<td class="n">'+nfmt(p.xp||0)+'</td><td class="n">'+Object.keys(p.badges||{}).length+'</td><td class="n'+(p.violations?' warn':'')+'">'+(p.violations||0)+'</td></tr>').join(''):'<tr><td colspan="12" class="muted">ยังไม่มีข้อมูล</td></tr>')+
+      '</tbody></table></div><div class="row" style="margin-top:12px"><button class="btn ghost" id="devCsv">⬇️ CSV ประวัติทุกรอบ</button><button class="btn danger" id="devReset">🗑️ ล้างข้อมูลเครื่องนี้</button></div>';
+    $('#devCsv').onclick=()=>downloadCSV('vocabbeat_device.csv',[['เวลา','ชั้น','ห้อง','เลขที่','ชื่อ','นามสกุล','ด่าน','คะแนน','เวลา(วินาที)','XP','ครั้งที่']].concat(
+      d.records.map(r=>[new Date(r.at).toLocaleString('th-TH'),r.cls,r.room,r.no,r.name,r.sur,(STAGES[r.stage-1]||{}).name,r.score,r.time,r.xp||0,r.attempt])));
+    $('#devReset').onclick=()=>confirmBox('ล้างข้อมูลทั้งหมดบนเครื่องนี้?','คะแนน ประวัติ เหรียญ และผู้ใช้ในเครื่องนี้จะถูกลบ (ข้อมูลใน Google Sheets ไม่ถูกลบ)',()=>{
+      LS.del(DB_KEY);LS.del('vbx_sess');LS.del('vbx_profile');LS.del('vbx_exam_sess');LS.del('vbx_lastphoto');PROFILE=null;updChip();toast('ล้างข้อมูลแล้ว');renderAdmTab();});
+  }else if(admTab==='bank'){
+    b.innerHTML=[15,16,17,18].map(s=>'<h3 style="margin:14px 0 8px;color:'+STAGE_COL[s-14]+'">SET '+s+' ('+BANK[s].length+' คำ)</h3><div class="kv">'+
+      BANK[s].map(a=>'<div><b>'+esc(a[0])+'</b> <span class="muted">('+a[1]+')</span><br>'+esc(a[2])+'</div>').join('')+'</div>').join('')+
+      '<p class="muted" style="margin-top:14px">ด่านฝึก 1–4: EN→TH 5 • TH→EN 5 • เติมคำ 5 • สะกดคำ 5 — สุ่มใหม่ทุกครั้งที่เล่น<br>'+
+      '👑 สอบจริง: '+EXAM_CFG.PLAN.map(([t,n])=>ETYPES[t].name+' '+n).join(' • ')+' = '+EXAM_CFG.N+' คะแนน • '+EXAM_CFG.MINUTES+' นาที • ผ่าน '+EXAM_CFG.PASS+' • ละเมิด '+EXAM_CFG.MAX_VIOL+' ครั้งส่งอัตโนมัติ • รหัสแทนสแกนหน้า '+EXAM_CFG.FACE_CODE+'<br>'+
+      '🔁 สอบซ่อม: ต้องซ่อม (18 − คะแนน) ครั้ง • ครั้งละ '+EXAM_CFG.REM.N+' ข้อ '+EXAM_CFG.REM.MINUTES+' นาที • ได้ ≥'+EXAM_CFG.REM.PASS+' นับ 1 ครั้ง (+1 คะแนน) • ครบแล้วได้ '+EXAM_CFG.PASS+'/30<br>'+
+      'ตัวช่วยต่อรอบ: ✂️ 50:50 ×1, 💡 คำใบ้ ×2 (ไม่หักคะแนน แต่ XP ข้อนั้นลดครึ่ง) • XP = (100 + โบนัสความเร็ว ≤50) × คอมโบ (×1.5 / ×2 / ×3)</p>';
+  }else if(admTab==='set'){
+    b.innerHTML='<div class="field"><label>Google Apps Script Web App URL</label><input id="setGas" placeholder="https://script.google.com/macros/s/…/exec" value="'+esc(LS.get('vbx_gas','')||'')+'"></div>'+
+      '<p class="muted" style="font-size:13px">URL ในไฟล์ตอนนี้: '+(CONFIG.GAS_URL?'✅ ตั้งไว้แล้ว':'— ยังไม่ได้ตั้ง')+' • ช่องนี้ใช้แทนเฉพาะเครื่องนี้ (เว้นว่าง = ใช้ค่าในไฟล์)</p>'+
+      '<div class="row"><button class="btn pri" id="setSave">บันทึก URL</button><button class="btn ghost" id="setTest">ทดสอบการเชื่อมต่อ</button></div>'+
+      '<hr style="border:0;border-top:1px solid var(--line);margin:18px 0">'+
+      '<label class="toggle"><input type="checkbox" id="setReveal" '+(SS.get('vbx_reveal')==='1'?'checked':'')+'> โหมดทดสอบของครู: ไฮไลต์คำตอบที่ถูกระหว่างเล่น (เฉพาะแท็บนี้)</label>'+
+      '<p class="muted" style="font-size:13px">ครูทดสอบเล่นได้เลยโดยไม่ต้องออกจากโหมดครู (ระบบไม่นับการสลับแท็บของครู)</p>'+
+      '<div class="row"><button class="btn ghost" id="setHub">ไปหน้าด่าน (ทดสอบเล่น)</button></div>'+
+      '<p class="muted" style="font-size:12px;margin-top:16px">'+esc(CONFIG.APP)+' v'+CONFIG.VERSION+'</p>';
+    $('#setSave').onclick=()=>{const v=$('#setGas').value.trim();if(v&&!/^https:\/\/script\.google(usercontent)?\.com\//.test(v)){toast('URL ไม่ถูกต้อง — ต้องขึ้นต้นด้วย https://script.google.com/');return;}LS.set('vbx_gas',v);toast(v?'บันทึก URL แล้ว':'ใช้ URL จากไฟล์');};
+    $('#setTest').onclick=async()=>{toast('กำลังทดสอบ…');const r=await gas('ping',{});toast(r&&r.ok?'✅ เชื่อมต่อสำเร็จ':'❌ เชื่อมต่อไม่ได้'+(r&&r.offline?' (ยังไม่ได้ใส่ URL)':' — ตรวจ Who has access = Anyone'),3500);};
+    $('#setReveal').onchange=e=>{e.target.checked?SS.set('vbx_reveal','1'):SS.del('vbx_reveal');};
+    $('#setHub').onclick=()=>{ if(PROFILE) renderHub(); else {show('reg');toast('ลงทะเบียนชื่อทดสอบก่อนนะครับ');} };
+  }
+}
+let LIVE=[];
+async function loadLive(){
+  const r=await gas('list',{pin:SS.get('vbx_pin')||''});
+  const stat=$('#lvStat');if(!stat) return;
+  if(!r||!r.ok){stat.textContent=r&&r.error==='bad_pin'?'PIN ไม่ตรงกับ Code.gs':'⚠ เชื่อมต่อไม่ได้';return;}
+  LIVE=r.rows||[];stat.textContent='อัปเดต '+new Date().toLocaleTimeString('th-TH')+' • '+LIVE.length+' คน';
+  drawLive();
+}
+function liveFiltered(){
+  const c=($('#lvCls')||{}).value||'',rm=($('#lvRoom')||{}).value||'',q=(($('#lvQ')||{}).value||'').trim().toLowerCase();
+  return LIVE.filter(r=>(!c||r.cls===c)&&(!rm||String(r.room)===rm)&&(!q||(r.name+' '+r.sur+' '+r.no).toLowerCase().includes(q)))
+    .sort((a,b)=>String(a.cls+a.room).localeCompare(String(b.cls+b.room))||(+a.no)-(+b.no));
+}
+function drawLive(){
+  const tb=$('#lvBody');if(!tb) return;
+  const rows=liveFiltered();
+  const sm=$('#lvSum'); if(sm){ const done=rows.filter(r=>r.exState==='done'); const pass=done.filter(r=>String(r.exResult).indexOf('ผ่าน')===0);
+    const avg=done.length?(done.reduce((s,r)=>s+(+r.exRaw||0),0)/done.length).toFixed(1):'–';
+    sm.innerHTML='<div>👥 นักเรียน <b>'+rows.length+'</b></div><div>📝 สอบแล้ว <b>'+done.length+'</b> • กำลังสอบ <b>'+rows.filter(r=>r.exState==='started').length+'</b></div>'+
+      '<div>✅ ผ่าน <b>'+pass.length+'</b> • 🔁 ต้องซ่อม <b>'+(done.length-pass.length)+'</b></div><div>📊 เฉลี่ยสอบจริง <b>'+avg+'</b>/30</div>'; }
+  const cell=v=>'<td class="n">'+(v===''||v==null?'–':esc(v))+'</td>';
+  tb.innerHTML=rows.length?rows.map(r=>{ const pass=String(r.exResult||'').indexOf('ผ่าน')===0;
+    return '<tr><td>'+esc(r.cls+'/'+r.room)+'</td><td class="n">'+esc(r.no)+'</td><td>'+esc(r.name+' '+r.sur)+'</td>'+
+    [r.s1,r.s2,r.s3,r.s4].map(cell).join('')+'<td class="n" style="color:#ffd23f">'+esc(r.total)+'</td>'+
+    cell(r.exRaw)+'<td class="n" style="color:'+(pass?'#2ee59d':'#ffb020')+'">'+(r.exFinal===''||r.exFinal==null?'–':esc(r.exFinal))+'</td>'+
+    '<td>'+(r.exState==='started'?'<span style="color:#22e5e5">📝 กำลังสอบ</span>':esc(r.exResult||'–'))+'</td>'+
+    '<td class="n">'+(r.remNeed&&+r.remNeed>0?esc(r.remDone||0)+'/'+esc(r.remNeed):'–')+'</td>'+
+    '<td class="n">'+(String(r.verify||'').indexOf('code')>=0?'🔑':r.verify?'📷':'–')+'</td>'+
+    '<td class="n'+(+r.exViol?' warn':'')+'">'+(r.exViol===''||r.exViol==null?'–':esc(r.exViol))+'</td>'+
+    '<td>'+(r.photo?'<a href="'+esc(r.photo)+'" target="_blank" rel="noopener" style="color:#22e5e5">ดูรูป</a>':'–')+'</td>'+
+    '<td>'+esc(r.status)+'</td><td class="n'+(+r.violations?' warn':'')+'">'+esc(r.violations||0)+'</td>'+
+    '<td style="white-space:nowrap">'+(r.exState&&r.exState!=='reset'?'<button class="btn ghost xs" data-reset="'+esc(r.key)+'">รีเซ็ตสอบ</button> ':'')+'<button class="btn danger xs" data-key="'+esc(r.key)+'">ลบ</button></td></tr>';}).join(''):'<tr><td colspan="18" class="muted">ยังไม่มีข้อมูล</td></tr>';
+  tb.querySelectorAll('button[data-reset]').forEach(btn=>btn.onclick=()=>{
+    const key=btn.dataset.reset;
+    confirmBox('รีเซ็ตการสอบ?','ล้างคะแนนสอบจริงและการสอบซ่อมของ '+key.split('|').slice(2).join(' ')+' ให้สอบใหม่ได้ (คะแนนฝึกไม่หาย)',async()=>{
+      const r=await gas('resetExam',{pin:SS.get('vbx_pin')||'',key});
+      toast(r&&r.ok?'รีเซ็ตแล้ว — นักเรียนสอบใหม่ได้':'รีเซ็ตไม่สำเร็จ');loadLive();
+    });
+  });
+  tb.querySelectorAll('button[data-key]').forEach(btn=>btn.onclick=()=>{
+    const key=btn.dataset.key;
+    confirmBox('ลบแถวนี้?',key.split('|').slice(2).join(' '),async()=>{
+      const r=await gas('del',{pin:SS.get('vbx_pin')||'',key});
+      toast(r&&r.ok?'ลบแล้ว':'ลบไม่สำเร็จ');loadLive();
+    });
+  });
+}
+function downloadCSV(name,rows){
+  const csv='﻿'+rows.map(r=>r.map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(',')).join('\r\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
+}
+
+
+/* =====================================================================
+   FINAL EXAM (BOSS MIX) • 30 คะแนน • ผ่าน 18 • สอบซ่อม = 18 − คะแนน ครั้ง
+   ===================================================================== */
+const ETYPES = {
+  gap:  {icon:'🧩',name:'เติมคำในประโยค',hint:'เลือกคำที่เหมาะสมเติมในช่องว่าง'},
+  en2th:{icon:'🔤',name:'ความหมายภาษาไทย',hint:'คำนี้แปลว่าอะไร'},
+  th2en:{icon:'🇹🇭',name:'เลือกคำศัพท์',hint:'ความหมายนี้ตรงกับคำใด'},
+  tf:   {icon:'⚖️',name:'ถูก / ผิด',hint:'คำแปลนี้ถูกต้องหรือไม่'},
+  spell:{icon:'🧱',name:'เรียงตัวอักษร',hint:'แตะตัวอักษรเรียงให้เป็นคำที่ถูกต้อง'},
+  type: {icon:'⌨️',name:'พิมพ์คำศัพท์',hint:'พิมพ์คำศัพท์ภาษาอังกฤษให้ถูกต้อง'}
+};
+let ES = null;                 // current exam / remedial session
+let examTimer = null;
+let SCAN = {stream:null,loop:null,ok:0,fd:undefined,busy:false,photo:null,verify:'',kind:'exam',resume:false,started:0};
+const isTouch = () => { try{ return (window.matchMedia&&matchMedia('(pointer:coarse)').matches) || ('ontouchstart' in window); }catch(e){ return false; } };
+const cfgOf = kind => kind==='rem' ? EXAM_CFG.REM : EXAM_CFG;
+
+function blankExam(){ return {state:'none',raw:null,need:0,remDone:0,remTries:0,log:[],viol:0,time:0,verify:'',at:0,reason:'',byType:null}; }
+function myExam(){ const r=myRec(); return Object.assign(blankExam(), r.exam||{}); }
+function saveExam(ex){ const d=db(); const k=profKey(PROFILE); if(!d.profiles[k]) d.profiles[k]={profile:PROFILE,stages:{},violations:0,xp:0,badges:{},created:Date.now()}; d.profiles[k].exam=ex; saveDb(d); }
+function examPassed(ex){ return ex.state==='done' && (ex.raw>=EXAM_CFG.PASS || (ex.need>0 && ex.remDone>=ex.need)); }
+function examFinal(ex){ if(ex.state!=='done'||ex.raw==null) return null; return ex.raw>=EXAM_CFG.PASS ? ex.raw : Math.min(EXAM_CFG.PASS, ex.raw+(ex.remDone||0)); }
+function examLabel(ex){
+  if(ex.state==='done'){ if(ex.raw>=EXAM_CFG.PASS) return {t:'ผ่าน',c:'tag-ok'}; if(examPassed(ex)) return {t:'ผ่าน (ซ่อม)',c:'tag-ok'}; return {t:'ซ่อม '+ex.remDone+'/'+ex.need,c:'tag-rem'}; }
+  if(ex.state==='started') return {t:'กำลังสอบ',c:'tag-run'};
+  return {t:'ยังไม่สอบ',c:'tag-new'};
+}
+
+/* ---------- question builder ---------- */
+function allPool(){ return poolFor({set:0}); }
+function buildExam(plan,seed){
+  const r=rng(seed); const pool=allPool(); const order=shuffle(pool,r); const qs=[]; let cur=0;
+  plan.forEach(([type,count])=>{
+    for(let i=0;i<count;i++){
+      const w=order[cur++%order.length]; const q={type,w};
+      if(type==='spell'){
+        const dp='aeioulnrstcdm'.split('');
+        q.tiles=shuffle(w.en.split('').concat([dp[Math.floor(r()*dp.length)],dp[Math.floor(r()*dp.length)]]),r);
+      }else if(type==='tf'){
+        const isTrue=r()<0.5;
+        if(isTrue) q.shown=w.th; else { const d=pickDistractors(w,pool,r,1,'th')[0]; q.shown=d.th; }
+        q.ans=isTrue?0:1;
+      }else if(type!=='type'){
+        const field=type==='en2th'?'th':'en';
+        const opts=shuffle([w].concat(pickDistractors(w,pool,r,3,field)),r);
+        q.opts=opts.map(o=>o[field]); q.ans=opts.indexOf(w);
+      }
+      qs.push(q);
+    }
+  });
+  return qs;   // grouped by part (ตอนที่) in plan order; word choice + options are shuffled per student
+}
+const normWord = s => String(s==null?'':s).toLowerCase().replace(/[^a-z]/g,'');
+function isAnswered(q,a){
+  if(a==null) return false;
+  if(q.type==='spell') return Array.isArray(a) && a.length===q.w.en.length;
+  if(q.type==='type') return normWord(a).length>0;
+  return typeof a==='number';
+}
+function isCorrect(q,a){
+  if(!isAnswered(q,a)) return false;
+  if(q.type==='spell') return a.map(i=>q.tiles[i]).join('')===q.w.en;
+  if(q.type==='type') return normWord(a)===q.w.en;
+  return a===q.ans;
+}
+function partsOf(plan){ const out=[]; let s=0; plan.forEach(([t,n],i)=>{ out.push({t,from:s,to:s+n-1,no:i+1}); s+=n; }); return out; }
+
+/* ---------- outbox (never lose an exam result to a bad network) ---------- */
+function outPush(action,data){
+  const o=LS.get('vbx_outbox',[]);
+  o.push({action,data,id:Date.now()+'_'+Math.random().toString(36).slice(2,7)});
+  while(o.length>30){ const i=o.findIndex(x=>x.action==='photo'); o.splice(i>=0?i:0,1); }
+  LS.set('vbx_outbox',o);
+  if(!LS.get('vbx_outbox',[]).length && action!=='photo'){   // storage full → drop photos and retry once
+    LS.set('vbx_outbox',o.filter(x=>x.action!=='photo'));
+  }
+  flushOutbox();
+}
+let flushing=false;
+async function flushOutbox(){
+  if(flushing||!getGasUrl()) return; flushing=true;
+  try{
+    let o=LS.get('vbx_outbox',[]);
+    while(o.length){
+      const it=o[0]; const r=await gas(it.action,it.data);
+      if(!r || r.net || r.error==='busy') break;            // network problem → try again later
+      o=LS.get('vbx_outbox',[]).filter(x=>x.id!==it.id);    // delivered (or rejected for good)
+      LS.set('vbx_outbox',o);
+    }
+  }finally{ flushing=false; }
+}
+function outboxHasExam(){ return LS.get('vbx_outbox',[]).some(x=>['examStart','examFinish','remFinish'].includes(x.action)&&x.data&&x.data.key===profKey(PROFILE)); }
+function gasT(action,data,ms){ return Promise.race([gas(action,data),new Promise(res=>setTimeout(()=>res({ok:false,net:true,error:'timeout'}),ms||7000))]); }
+
+/* ---------- server sync ---------- */
+async function syncExamStatus(){
+  if(!getGasUrl()||!PROFILE) return false;
+  await flushOutbox();
+  if(outboxHasExam()) return false;
+  const r=await gasT('examStatus',{key:profKey(PROFILE)},6000);
+  if(!r||!r.ok||!r.ex) return false;
+  return mergeServerExam(r.ex);
+}
+function mergeServerExam(sx){
+  const ex=myExam(); let changed=false;
+  if(sx.exState==='reset' && ex.state!=='none'){
+    saveExam(blankExam()); LS.del('vbx_exam_sess'); toast('🔄 ครูโอ๊ตรีเซ็ตการสอบให้แล้ว — สอบใหม่ได้',3500); return true;
+  }
+  if(sx.exState==='done'){
+    const raw=Number(sx.exRaw);
+    if(ex.state!=='done'){ Object.assign(ex,{state:'done',raw,need:Number(sx.remNeed)||0,remDone:Number(sx.remDone)||0,remTries:Number(sx.remTries)||0,at:Date.now()}); changed=true; LS.del('vbx_exam_sess'); }
+    else{
+      const rd=Math.max(ex.remDone||0,Number(sx.remDone)||0), rt=Math.max(ex.remTries||0,Number(sx.remTries)||0);
+      if(rd!==ex.remDone||rt!==ex.remTries){ ex.remDone=rd; ex.remTries=rt; changed=true; }
+    }
+    if(changed) saveExam(ex);
+  }
+  return changed;
+}
+
+/* ---------- LOBBY ---------- */
+async function openLobby(){
+  if(!PROFILE){ show('reg'); return; }
+  renderLobby();
+  await syncExamStatus();
+  // re-render whenever local exam state differs from what is on screen (also covers a sync started elsewhere)
+  if(!$('#scr-lobby').classList.contains('hidden') && examSig()!==renderLobby._sig) renderLobby();
+}
+function examSig(){ const ex=myExam(); const s=LS.get('vbx_exam_sess',null); return [ex.state,ex.raw,ex.remDone,ex.remTries,s&&PROFILE&&s.key===profKey(PROFILE)?s.kind+s.remNo:''].join('|'); }
+function typeChips(plan){ return '<div class="tchips">'+plan.map(([t,n])=>'<span class="tchip">'+ETYPES[t].icon+' '+ETYPES[t].name+' <b>'+n+'</b></span>').join('')+'</div>'; }
+function remPathHTML(ex){
+  if(!(ex.state==='done'&&ex.raw<EXAM_CFG.PASS)) return '';
+  let h='<div class="rpath"><div class="rnode"><span>สอบจริง</span><b>'+ex.raw+'</b></div>';
+  for(let i=1;i<=ex.need;i++){
+    const cls=i<=ex.remDone?'done':(i===ex.remDone+1?'cur':'');
+    h+='<span class="rarrow">›</span><div class="rnode '+cls+'"><span>ซ่อม '+i+'</span><b>'+(i<=ex.remDone?'✓':(ex.raw+i))+'</b></div>';
+  }
+  h+='<span class="rarrow">›</span><div class="rnode goal"><span>ผ่าน</span><b>'+EXAM_CFG.PASS+' 🏁</b></div></div>';
+  if(ex.log&&ex.log.length) h+='<div class="rlog">ประวัติสอบซ่อม: '+ex.log.map(l=>'#'+l.n+' '+l.score+'/'+EXAM_CFG.REM.N+(l.passed?' ✅':' ❌')).join(' • ')+'</div>';
+  return h;
+}
+function renderLobby(){
+  setTheme('exam');
+  const ex=myExam(); const E=EXAM_CFG, R=E.REM;
+  const sess=LS.get('vbx_exam_sess',null); const mySess=sess&&sess.key===profKey(PROFILE)?sess:null;
+  let h='<div class="lobhero"><div class="crown">👑</div><h1>FINAL EXAM</h1><div class="sub">BOSS MIX • SET 15–18 • VOCAB BEAT ADVANCE</div></div>';
+  if(mySess){
+    const left=Math.max(0,mySess.deadline-Date.now());
+    h+='<div class="note" style="margin:16px 0;text-align:center">⏸️ มี'+(mySess.kind==='rem'?'การสอบซ่อมครั้งที่ '+mySess.remNo:'การสอบ')+'ที่ยังทำค้างอยู่ • เวลาที่เหลือ <b>'+fmtTime(left/1000)+'</b><br>'+
+      '<span class="muted">เวลายังเดินต่อแม้ออกจากหน้าสอบ • ต้องสแกนหน้าอีกครั้งก่อนทำต่อ</span></div>'+
+      '<button class="btn gold big" id="lbResume">📷 สแกนหน้า แล้วทำต่อ</button>';
+  }else if(ex.state==='done'){
+    const fin=examFinal(ex), ok=examPassed(ex);
+    h+='<div class="center"><div class="big-ring">'+ringSVG(fin,E.N,200,ok?'#2ee59d':'#ffb020')+'<div class="v"><b>'+fin+'</b><span class="muted">/ '+E.N+' คะแนน</span></div></div>'+
+      '<div class="stamp '+(ex.raw>=E.PASS?'pass':ok?'pass':'rem')+'">'+(ex.raw>=E.PASS?'ผ่าน ✓':ok?'ผ่าน (ซ่อม) ✓':'ต้องสอบซ่อม')+'</div>'+
+      '<div class="muted">คะแนนสอบจริง '+ex.raw+'/'+E.N+(ex.raw<E.PASS?' • เกณฑ์ผ่าน '+E.PASS+' • ขาด '+ex.need+' คะแนน':'')+'</div></div>';
+    h+=remPathHTML(ex);
+    if(!ok){
+      h+='<div class="rules">'+
+        '<div class="rule"><span class="i">🔁</span><div>ต้องสอบซ่อมให้ผ่าน <b>'+ex.need+' ครั้ง</b> (เหลือ '+(ex.need-ex.remDone)+' ครั้ง) • แต่ละครั้ง '+R.N+' ข้อ / '+R.MINUTES+' นาที</div></div>'+
+        '<div class="rule"><span class="i">🎯</span><div>ต้องได้อย่างน้อย <b>'+R.PASS+'/'+R.N+'</b> จึงนับ 1 ครั้ง (+1 คะแนน) — ถ้าไม่ถึงเกณฑ์ ครั้งนั้นไม่นับ แต่สอบใหม่ได้</div></div>'+
+        '<div class="rule"><span class="i">🏁</span><div>ซ่อมครบแล้วได้คะแนนสุทธิ <b>'+E.PASS+'/'+E.N+'</b> (เต็มเกณฑ์ผ่าน)</div></div></div>'+
+        '<button class="btn gold big" id="lbRem">📷 สแกนหน้า → สอบซ่อมครั้งที่ '+(ex.remDone+1)+'</button>';
+    }else{
+      h+='<p class="center" style="font-weight:800;margin:14px 0">🎉 ยินดีด้วย! ผ่านการสอบเรียบร้อย</p>';
+    }
+    h+='<div class="hubfoot"><button class="btn pri" id="lbImg">💾 บันทึกรูปผลสอบ</button><button class="btn ghost" id="lbHub">← กลับหน้าหลัก</button></div>';
+  }else{
+    h+='<div class="specs"><div class="spec"><b>'+E.N+'</b><span>ข้อ / คะแนน</span></div><div class="spec"><b>'+E.MINUTES+'</b><span>นาที</span></div>'+
+       '<div class="spec"><b>'+E.PASS+'</b><span>เกณฑ์ผ่าน</span></div><div class="spec"><b>1</b><span>สอบได้ครั้งเดียว</span></div></div>'+
+       typeChips(E.PLAN)+
+       '<div class="rules">'+
+       '<div class="rule"><span class="i">📷</span><div>สแกนใบหน้าก่อนเข้าสอบ ระบบจะเก็บภาพไว้ให้ครูโอ๊ตตรวจ (สแกนไม่ได้ ขอรหัสจากครู)</div></div>'+
+       '<div class="rule"><span class="i">🛡️</span><div>ห้ามสลับแท็บ/แอป ออกจากเต็มจอ คัดลอก หรือใช้ตัวแปลภาษา — ครบ <b>'+E.MAX_VIOL+' ครั้ง ระบบส่งข้อสอบอัตโนมัติ</b></div></div>'+
+       '<div class="rule"><span class="i">⏱️</span><div>เวลา '+E.MINUTES+' นาที หมดเวลาแล้วส่งอัตโนมัติ • เวลาเดินต่อแม้ปิดหน้าเว็บ</div></div>'+
+       '<div class="rule"><span class="i">🔁</span><div>ได้ต่ำกว่า '+E.PASS+' ต้องสอบซ่อม (ขาดกี่คะแนน ซ่อมกี่ครั้ง เช่น ได้ 15 → ซ่อม 3 ครั้ง)</div></div>'+
+       '<div class="rule"><span class="i">🔒</span><div>ไม่เฉลยระหว่างสอบ ย้อนกลับไปแก้ข้อไหนก็ได้ก่อนกดส่ง</div></div></div>'+
+       '<label class="agree"><input type="checkbox" id="lbAgree"> ฉันอ่านกติกาแล้ว และจะทำข้อสอบด้วยตัวเองอย่างซื่อสัตย์ 🙏</label>'+
+       '<button class="btn gold big" id="lbStart" disabled>📷 สแกนใบหน้าเพื่อเข้าสอบ</button>'+
+       '<div class="hubfoot"><button class="btn ghost" id="lbHub">← กลับไปฝึกก่อน</button></div>';
+  }
+  $('#lobbyBox').innerHTML=h;
+  renderLobby._sig=examSig();
+  show('lobby');
+  const on=(id,fn)=>{const el=$('#'+id); if(el) el.onclick=fn;};
+  on('lbHub',renderHub);
+  on('lbImg',saveExamImage);
+  on('lbResume',()=>goScan(mySess.kind,true));
+  on('lbRem',()=>goScan('rem',false));
+  on('lbStart',()=>goScan('exam',false));
+  const ag=$('#lbAgree'); if(ag) ag.onchange=()=>{ $('#lbStart').disabled=!ag.checked; if(ag.checked) SFX.tap(); };
+  if(ex.state==='done'&&examPassed(ex)) setTimeout(()=>confetti(90),400);
+}
+function ringSVG(v,max,size,col){
+  const r=size/2-14, C=2*Math.PI*r, off=C*(1-Math.max(0,Math.min(1,(v||0)/max)));
+  return '<svg width="'+size+'" height="'+size+'"><circle cx="'+size/2+'" cy="'+size/2+'" r="'+r+'" stroke="rgba(255,255,255,.1)" stroke-width="14" fill="none"/>'+
+    '<circle cx="'+size/2+'" cy="'+size/2+'" r="'+r+'" stroke="'+col+'" stroke-width="14" fill="none" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+off+'"/></svg>';
+}
+
+/* ---------- FACE SCAN ---------- */
+// pure function (testable): skin-tone + texture check on a small frame inside the oval
+function analyzeFrame(data,w,h){
+  let skin=0,n=0,sum=0,sum2=0;
+  const cx=w/2, cy=h*0.45, rx=w*0.33, ry=h*0.36;
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++){
+    const dx=(x-cx)/rx, dy=(y-cy)/ry; if(dx*dx+dy*dy>1) continue;
+    const i=(y*w+x)*4, R=data[i], G=data[i+1], B=data[i+2];
+    const Y=0.299*R+0.587*G+0.114*B, Cb=128-0.168736*R-0.331264*G+0.5*B, Cr=128+0.5*R-0.418688*G-0.081312*B;
+    if(Cb>=77&&Cb<=127&&Cr>=133&&Cr<=173&&Y>40) skin++;
+    sum+=Y; sum2+=Y*Y; n++;
+  }
+  const mean=sum/Math.max(1,n), std=Math.sqrt(Math.max(0,sum2/Math.max(1,n)-mean*mean));
+  return {skin:skin/Math.max(1,n), std, mean};
+}
+function frameLooksLikeFace(a){ return a.skin>0.22 && a.std>8 && a.mean>45; }   // std rejects flat skin-coloured walls
+function goScan(kind,resume){
+  if(kind==='exam' && myExam().state==='done' && !resume){ toast('สอบจริงไปแล้ว — สอบได้ครั้งเดียวนะ'); openLobby(); return; }
+  SCAN=Object.assign(SCAN,{kind,resume,ok:0,photo:null,verify:'',busy:false,started:Date.now()});
+  setTheme('exam');
+  const ttl=kind==='rem'?('สอบซ่อมครั้งที่ '+(resume?(LS.get('vbx_exam_sess',{}).remNo||''):(myExam().remDone+1))):'FINAL EXAM';
+  $('#scanBox').innerHTML='<div class="scanwrap">'+
+    '<div class="center"><div class="qtype">📷 ยืนยันตัวตน • '+esc(ttl)+'</div><h2 style="margin-top:10px">สแกนใบหน้าก่อนเข้าสอบ</h2>'+
+    '<p class="muted" style="margin:6px 0 0">'+esc(PROFILE.name+' '+PROFILE.sur)+' • '+esc(PROFILE.cls+'/'+PROFILE.room)+' เลขที่ '+esc(PROFILE.no)+'</p></div>'+
+    '<div class="scanbox" id="scanBoxV"><video id="scanVid" playsinline muted autoplay></video><div class="oval" id="scanOval"></div><div class="line"></div>'+
+      '<div class="ph" id="scanPh"><div><b>📷</b>กด “เปิดกล้อง” แล้วจัดใบหน้าให้อยู่ในวงรี</div></div></div>'+
+    '<div class="scanbar"><i id="scanBar"></i></div>'+
+    '<div class="scanmsg" id="scanMsg">มองกล้องตรง ๆ ในที่มีแสงสว่างพอ</div>'+
+    '<div class="row" style="justify-content:center"><button class="btn gold" id="scanStart">📷 เปิดกล้อง</button><button class="btn ghost" id="scanBack">ยกเลิก</button></div>'+
+    '<div class="glass pad" style="padding:14px"><div class="center muted" style="margin-bottom:8px">สแกนไม่ได้ / ไม่มีกล้อง? ขอ <b>รหัสยืนยัน</b> จากครูโอ๊ต</div>'+
+      '<div class="codebox"><input id="scanCode" type="password" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="••••"><button class="btn ghost" id="scanCodeBtn">ยืนยันรหัส</button></div>'+
+      '<div class="err center" id="scanErr"></div></div>'+
+  '</div>';
+  show('scan');
+  $('#scanStart').onclick=startCamera;
+  $('#scanBack').onclick=()=>{stopCamera();openLobby();};
+  $('#scanCodeBtn').onclick=useFaceCode;
+  $('#scanCode').onkeydown=e=>{if(e.key==='Enter')useFaceCode();};
+}
+async function startCamera(){
+  const msg=$('#scanMsg');
+  if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){ camFail('อุปกรณ์/เบราว์เซอร์นี้เปิดกล้องไม่ได้ — ใช้รหัสจากครูแทน'); return; }
+  $('#scanStart').disabled=true; msg.textContent='กำลังเปิดกล้อง…';
+  try{
+    stopCamera();
+    SCAN.stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:640},height:{ideal:480}},audio:false});
+    const v=$('#scanVid'); if(!v){ stopCamera(); return; }
+    v.srcObject=SCAN.stream; try{ await v.play(); }catch(e){}
+    $('#scanPh').classList.add('hidden');
+    msg.textContent='จัดใบหน้าให้อยู่ในวงรี แล้วนิ่งไว้สักครู่…';
+    SCAN.ok=0; SCAN.started=Date.now();
+    if(SCAN.fd===undefined){ try{ SCAN.fd = ('FaceDetector' in window) ? new window.FaceDetector({fastMode:true,maxDetectedFaces:3}) : null; }catch(e){ SCAN.fd=null; } }
+    clearInterval(SCAN.loop); SCAN.loop=setInterval(scanTick,140);
+  }catch(e){
+    camFail(e&&e.name==='NotAllowedError'?'ไม่ได้อนุญาตให้ใช้กล้อง — กดอนุญาต หรือใช้รหัสจากครู':'เปิดกล้องไม่สำเร็จ — ใช้รหัสจากครูแทน');
+  }
+}
+function camFail(m){ const msg=$('#scanMsg'); if(msg){ msg.innerHTML='<span style="color:#ff9fb0">⚠️ '+esc(m)+'</span>'; } const b=$('#scanStart'); if(b) b.disabled=false; try{ $('#scanCode').focus(); }catch(e){} }
+function stopCamera(){ clearInterval(SCAN.loop); SCAN.loop=null; if(SCAN.stream){ try{ SCAN.stream.getTracks().forEach(t=>t.stop()); }catch(e){} } SCAN.stream=null; }
+async function detectOnce(v){
+  if(SCAN.fd){
+    try{ const f=await SCAN.fd.detect(v); return f.length===1 && f[0].boundingBox.width > v.videoWidth*0.18; }
+    catch(e){ SCAN.fd=null; }
+  }
+  const c=detectOnce.c||(detectOnce.c=document.createElement('canvas')); c.width=64; c.height=48;
+  const ctx=c.getContext&&c.getContext('2d'); if(!ctx) return false;
+  ctx.drawImage(v,0,0,64,48);
+  return frameLooksLikeFace(analyzeFrame(ctx.getImageData(0,0,64,48).data,64,48));
+}
+async function scanTick(){
+  const v=$('#scanVid'); if(!v||!SCAN.stream){ stopCamera(); return; }
+  if(SCAN.busy||v.readyState<2||!v.videoWidth) return;
+  SCAN.busy=true;
+  let ok=false; try{ ok=await detectOnce(v); }catch(e){ ok=false; }
+  SCAN.busy=false;
+  if(!SCAN.stream) return;
+  SCAN.ok = ok ? SCAN.ok+1 : Math.max(0,SCAN.ok-2);
+  const need=12, p=Math.min(1,SCAN.ok/need);
+  const bar=$('#scanBar'); if(bar) bar.style.width=(p*100)+'%';
+  const ov=$('#scanOval'); if(ov) ov.classList.toggle('on',ok);
+  const msg=$('#scanMsg');
+  if(msg) msg.textContent = ok ? 'พบใบหน้า ✓ นิ่งไว้นะ… '+Math.round(p*100)+'%' : (Date.now()-SCAN.started>20000 ? 'ยังตรวจไม่พบใบหน้า — ขยับเข้าใกล้/หาที่สว่าง หรือขอรหัสจากครู' : 'จัดใบหน้าให้อยู่ในวงรี…');
+  if(SCAN.ok>=need){ SCAN.photo=capturePhoto(v); verified('face'); }
+}
+function capturePhoto(v){
+  try{ const c=document.createElement('canvas'); c.width=320; c.height=240; const ctx=c.getContext('2d'); ctx.drawImage(v,0,0,320,240); return c.toDataURL('image/jpeg',0.72); }catch(e){ return null; }
+}
+function useFaceCode(){
+  const v=($('#scanCode').value||'').trim();
+  if(v!==EXAM_CFG.FACE_CODE){ $('#scanErr').textContent='รหัสไม่ถูกต้อง'; SFX.bad(); return; }
+  const vid=$('#scanVid'); if(SCAN.stream&&vid&&vid.videoWidth) SCAN.photo=capturePhoto(vid);
+  verified('code');
+}
+function verified(how){
+  stopCamera(); SCAN.verify=how; SFX.badge();
+  const kind=SCAN.kind;
+  $('#scanBox').innerHTML='<div class="verified">'+
+    (SCAN.photo?'<img class="shot" src="'+SCAN.photo+'" alt="ภาพยืนยันตัวตน">':'<div class="shot none">🔑</div>')+
+    '<h2>✅ ยืนยันตัวตนสำเร็จ</h2><p class="muted">'+(how==='face'?'สแกนใบหน้าเรียบร้อย':'ยืนยันด้วยรหัสจากครู')+' • '+esc(PROFILE.name+' '+PROFILE.sur)+'</p>'+
+    '<div class="rules" style="text-align:left;max-width:520px;margin:14px auto">'+
+      '<div class="rule"><span class="i">⏱️</span><div>'+(kind==='rem'?'สอบซ่อม '+EXAM_CFG.REM.N+' ข้อ • '+EXAM_CFG.REM.MINUTES+' นาที • ผ่าน '+EXAM_CFG.REM.PASS+' ข้อขึ้นไป':'สอบจริง '+EXAM_CFG.N+' ข้อ • '+EXAM_CFG.MINUTES+' นาที • ผ่าน '+EXAM_CFG.PASS+' คะแนน')+'</div></div>'+
+      '<div class="rule"><span class="i">🛡️</span><div>ระบบป้องกันทุจริตเริ่มทำงานทันทีเมื่อกดเริ่ม'+(isTouch()?'':' (จะเข้าโหมดเต็มจอ)')+'</div></div></div>'+
+    '<button class="btn gold big" id="goExam" style="max-width:520px">🚀 '+(SCAN.resume?'ทำข้อสอบต่อ':'เริ่มทำข้อสอบ')+'</button></div>';
+  $('#goExam').onclick=()=>beginExam(kind,SCAN.resume);
+}
+
+/* ---------- EXAM SESSION ---------- */
+function persistES(){ if(!ES) return; const c=Object.assign({},ES); delete c.qs; LS.set('vbx_exam_sess',c); }
+function wantFS(){ return !isTouch() && !!(document.documentElement.requestFullscreen); }
+function enterFS(){ try{ if(wantFS() && !document.fullscreenElement){ const p=document.documentElement.requestFullscreen(); if(p&&p.catch) p.catch(()=>{}); } }catch(e){} }
+function exitFS(){ try{ if(document.fullscreenElement&&document.exitFullscreen){ const p=document.exitFullscreen(); if(p&&p.catch) p.catch(()=>{}); } }catch(e){} }
+async function beginExam(kind,resume){
+  const btn=$('#goExam'); if(btn){ if(btn.disabled) return; btn.disabled=true; }
+  enterFS();                                     // must run inside the click gesture
+  const key=profKey(PROFILE); const ex=myExam(); const cfg=cfgOf(kind);
+  if(resume){
+    const s=LS.get('vbx_exam_sess',null);
+    if(!s||s.key!==key){ toast('ไม่พบการสอบที่ค้างไว้'); openLobby(); return; }
+    ES=s; ES.resumes=(ES.resumes||0)+1; ES.verifyLog=(ES.verifyLog||[]).concat([SCAN.verify]);
+  }else{
+    if(kind==='exam'){
+      if(ex.state==='done'){ exitFS(); toast('สอบจริงไปแล้ว'); openLobby(); return; }
+      if(getGasUrl()){
+        if(btn) btn.innerHTML='⏳ กำลังเชื่อมต่อระบบสอบ…';
+        const r=await gasT('examStart',Object.assign(studentPayload(),{verify:SCAN.verify}),5000);
+        if(r&&r.ok===false&&r.error==='taken'){ exitFS(); if(r.ex) mergeServerExam(r.ex); toast('ระบบบันทึกว่าสอบไปแล้ว — ติดต่อครูโอ๊ตหากผิดพลาด',4000); openLobby(); return; }
+        if(!r||r.net) outPush('examStart',Object.assign(studentPayload(),{verify:SCAN.verify}));
+      }
+      ex.state='started'; saveExam(ex);
+    }else{
+      if(ex.state!=='done'||examPassed(ex)){ exitFS(); openLobby(); return; }
+    }
+    const remNo = kind==='rem' ? (ex.remTries||0)+1 : 0;
+    ES={kind,key,remNo,seed: kind==='exam' ? key+'#EXAM-2026' : key+'#REM#'+remNo,
+        answers:Array(cfg.N).fill(null),flags:Array(cfg.N).fill(false),idx:0,startAt:Date.now(),deadline:Date.now()+cfg.MINUTES*60000,
+        viol:0,vlog:[],verify:SCAN.verify,verifyLog:[SCAN.verify],resumes:0,warned5:false,warned1:false};
+  }
+  ES.qs=buildExam(cfg.PLAN,ES.seed); ES.submitted=false;
+  if(ES.answers.length!==cfg.N){ ES.answers=Array(cfg.N).fill(null); ES.flags=Array(cfg.N).fill(false); }
+  persistES();
+  if(SCAN.photo){
+    const kindTag = kind==='exam' ? (resume?'EXAM-RESUME':'EXAM') : ('REM'+ES.remNo+(resume?'-RESUME':''));
+    LS.set('vbx_lastphoto',{key,data:SCAN.photo,at:Date.now()});
+    outPush('photo',Object.assign(studentPayload(),{kind:kindTag,verify:SCAN.verify,data:SCAN.photo.split(',')[1]||''}));
+  }
+  gas('violation',Object.assign(studentPayload(),{kind:resume?'exam-resume':'exam-begin',stage:kind==='exam'?'EXAM':'REM'+ES.remNo,count:0}));
+  if(Date.now()>=ES.deadline){ submitExam('หมดเวลา'); return; }
+  startExamUI();
+}
+function startExamUI(){
+  setTheme('exam');
+  document.body.classList.add('examlock');
+  $('#wm').innerHTML=Array.from({length:70},()=>'<span>'+esc(PROFILE.name+' '+PROFILE.sur+' • '+PROFILE.cls+'/'+PROFILE.room+' #'+PROFILE.no)+'</span>').join('');
+  $('#eTitle').textContent=ES.kind==='exam'?'👑 FINAL EXAM':'🔁 สอบซ่อมครั้งที่ '+ES.remNo;
+  show('exam');
+  renderEQ();
+  clearInterval(examTimer); examTimer=setInterval(tickExam,500); tickExam();
+}
+function tickExam(){
+  if(!ES||ES.submitted){ clearInterval(examTimer); return; }
+  const cfg=cfgOf(ES.kind); const left=ES.deadline-Date.now();
+  const t=$('#eTimer'); if(t){ t.textContent='⏱ '+fmtTime(Math.max(0,left)/1000); t.classList.toggle('warn',left<5*60000); }
+  const b=$('#eTbar'); if(b) b.style.width=Math.max(0,left/(cfg.MINUTES*60000)*100)+'%';
+  if(left<=5*60000&&!ES.warned5&&cfg.MINUTES>5){ ES.warned5=true; persistES(); toast('⏰ เหลือเวลา 5 นาที!',3000); SFX.tick(); }
+  if(left<=60000&&!ES.warned1){ ES.warned1=true; persistES(); toast('⏰ เหลือเวลา 1 นาทีสุดท้าย!',3000); SFX.tick(); setTimeout(SFX.tick,250); }
+  if(left<=0) submitExam('หมดเวลา');
+}
+function curPart(){ const cfg=cfgOf(ES.kind); return partsOf(cfg.PLAN).find(p=>ES.idx>=p.from&&ES.idx<=p.to); }
+function renderEQ(){
+  const cfg=cfgOf(ES.kind); const q=ES.qs[ES.idx]; const a=ES.answers[ES.idx]; const T=ETYPES[q.type]; const P=curPart();
+  $('#ePart').textContent='ตอนที่ '+P.no+' • '+T.icon+' '+T.name+'  (ข้อ '+(P.from+1)+'–'+(P.to+1)+')';
+  let h='<div class="qtop"><span class="qtype">'+T.icon+' '+T.name.toUpperCase()+'</span><span class="qnum">ข้อ '+(ES.idx+1)+' / '+cfg.N+'</span></div>';
+  if(q.type==='gap'){
+    const parts=q.w.ex.split('____'); const sel=typeof a==='number'?q.opts[a]:null;
+    h+='<div class="prompt"><div class="sent">'+esc(parts[0])+'<span class="blank'+(sel?' fill':'')+'">'+(sel?esc(parts[0].trim()===''?sel.charAt(0).toUpperCase()+sel.slice(1):sel):'&nbsp;?&nbsp;')+'</span>'+esc(parts.slice(1).join('____'))+'</div><div class="hint">'+T.hint+'</div></div>';
+  }else if(q.type==='en2th'){
+    h+='<div class="prompt"><div class="big">'+esc(q.w.en)+'</div><div class="pos">'+q.w.pos+'</div><div class="hint">'+T.hint+'</div></div>';
+  }else if(q.type==='th2en'){
+    h+='<div class="prompt"><div class="th">'+esc(q.w.th)+'</div><div class="pos">'+q.w.pos+'</div><div class="hint">'+T.hint+'</div></div>';
+  }else if(q.type==='tf'){
+    h+='<div class="prompt"><div class="tfstate"><span class="w">'+esc(q.w.en)+'</span> <span class="muted" style="font-size:16px">('+q.w.pos+')</span><br>แปลว่า <span class="m">“'+esc(q.shown)+'”</span></div><div class="hint">'+T.hint+'</div></div>'+
+       '<div class="tfrow"><button class="tfbtn t'+(a===0?' sel':'')+'" data-v="0">✓ ถูก</button><button class="tfbtn f'+(a===1?' sel':'')+'" data-v="1">✗ ผิด</button></div>';
+  }else if(q.type==='spell'){
+    h+='<div class="prompt"><div class="th">'+esc(q.w.th)+'</div><div class="pos">'+q.w.pos+' • '+q.w.en.length+' ตัวอักษร</div><div class="hint">'+T.hint+'</div></div>'+
+       '<div class="slots" id="eSlots"></div><div class="tiles" id="eTiles"></div>'+
+       '<div class="spellbar"><button class="btn ghost" id="eBack">⌫ ลบ</button><button class="btn ghost" id="eClear">ล้าง</button></div>';
+  }else if(q.type==='type'){
+    const parts=q.w.ex.split('____');
+    h+='<div class="prompt"><div class="th" style="font-size:clamp(22px,5vw,32px)">'+esc(q.w.th)+' <span class="pos">'+q.w.pos+'</span></div>'+
+       '<div class="sent" style="margin-top:12px">'+esc(parts[0])+'<span class="blank">&nbsp;?&nbsp;</span>'+esc(parts.slice(1).join('____'))+'</div></div>'+
+       '<div class="tybox"><input id="eType" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="30" placeholder="พิมพ์คำตอบ" value="'+esc(a||'')+'"></div>'+
+       '<div class="tyhint">ขึ้นต้นด้วย “'+esc(q.w.en[0])+'” • '+q.w.en.length+' ตัวอักษร</div>';
+  }
+  if(q.opts && q.type!=='tf'){
+    h+='<div class="opts">'+q.opts.map((o,i)=>'<button class="opt'+(a===i?' sel':'')+'" data-i="'+i+'"><span class="k">'+'ABCD'[i]+'</span><span>'+esc(o)+'</span></button>').join('')+'</div>';
+  }
+  $('#eqCard').innerHTML=h;
+  $$('#eqCard .opt').forEach(b=>b.onclick=()=>setAns(+b.dataset.i));
+  $$('#eqCard .tfbtn').forEach(b=>b.onclick=()=>setAns(+b.dataset.v));
+  if(q.type==='spell'){ renderESpell(); $('#eBack').onclick=()=>{const arr=(ES.answers[ES.idx]||[]).slice();arr.pop();setAns(arr.length?arr:null,true);}; $('#eClear').onclick=()=>setAns(null,true); }
+  if(q.type==='type'){ const inp=$('#eType'); inp.oninput=()=>{ ES.answers[ES.idx]=inp.value; persistES(); updEHUD(); }; inp.onpaste=e=>e.preventDefault(); inp.ondrop=e=>e.preventDefault(); if(!isTouch()) setTimeout(()=>{try{inp.focus();}catch(e){}},60); }
+  $('#ePrev').disabled=ES.idx===0;
+  $('#eNext').textContent=ES.idx===cfg.N-1?'ตรวจทาน & ส่ง ▶':'ถัดไป ▶';
+  $('#eFlag').classList.toggle('on',!!ES.flags[ES.idx]);
+  updEHUD();
+}
+function renderESpell(){
+  const q=ES.qs[ES.idx]; const arr=ES.answers[ES.idx]||[];
+  let s=''; for(let i=0;i<q.w.en.length;i++){ const ti=arr[i]; s+='<div class="slot'+(ti!=null?' f':'')+'" data-s="'+i+'">'+(ti!=null?esc(q.tiles[ti]):'')+'</div>'; }
+  $('#eSlots').innerHTML=s;
+  $('#eTiles').innerHTML=q.tiles.map((ch,i)=>'<button class="tile'+(arr.includes(i)?' used':'')+'" data-t="'+i+'">'+esc(ch)+'</button>').join('');
+  $$('#eTiles .tile').forEach(b=>b.onclick=()=>eAddTile(+b.dataset.t));
+  $$('#eSlots .slot').forEach(el=>el.onclick=()=>{ const i=+el.dataset.s; const a2=(ES.answers[ES.idx]||[]).slice(); if(i<a2.length){ a2.splice(i,1); setAns(a2.length?a2:null,true);} });
+}
+function eAddTile(i){
+  const q=ES.qs[ES.idx]; const arr=(ES.answers[ES.idx]||[]).slice();
+  if(arr.includes(i)||arr.length>=q.w.en.length) return;
+  arr.push(i); SFX.tap(); setAns(arr,true);
+}
+function setAns(v,spell){
+  if(!ES||ES.submitted) return;
+  ES.answers[ES.idx]=v; persistES();
+  if(spell){ renderESpell(); updEHUD(); return; }
+  SFX.tap(); renderEQ();
+}
+function answeredCount(){ return ES.qs.reduce((n,q,i)=>n+(isAnswered(q,ES.answers[i])?1:0),0); }
+function updEHUD(){
+  const cfg=cfgOf(ES.kind);
+  $('#eAns').textContent='ตอบแล้ว '+answeredCount()+'/'+cfg.N;
+  const vp=$('#eViol'); vp.textContent='🛡️ '+ES.viol+'/'+EXAM_CFG.MAX_VIOL; vp.classList.toggle('hot',ES.viol>0);
+  $('#eGrid').innerHTML=ES.qs.map((q,i)=>'<button class="gq'+(isAnswered(q,ES.answers[i])?' ans':'')+(i===ES.idx?' cur':'')+(ES.flags[i]?' flag':'')+'" data-g="'+i+'">'+(i+1)+'</button>').join('');
+  $$('#eGrid .gq').forEach(b=>b.onclick=()=>goQ(+b.dataset.g));
+}
+function goQ(i){ const cfg=cfgOf(ES.kind); if(i<0||i>=cfg.N) return; ES.idx=i; persistES(); renderEQ(); if(scrollY>120){ try{ window.scrollTo({top:0,behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); } } }
+function askSubmit(){
+  if(!ES||ES.submitted) return;
+  const cfg=cfgOf(ES.kind); const n=answeredCount(); const left=cfg.N-n; const fl=ES.flags.filter(Boolean).length;
+  confirmBox('ส่งข้อสอบเลยไหม?','ตอบแล้ว '+n+'/'+cfg.N+' ข้อ'+(left?' • ⚠️ ยังไม่ตอบ '+left+' ข้อ':'')+(fl?' • 🚩 ทำเครื่องหมายไว้ '+fl+' ข้อ':'')+' — ส่งแล้วแก้ไขไม่ได้นะ',()=>submitExam(''));
+}
+function submitExam(reason){
+  if(!ES||ES.submitted) return;
+  ES.submitted=true; clearInterval(examTimer);
+  document.body.classList.remove('examlock'); hideGuard(); exitFS();
+  $('#cfmModal').classList.add('hidden');
+  const cfg=cfgOf(ES.kind);
+  const byType={}; let score=0;
+  ES.qs.forEach((q,i)=>{ const ok=isCorrect(q,ES.answers[i]); byType[q.type]=byType[q.type]||{ok:0,n:0}; byType[q.type].n++; if(ok){ byType[q.type].ok++; score++; } });
+  const secs=Math.round((Math.min(Date.now(),ES.deadline)-ES.startAt)/1000);
+  const ex=myExam();
+  let info;
+  if(ES.kind==='exam'){
+    Object.assign(ex,{state:'done',raw:score,need:Math.max(0,EXAM_CFG.PASS-score),remDone:0,remTries:0,log:[],viol:ES.viol,time:secs,verify:ES.verify,at:Date.now(),reason,byType});
+    info={kind:'exam',score,secs};
+    outPush('examFinish',Object.assign(studentPayload(),{raw:score,time:secs,viol:ES.viol,verify:(ES.verifyLog||[ES.verify]).join(','),reason,byType:Object.keys(byType).map(t=>t+':'+byType[t].ok+'/'+byType[t].n).join(' '),resumes:ES.resumes||0}));
+  }else{
+    const passed=score>=EXAM_CFG.REM.PASS; const before=ex.remDone||0;
+    ex.remTries=Math.max(ex.remTries||0,ES.remNo);
+    ex.log=(ex.log||[]).concat([{n:ES.remNo,score,passed,at:Date.now(),viol:ES.viol,reason}]);
+    if(passed&&ex.remDone<ex.need) ex.remDone++;
+    info={kind:'rem',score,secs,passed,gained:ex.remDone>before};
+    outPush('remFinish',Object.assign(studentPayload(),{remNo:ES.remNo,score,time:secs,viol:ES.viol,verify:ES.verify,reason}));
+  }
+  saveExam(ex);
+  const d=db(); const rec=d.profiles[profKey(PROFILE)]; const fresh=rec?checkBadges(rec,{}):[]; if(rec) saveDb(d);
+  LS.del('vbx_exam_sess');
+  const kind=ES.kind, vio=ES.viol; ES=null;
+  renderExamResult(Object.assign(info,{reason,byType,viol:vio,fresh,kind}));
+}
+function renderExamResult(o){
+  setTheme('exam');
+  const ex=myExam(); const E=EXAM_CFG; const cfg=cfgOf(o.kind);
+  const fin=examFinal(ex); const ok=examPassed(ex);
+  let h='';
+  if(o.kind==='exam'){
+    const pass=o.score>=E.PASS;
+    h+='<div class="qtype">👑 FINAL EXAM • ส่งแล้ว</div>'+
+      '<div class="big-ring">'+ringSVG(0,E.N,200,pass?'#2ee59d':'#ff5470').replace('stroke-dashoffset','id="exArc" stroke-dashoffset')+'<div class="v"><b id="exN">0</b><span class="muted">/ '+E.N+' คะแนน</span></div></div>'+
+      '<div class="stamp '+(pass?'pass':'fail')+'" style="animation-delay:1.3s">'+(pass?'ผ่าน ✓':'ไม่ผ่าน')+'</div>'+
+      '<div class="msg">'+(pass?(o.score>=27?'สุดยอด! คะแนนระดับตำนาน 👑':'ยอดเยี่ยม! ผ่านการสอบ 🎉'):'ยังไม่ถึงเกณฑ์ '+E.PASS+' — ต้องสอบซ่อม '+ex.need+' ครั้ง 💪')+'</div>';
+  }else{
+    h+='<div class="qtype">🔁 สอบซ่อมครั้งที่ '+ex.remTries+'</div>'+
+      '<div class="big-ring">'+ringSVG(0,cfg.N,200,o.passed?'#2ee59d':'#ff5470').replace('stroke-dashoffset','id="exArc" stroke-dashoffset')+'<div class="v"><b id="exN">0</b><span class="muted">/ '+cfg.N+'</span></div></div>'+
+      '<div class="stamp '+(o.passed?'pass':'fail')+'" style="animation-delay:1.3s">'+(o.passed?'ผ่านรอบนี้ ✓':'ไม่ถึงเกณฑ์')+'</div>'+
+      '<div class="msg">'+(o.gained?'+1 คะแนน → คะแนนสุทธิ '+fin+'/'+E.N+(ok?' • ครบแล้ว! ผ่านการสอบ 🎉':' • เหลืออีก '+(ex.need-ex.remDone)+' ครั้ง'):o.passed?'ผ่านแล้ว (ครบจำนวนครั้งแล้ว)':'ต้องได้ '+E.REM.PASS+'/'+cfg.N+' ขึ้นไป ครั้งนี้ไม่นับ — ทบทวนแล้วลองใหม่ได้ 💪')+'</div>';
+  }
+  if(o.reason) h+='<div class="note" style="margin:10px 0">⚠️ ส่งอัตโนมัติ: <b>'+esc(o.reason)+'</b></div>';
+  h+='<div class="muted">'+esc(PROFILE.name+' '+PROFILE.sur)+' • '+esc(PROFILE.cls+'/'+PROFILE.room)+' เลขที่ '+esc(PROFILE.no)+' • '+nowTH()+'</div>'+
+    '<div class="stats"><div class="stat"><b>'+Math.round(o.score/cfg.N*100)+'%</b><span>ความแม่นยำ</span></div><div class="stat"><b>'+fmtTime(o.secs)+'</b><span>เวลาที่ใช้</span></div>'+
+    '<div class="stat"><b>'+(fin==null?'–':fin)+'</b><span>คะแนนสุทธิ /'+E.N+'</span></div><div class="stat"><b class="'+(o.viol?'warn':'')+'">'+o.viol+'</b><span>การละเมิด</span></div></div>'+
+    '<div class="tbars">'+cfg.PLAN.map(([t])=>{const b=o.byType[t]||{ok:0,n:0};return '<div class="tbar"><span>'+ETYPES[t].icon+' '+ETYPES[t].name+'</span><div class="tr"><i data-w="'+(b.n?b.ok/b.n*100:0)+'"></i></div><b>'+b.ok+'/'+b.n+'</b></div>';}).join('')+'</div>'+
+    remPathHTML(ex)+
+    (o.fresh&&o.fresh.length?'<div class="newb"><b>🏅 ปลดล็อกเหรียญใหม่!</b><div class="list">'+o.fresh.map((id,i)=>{const b=BADGES.find(x=>x.id===id);return '<div class="it" style="animation-delay:'+(1.8+i*.25)+'s"><span>'+b.e+'</span>'+esc(b.n)+'</div>';}).join('')+'</div></div>':'')+
+    '<p class="muted" style="font-size:13px">🔒 ไม่แสดงเฉลยเพื่อความยุติธรรมกับเพื่อนที่ยังไม่ได้สอบ • ผลถูกส่งถึงครูโอ๊ตแล้ว</p>'+
+    '<div class="hubfoot">'+
+      (!ok&&ex.state==='done'?'<button class="btn gold" id="erRem">🔁 สอบซ่อมครั้งต่อไป</button>':'')+
+      '<button class="btn pri" id="erImg">💾 บันทึกรูปผลสอบ</button><button class="btn ghost" id="erHub">← หน้าหลัก</button></div>';
+  $('#exresBox').innerHTML=h;
+  show('exres');
+  countUp($('#exN'),o.score,1200);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    const arc=$('#exArc'); if(arc){ const C=parseFloat(arc.getAttribute('stroke-dasharray')); arc.style.transition='stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)'; arc.style.strokeDashoffset=String(C*(1-o.score/cfg.N)); }
+    $$('#exresBox .tbar .tr i').forEach(i=>i.style.width=i.dataset.w+'%');
+  }));
+  const good = o.kind==='exam' ? o.score>=E.PASS : o.passed;
+  setTimeout(()=>{ if(good){ SFX.win(); confetti(ok&&o.kind==='exam'&&o.score>=27?240:140); banner(o.kind==='exam'?'PASSED! 👑':'+1 POINT ✓'); } else SFX.bad(); },1300);
+  if(o.fresh&&o.fresh.length) setTimeout(()=>SFX.badge(),2000);
+  const on=(id,fn)=>{const el=$('#'+id); if(el) el.onclick=fn;};
+  on('erHub',renderHub); on('erImg',saveExamImage); on('erRem',()=>goScan('rem',false));
+}
+
+/* ---------- ANTI-CHEAT (exam only) ---------- */
+function examActive(){ return !!ES && !ES.submitted && !$('#scr-exam').classList.contains('hidden'); }
+let blurT=null;
+function examViolation(kind,label){
+  if(!examActive()) return;
+  if(isAdmin()){ toast('(โหมดครู) ตรวจพบ: '+label); return; }
+  const now=Date.now(); if(ES.lastV && now-ES.lastV<1200) return;   // one incident = one count
+  ES.lastV=now; ES.viol++; ES.vlog.push({k:kind,t:now}); persistES(); updEHUD();
+  gas('violation',Object.assign(studentPayload(),{kind:'exam-'+kind,stage:ES.kind==='exam'?'EXAM':'REM'+ES.remNo,count:ES.viol}));
+  SFX.bad(); try{navigator.vibrate&&navigator.vibrate([120,80,120]);}catch(e){}
+  if(ES.viol>=EXAM_CFG.MAX_VIOL){
+    showGuard('🚨','ละเมิดกติกาครบ '+EXAM_CFG.MAX_VIOL+' ครั้ง','ระบบกำลังส่งข้อสอบอัตโนมัติ…',true);
+    setTimeout(()=>submitExam('ละเมิดกติกาครบ '+EXAM_CFG.MAX_VIOL+' ครั้ง (ล่าสุด: '+label+')'),1600);
+  }else showGuard('⚠️','ตรวจพบ: '+label,'บันทึกถึงครูโอ๊ตแล้ว • ครบ '+EXAM_CFG.MAX_VIOL+' ครั้ง ระบบจะส่งข้อสอบทันที',false);
+}
+function showGuard(ic,title,text,final){
+  const g=$('#guard');
+  g.innerHTML='<div class="box"><div class="ic">'+ic+'</div><h2>'+esc(title)+'</h2><p class="muted">'+esc(text)+'</p>'+
+    (ES?'<div class="cnt">ครั้งที่ '+ES.viol+' / '+EXAM_CFG.MAX_VIOL+'</div>':'')+
+    (final?'':'<div><button class="btn gold" id="guardBack" style="margin-top:10px">กลับไปทำข้อสอบ</button></div>')+'</div>';
+  g.classList.remove('hidden');
+  const b=$('#guardBack'); if(b) b.onclick=()=>{ enterFS(); hideGuard(); };
+}
+function hideGuard(){ const g=$('#guard'); if(g) g.classList.add('hidden'); }
+function initExamGuards(){
+  document.addEventListener('visibilitychange',()=>{ if(document.hidden && examActive()) examViolation('tab','สลับแท็บ / ออกจากแอป'); });
+  window.addEventListener('blur',()=>{ if(!examActive()) return; clearTimeout(blurT); blurT=setTimeout(()=>{ if(examActive() && document.visibilityState==='visible' && !document.hasFocus()) examViolation('blur','คลิกออกนอกหน้าต่างสอบ'); },2500); });
+  window.addEventListener('focus',()=>clearTimeout(blurT));
+  document.addEventListener('fullscreenchange',()=>{ if(examActive() && !document.fullscreenElement && wantFS()) examViolation('fullscreen','ออกจากโหมดเต็มจอ'); });
+  ['copy','cut','paste','contextmenu','dragstart'].forEach(ev=>document.addEventListener(ev,e=>{ if(examActive()){ e.preventDefault(); if(ev!=='dragstart') toast('🚫 ปิดการคัดลอก/วาง/คลิกขวา ระหว่างสอบ'); } }));
+  document.addEventListener('selectstart',e=>{ if(examActive() && !(e.target&&e.target.tagName==='INPUT')) e.preventDefault(); });
+  const keyGuard=e=>{
+    if(!examActive()) return false;
+    const k=(e.key||'').toLowerCase(); const mod=e.ctrlKey||e.metaKey;
+    if(k==='printscreen'){ e.preventDefault(); examViolation('screenshot','กดปุ่มจับภาพหน้าจอ'); return true; }
+    if(e.type==='keyup') return false;
+    if(k==='f12'||(mod&&e.shiftKey&&['i','j','c'].includes(k))||(mod&&k==='u')){ e.preventDefault(); examViolation('devtools','พยายามเปิดเครื่องมือนักพัฒนา'); return true; }
+    if(e.metaKey&&e.shiftKey&&['3','4','5'].includes(k)){ examViolation('screenshot','กดคีย์ลัดจับภาพหน้าจอ'); return true; }
+    if(mod&&['c','x','v','a','p','s','f','g'].includes(k)){ e.preventDefault(); toast('🚫 คีย์ลัดนี้ถูกปิดระหว่างสอบ'); return true; }
+    return false;
+  };
+  document.addEventListener('keyup',keyGuard,true);
+  document.addEventListener('keydown',e=>{
+    if(!examActive()) return;
+    if(keyGuard(e)) { e.stopImmediatePropagation(); return; }
+    if(!$('#cfmModal').classList.contains('hidden')||!$('#guard').classList.contains('hidden')) return;
+    const tag=(e.target&&e.target.tagName)||''; const q=ES.qs[ES.idx]; const k=(e.key||'').toLowerCase();
+    if(tag==='INPUT'){ if(e.key==='Enter'){ e.preventDefault(); goQ(ES.idx+1); } return; }
+    if(e.key==='ArrowRight'){ e.preventDefault(); goQ(ES.idx+1); return; }
+    if(e.key==='ArrowLeft'){ e.preventDefault(); goQ(ES.idx-1); return; }
+    if(q.type==='spell'){
+      if(e.key==='Backspace'){ e.preventDefault(); $('#eBack').click(); }
+      else if(/^[a-z]$/.test(k)){ const arr=ES.answers[ES.idx]||[]; const i=q.tiles.findIndex((t,j)=>t===k&&!arr.includes(j)); if(i>=0) eAddTile(i); }
+      return;
+    }
+    if(q.type==='tf'){ if(k==='t'||k==='1'){ setAns(0); } else if(k==='f'||k==='2'){ setAns(1); } return; }
+    if(q.opts){ const n='1234'.indexOf(e.key), m='abcd'.indexOf(k), i=n>=0?n:m; if(i>=0){ e.preventDefault(); setAns(i); } }
+  },true);
+  try{
+    new MutationObserver(muts=>{ if(examActive() && muts.some(m=>m.type==='characterData'&&!(m.target.parentNode&&m.target.parentNode.tagName==='INPUT'))) examViolation('translate','ใช้ระบบแปลภาษา'); })
+      .observe(document.body,{subtree:true,characterData:true});
+  }catch(e){}
+  window.addEventListener('online',flushOutbox);
+}
+
+/* ---------- RESULT IMAGE ---------- */
+function drawExamPNG(){
+  const ex=myExam(); const E=EXAM_CFG; const fin=examFinal(ex); const ok=examPassed(ex);
+  const cv=document.createElement('canvas'); cv.width=1080; cv.height=1350;
+  let ctx=null; try{ ctx=cv.getContext&&cv.getContext('2d'); }catch(e){} if(!ctx) return Promise.resolve(null);
+  const F='"Sukhumvit Set","Noto Sans Thai","Leelawadee UI","Thonburi",system-ui,sans-serif';
+  let g=ctx.createLinearGradient(0,0,1080,1350); g.addColorStop(0,'#2b1a03'); g.addColorStop(.55,'#0d0904'); g.addColorStop(1,'#1d0a2c'); ctx.fillStyle=g; ctx.fillRect(0,0,1080,1350);
+  let rg=ctx.createRadialGradient(540,0,10,540,0,700); rg.addColorStop(0,'rgba(255,210,63,.35)'); rg.addColorStop(1,'rgba(255,210,63,0)'); ctx.fillStyle=rg; ctx.fillRect(0,0,1080,1350);
+  g=ctx.createLinearGradient(0,0,1080,0); g.addColorStop(0,'#fff1b3'); g.addColorStop(.5,'#ffd23f'); g.addColorStop(1,'#ff9f1c');
+  ctx.strokeStyle=g; ctx.lineWidth=8; roundRect(ctx,22,22,1036,1306,44); ctx.stroke(); ctx.lineWidth=2; roundRect(ctx,42,42,996,1266,34); ctx.stroke();
+  ctx.textAlign='center'; ctx.font='90px sans-serif'; ctx.fillText('👑',540,150);
+  ctx.fillStyle=g; ctx.font='900 78px '+F; ctx.fillText('FINAL EXAM',540,245);
+  ctx.fillStyle='rgba(255,255,255,.65)'; ctx.font='800 24px '+F; ctx.fillText('VOCAB BEAT ADVANCE  •  BOSS MIX  •  SET 15–18',540,290);
+  const finish=(img)=>{
+    const cy=430;
+    ctx.save(); ctx.beginPath(); ctx.arc(540,cy,95,0,Math.PI*2); ctx.closePath();
+    if(img){ ctx.clip(); ctx.translate(1080,0); ctx.scale(-1,1); ctx.drawImage(img,540-127,cy-95,254,190); }
+    else{ ctx.fillStyle='rgba(255,255,255,.08)'; ctx.fill(); }
+    ctx.restore();
+    ctx.strokeStyle=ok?'#2ee59d':'#ffb020'; ctx.lineWidth=7; ctx.beginPath(); ctx.arc(540,cy,98,0,Math.PI*2); ctx.stroke();
+    if(!img){ ctx.font='80px sans-serif'; ctx.fillStyle='#fff'; ctx.fillText('🎓',540,cy+28); }
+    ctx.fillStyle='#fff'; ctx.font='900 52px '+F; ctx.fillText(PROFILE.name+' '+PROFILE.sur,540,600);
+    ctx.fillStyle='rgba(255,255,255,.7)'; ctx.font='600 30px '+F; ctx.fillText('ชั้น '+PROFILE.cls+'/'+PROFILE.room+'   •   เลขที่ '+PROFILE.no,540,648);
+    { const big=fin==null?'–':String(fin), small=' /'+E.N;
+      ctx.font='900 190px '+F; const bw=ctx.measureText(big).width; ctx.font='800 56px '+F; const sw=ctx.measureText(small).width;
+      const x0=540-(bw+sw)/2; ctx.textAlign='left';
+      ctx.fillStyle=g; ctx.font='900 190px '+F; ctx.fillText(big,x0,850);
+      ctx.fillStyle='rgba(255,255,255,.55)'; ctx.font='800 56px '+F; ctx.fillText(small,x0+bw,850); ctx.textAlign='center'; }
+    const label= ex.state!=='done'?'ยังไม่สอบ': ex.raw>=E.PASS?'ผ่าน ✓': ok?'ผ่าน (ซ่อม) ✓':'ต้องสอบซ่อม '+ex.remDone+'/'+ex.need;
+    ctx.save(); ctx.translate(540,945); ctx.rotate(-0.05); ctx.strokeStyle=ok?'#2ee59d':'#ffb020'; ctx.fillStyle=ctx.strokeStyle; ctx.lineWidth=6;
+    ctx.font='900 54px '+F; const tw=ctx.measureText(label).width+60; roundRect(ctx,-tw/2,-48,tw,80,16); ctx.stroke(); ctx.fillText(label,0,12); ctx.restore();
+    ctx.fillStyle='rgba(255,255,255,.75)'; ctx.font='600 28px '+F;
+    if(ex.state==='done'){
+      ctx.fillText('คะแนนสอบจริง '+ex.raw+'/'+E.N+'   •   เกณฑ์ผ่าน '+E.PASS+(ex.need?'   •   สอบซ่อมผ่าน '+ex.remDone+'/'+ex.need+' ครั้ง':''),540,1050);
+      ctx.fillText('ยืนยันตัวตน: '+(ex.verify==='face'?'สแกนใบหน้า':ex.verify==='code'?'รหัสจากครู':'–')+'   •   การละเมิด '+(ex.viol||0)+' ครั้ง   •   เวลา '+fmtTime(ex.time||0),540,1095);
+    }
+    const prog=myRec().stages||{};
+    ctx.fillStyle='rgba(255,255,255,.55)'; ctx.font='700 24px '+F;
+    ctx.fillText('คะแนนฝึก: '+STAGES.map(s=>s.name.replace('SET ','S')+' '+(prog[s.id]?prog[s.id].best:'–')).join('  ')+'   (รวม '+totalBest(prog)+'/80)',540,1160);
+    ctx.fillText(nowTH()+'   •   BY T.OAT • GSB SCHOOL',540,1260);
+    return cv;
+  };
+  const ph=LS.get('vbx_lastphoto',null);
+  if(ph&&ph.key===profKey(PROFILE)&&ph.data){
+    return new Promise(res=>{ const im=new Image(); im.onload=()=>res(finish(im)); im.onerror=()=>res(finish(null)); im.src=ph.data; setTimeout(()=>res(finish(null)),2500); });
+  }
+  return Promise.resolve(finish(null));
+}
+async function saveExamImage(){
+  let cv=null; try{ cv=await drawExamPNG(); }catch(e){ cv=null; }
+  if(!cv){ toast('อุปกรณ์นี้สร้างรูปไม่ได้ — ใช้การแคปหน้าจอแทนนะ'); return; }
+  let url; try{ url=cv.toDataURL('image/png'); }catch(e){ toast('สร้างรูปไม่สำเร็จ — ใช้การแคปหน้าจอแทน'); return; }
+  $('#imgOut').src=url; $('#imgDl').href=url;
+  $('#imgDl').setAttribute('download','exam_'+PROFILE.cls.replace('.','')+'-'+PROFILE.room+'_'+PROFILE.no+'_'+PROFILE.name+'.png');
+  $('#imgModal').classList.remove('hidden'); SFX.badge();
+}
+
+/* ===================== WIRING ===================== */
+function enterApp(){
+  const sp=$('#splash');if(sp.classList.contains('out')) return;
+  ac();SFX.go();sp.classList.add('out');setTimeout(()=>sp.classList.add('hidden'),650);
+  if(!PROFILE){ show('reg'); return; }
+  const es=LS.get('vbx_exam_sess',null);
+  if(es&&es.key===profKey(PROFILE)){ openLobby(); toast('⏸️ มีการสอบที่ค้างอยู่ — กลับเข้าห้องสอบ',3000); } else renderHub();
+}
+function init(){
+  $('#splashTitle').innerHTML=['VOCAB','BEAT'].map((w,li)=>'<div class="ln">'+w.split('').map((ch,i)=>'<span style="animation-delay:'+(0.25+li*.35+i*.07).toFixed(2)+'s">'+ch+'</span>').join('')+'</div>').join('');
+  $('#eq').innerHTML=Array.from({length:30},(_,i)=>'<i style="animation-delay:'+(-(i*0.13)%1.1).toFixed(2)+'s;animation-duration:'+(0.8+((i*37)%7)/10).toFixed(1)+'s"></i>').join('');
+  updAudioBtns();fxInit();initExamGuards();
+  { const s=LS.get('vbx_sess',null); if(s&&!STAGES.some(st=>st.id===s.stageId)) LS.del('vbx_sess'); }   // old v2 BOSS practice session
+  setTimeout(flushOutbox,1500);
+  $('#ePrev').onclick=()=>goQ(ES.idx-1);
+  $('#eNext').onclick=()=>{ if(ES.idx>=cfgOf(ES.kind).N-1) askSubmit(); else goQ(ES.idx+1); };
+  $('#eFlag').onclick=()=>{ ES.flags[ES.idx]=!ES.flags[ES.idx]; persistES(); $('#eFlag').classList.toggle('on',ES.flags[ES.idx]); updEHUD(); };
+  $('#eSubmit').onclick=askSubmit;
+  try{pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}catch(e){}
+  $('#splash').onclick=enterApp;
+  $('#sndBtn').onclick=()=>{SOUND=!SOUND;LS.set('vbx_sound',SOUND);updAudioBtns();if(SOUND)SFX.tap();};
+  $('#musBtn').onclick=()=>{MUSIC=!MUSIC;LS.set('vbx_music',MUSIC);updAudioBtns();if(MUSIC){ac();musicStart();toast(playing()?'🎵 เปิดเพลงประกอบ':'🎵 เพลงจะเล่นระหว่างทำข้อสอบ');}else musicStop();};
+  $('#adminBtn').onclick=openPin;
+  $('#pinOk').onclick=submitPin;
+  $('#pinCancel').onclick=()=>$('#pinModal').classList.add('hidden');
+  $('#pinIn').onkeydown=e=>{if(e.key==='Enter')submitPin();};
+  $('#regBtn').onclick=register;
+  ['fName','fSur','fNo'].forEach(id=>$('#'+id).onkeydown=e=>{if(e.key==='Enter')register();});
+  $('#resumeBtn').onclick=()=>{const s=LS.get('vbx_sess',null);if(s)startStage(s.stageId,true);};
+  $('#resumeDrop').onclick=()=>confirmBox('ทิ้งด่านที่ทำค้าง?','คะแนนของรอบที่ค้างจะไม่ถูกบันทึก',()=>{LS.del('vbx_sess');renderHub();});
+  $('#cardBtn').onclick=renderCard;
+  $('#cardBack').onclick=renderHub;
+  $('#saveImgBtn').onclick=saveCardImage;
+  $('#imgClose').onclick=()=>$('#imgModal').classList.add('hidden');
+  $('#logoutBtn').onclick=()=>confirmBox('เปลี่ยนผู้ใช้?','คะแนนของคุณยังเก็บไว้ในเครื่องนี้ กลับมาลงทะเบียนชื่อเดิมเพื่อเล่นต่อได้',()=>{
+    PROFILE=null;LS.del('vbx_profile');updChip();
+    ['fName','fSur','fNo'].forEach(id=>$('#'+id).value='');$('#fCls').value='';$('#fRoom').value='';show('reg');});
+  $('#quitBtn').onclick=quitStage;
+  $('#admExit').onclick=()=>{SS.del('vbx_admin');SS.del('vbx_pin');SS.del('vbx_reveal');toast('ออกจากโหมดครูแล้ว');PROFILE?renderHub():show('reg');};
+  $$('#admTabs .tab').forEach(t=>t.onclick=()=>{admTab=t.dataset.t;$$('#admTabs .tab').forEach(x=>x.classList.toggle('on',x===t));renderAdmTab();});
+  document.addEventListener('keydown',e=>{
+    if(!$('#splash').classList.contains('hidden')&&!$('#splash').classList.contains('out')){if(e.key==='Enter'||e.key===' '){e.preventDefault();enterApp();}return;}
+    if(!playing()||!$('#cd').classList.contains('hidden')) return;
+    if(!$('#cfmModal').classList.contains('hidden')) return;
+    const tag=(e.target&&e.target.tagName)||'';if(tag==='INPUT') return;
+    if(S.locked){ if(e.key==='Enter'||e.key===' '){e.preventDefault();next();} return; }
+    const q=S.qs[S.idx];const k=e.key.toLowerCase();
+    if(k==='h'&&q.type!=='spell'){e.preventDefault();useHint();return;}
+    if(k==='f'&&q.type!=='spell'){e.preventDefault();useFifty();return;}
+    if(q.type!=='spell'){const n='1234'.indexOf(e.key);const m='abcd'.indexOf(k);const i=n>=0?n:m;if(i>=0){e.preventDefault();chooseOpt(i);}}
+    else{
+      if(e.key==='Backspace'){e.preventDefault();if(S.spell.length>S.hintLetters){S.spell.pop();renderSpell();}}
+      else if(e.key==='Enter'){e.preventDefault();checkSpell();}
+      else if(e.key==='?'){e.preventDefault();useHint();}
+      else if(/^[a-z]$/i.test(e.key)){const i=q.tiles.findIndex((t,j)=>t===k&&!S.spell.includes(j));if(i>=0) addTile(i);}
+    }
+  });
+}
+init();
+</script>
+</body>
+</html>
