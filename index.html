@@ -939,14 +939,16 @@ const CONFIG = {
   GAS_URL: 'https://script.google.com/macros/s/AKfycbxP8qOYMEXf9C-25biJWdEB9uKhuky2vZI2ZqGep8bQwSY2oj_WGf3_jzGBwNHqWN4NSg/exec',
   PIN: '7846',          // PIN สำรองเมื่อเชื่อม GAS ไม่ได้
   APP: 'VOCAB BEAT ADVANCE • SET 15-18',
-  VERSION: '4.0'
+  VERSION: '4.1'
 };
 /* ===== การสอบจริง (ด่าน 5) — ครูแก้ค่าได้ที่นี่ ===== */
 const EXAM_CFG = {
   N: 30, PASS: 18, MINUTES: 40,          // 30 ข้อ = 30 คะแนน • ผ่าน 18 • เวลา 40 นาที
   MAX_VIOL: 3,                           // ละเมิดครบกี่ครั้ง = ส่งข้อสอบอัตโนมัติ
   FACE_CODE: '1112',                     // รหัสสำรองเมื่อสแกนหน้าไม่ได้
-  PLAN: [['gap',7],['en2th',5],['th2en',5],['tf',4],['spell',4],['type',5]],
+  PLAN: [['gap',7],['en2th',4],['th2en',4],['tf',4],['spell',5],['type',6]],   // v4.1: harder mix (more spelling/typing)
+  HARD: true,                            // ตัวเลือกหลอกหน้าตาคล้ายคำตอบ + ตัวอักษรหลอก 3 ตัว (เฉพาะสอบจริง)
+  PLAN_V1: [['gap',7],['en2th',5],['th2en',5],['tf',4],['spell',4],['type',5]],   // for sessions started before v4.1
   REM: { N: 10, PASS: 7, MINUTES: 12,    // สอบซ่อม: 10 ข้อ ต้องได้ ≥7 จึงนับ 1 ครั้ง (+1 คะแนน)
          PLAN: [['gap',3],['en2th',2],['th2en',1],['tf',1],['spell',1],['type',2]] }
 };
@@ -1062,7 +1064,10 @@ const BANK = {
 /* pairs that must never be answer + distractor together (both could fit / same meaning) */
 const AVOID = [["cope","handle"],["arid","drought"],["appoint","allocate"],["diagnose","ascertain"],["cautious","decisive"],
   ["comply","cope"],["comply","adhere"],["adoption","usage"],["utilize","exploit"],["arrest","detain"],["tolerance","affection"],
-  ["aftermath","crisis"],["disclose","assert"],["accomplish","exert"],["assemble","allocate"]];
+  ["aftermath","crisis"],["disclose","assert"],["accomplish","exert"],["assemble","allocate"],
+  /* v4.1: look-alike pairs that could also fit a sentence or meaning */
+  ["abundant","affordable"],["adoption","aftermath"],["approximate","ultimate"],["devise","disclose"],["ultimate","initial"],
+  ["cautious","furious"],["exert","utilize"],["consent","comply"],["beware","cautious"]];
 const AVOID_SET = new Set(AVOID.flatMap(([a,b])=>[a+'|'+b,b+'|'+a]));
 
 const TYPES = {
@@ -1992,21 +1997,46 @@ function examLabel(ex){
 
 /* ---------- question builder ---------- */
 function allPool(){ return poolFor({set:0}); }
-function buildExam(plan,seed){
+/* hard mode: wrong options that LOOK like the answer (same part of speech, shared spelling) */
+function wordLike(a,b){
+  let p=0; while(p<a.length&&p<b.length&&a[p]===b[p]) p++;
+  const bg=s=>{const o=new Set();for(let i=0;i<s.length-1;i++)o.add(s.slice(i,i+2));return o;};
+  const A=bg(a),B=bg(b); let sh=0; A.forEach(x=>{if(B.has(x))sh++;});
+  return p*2 + sh/Math.max(1,Math.min(A.size,B.size))*4 - Math.abs(a.length-b.length)*0.3 + (a.slice(-3)===b.slice(-3)?1.5:0);
+}
+function pickHard(target,pool,r,n,field){
+  const bad=w=> w.en===target.en || w.th===target.th || AVOID_SET.has(w.en+'|'+target.en);
+  const ranked=shuffle(pool.filter(w=>!bad(w)),r)
+    .map(w=>({w,s:wordLike(target.en,w.en)+(w.pos===target.pos?7:0)+r()*0.8}))
+    .sort((x,y)=>y.s-x.s).map(x=>x.w);
+  const top=shuffle(ranked.slice(0,Math.max(n*2,6)),r).concat(ranked.slice(Math.max(n*2,6)));   // variety among the closest look-alikes
+  const out=[],used=new Set();
+  for(const w of top){
+    if(out.length>=n) break;
+    if(used.has(w[field])) continue;
+    if(out.some(o=>AVOID_SET.has(o.en+'|'+w.en))) continue;
+    used.add(w[field]); out.push(w);
+  }
+  return out;
+}
+function buildExam(plan,seed,hard){
   const r=rng(seed); const pool=allPool(); const order=shuffle(pool,r); const qs=[]; let cur=0;
+  const pick=hard?pickHard:pickDistractors;
   plan.forEach(([type,count])=>{
     for(let i=0;i<count;i++){
       const w=order[cur++%order.length]; const q={type,w};
       if(type==='spell'){
         const dp='aeioulnrstcdm'.split('');
-        q.tiles=shuffle(w.en.split('').concat([dp[Math.floor(r()*dp.length)],dp[Math.floor(r()*dp.length)]]),r);
+        const dec = hard ? [w.en[Math.floor(r()*w.en.length)], w.en[Math.floor(r()*w.en.length)], dp[Math.floor(r()*dp.length)]]   // doubled letters from the word itself
+                         : [dp[Math.floor(r()*dp.length)], dp[Math.floor(r()*dp.length)]];
+        q.tiles=shuffle(w.en.split('').concat(dec),r);
       }else if(type==='tf'){
         const isTrue=r()<0.5;
-        if(isTrue) q.shown=w.th; else { const d=pickDistractors(w,pool,r,1,'th')[0]; q.shown=d.th; }
+        if(isTrue) q.shown=w.th; else { const d=pick(w,pool,r,1,'th')[0]; q.shown=d.th; }
         q.ans=isTrue?0:1;
       }else if(type!=='type'){
         const field=type==='en2th'?'th':'en';
-        const opts=shuffle([w].concat(pickDistractors(w,pool,r,3,field)),r);
+        const opts=shuffle([w].concat(pick(w,pool,r,3,field)),r);
         q.opts=opts.map(o=>o[field]); q.ans=opts.indexOf(w);
       }
       qs.push(q);
@@ -2138,6 +2168,7 @@ function renderLobby(){
        '<div class="rule"><span class="i">🛡️</span><div>ห้ามสลับแท็บ/แอป ออกจากเต็มจอ คัดลอก หรือใช้ตัวแปลภาษา — ครบ <b>'+E.MAX_VIOL+' ครั้ง ระบบส่งข้อสอบอัตโนมัติ</b></div></div>'+
        '<div class="rule"><span class="i">⏱️</span><div>เวลา '+E.MINUTES+' นาที หมดเวลาแล้วส่งอัตโนมัติ • เวลาเดินต่อแม้ปิดหน้าเว็บ</div></div>'+
        '<div class="rule"><span class="i">🔁</span><div>ได้ต่ำกว่า '+E.PASS+' ต้องสอบซ่อม (ขาดกี่คะแนน ซ่อมกี่ครั้ง เช่น ได้ 15 → ซ่อม 3 ครั้ง)</div></div>'+
+       '<div class="rule"><span class="i">🔥</span><div><b>ยากกว่าด่านฝึก:</b> ตัวเลือกหลอกหน้าตาคล้ายคำตอบ • ตัวอักษรหลอกในข้อเรียงคำมากขึ้น • ข้อพิมพ์คำเพิ่มขึ้น — อ่านให้ดีก่อนตอบนะ!</div></div>'+
        '<div class="rule"><span class="i">🔒</span><div>ไม่เฉลยระหว่างสอบ ย้อนกลับไปแก้ข้อไหนก็ได้ก่อนกดส่ง</div></div></div>'+
        '<label class="agree"><input type="checkbox" id="lbAgree"> ฉันอ่านกติกาแล้ว และจะทำข้อสอบด้วยตัวเองอย่างซื่อสัตย์ 🙏</label>'+
        '<button class="btn gold big" id="lbStart" disabled>📷 สแกนใบหน้าเพื่อเข้าสอบ</button>'+
@@ -2294,11 +2325,13 @@ async function beginExam(kind,resume){
       if(ex.state!=='done'||examPassed(ex)){ exitFS(); openLobby(); return; }
     }
     const remNo = kind==='rem' ? (ex.remTries||0)+1 : 0;
-    ES={kind,key,remNo,seed: kind==='exam' ? key+'#EXAM-2026' : key+'#REM#'+remNo,
+    ES={kind,key,remNo,bv:2,seed: kind==='exam' ? key+'#EXAM-2026' : key+'#REM#'+remNo,
         answers:Array(cfg.N).fill(null),flags:Array(cfg.N).fill(false),idx:0,startAt:Date.now(),deadline:Date.now()+cfg.MINUTES*60000,
         viol:0,vlog:[],verify:SCAN.verify,verifyLog:[SCAN.verify],resumes:0,warned5:false,warned1:false};
   }
-  ES.qs=buildExam(cfg.PLAN,ES.seed); ES.submitted=false;
+  ES.qs = (ES.kind==='exam' && ES.bv!==2) ? buildExam(EXAM_CFG.PLAN_V1,ES.seed,false)
+        : buildExam(cfg.PLAN,ES.seed,ES.kind==='exam'&&!!EXAM_CFG.HARD);
+  ES.submitted=false;
   if(ES.answers.length!==cfg.N){ ES.answers=Array(cfg.N).fill(null); ES.flags=Array(cfg.N).fill(false); }
   persistES();
   if(SCAN.photo){
@@ -2328,7 +2361,8 @@ function tickExam(){
   if(left<=60000&&!ES.warned1){ ES.warned1=true; persistES(); toast('⏰ เหลือเวลา 1 นาทีสุดท้าย!',3000); SFX.tick(); setTimeout(SFX.tick,250); }
   if(left<=0) submitExam('หมดเวลา');
 }
-function curPart(){ const cfg=cfgOf(ES.kind); return partsOf(cfg.PLAN).find(p=>ES.idx>=p.from&&ES.idx<=p.to); }
+function planOfES(){ return (ES.kind==='exam' && ES.bv!==2) ? EXAM_CFG.PLAN_V1 : cfgOf(ES.kind).PLAN; }
+function curPart(){ return partsOf(planOfES()).find(p=>ES.idx>=p.from&&ES.idx<=p.to); }
 function renderEQ(){
   const cfg=cfgOf(ES.kind); const q=ES.qs[ES.idx]; const a=ES.answers[ES.idx]; const T=ETYPES[q.type]; const P=curPart();
   $('#ePart').textContent='ตอนที่ '+P.no+' • '+T.icon+' '+T.name+'  (ข้อ '+(P.from+1)+'–'+(P.to+1)+')';
