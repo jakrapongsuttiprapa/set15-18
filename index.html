@@ -729,6 +729,11 @@ body[data-fx="lo"] .neon::before{animation:none}
 }
 @media (prefers-reduced-motion:reduce){.aurora,.lasers,.grain,#cursorGlow,.sp-ring,.curtain{display:none!important}}
 
+/* v4.2 delivery status */
+.sendstat{margin:14px auto 6px;max-width:560px;padding:12px 16px;border-radius:16px;font-weight:800;line-height:1.5}
+.sendstat.ok{background:rgba(46,229,157,.12);border:1px solid rgba(46,229,157,.5);color:#bfffe6}
+.sendstat.wait{background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.6);color:#ffe2a6;animation:hot .8s ease-in-out infinite alternate}
+.sendstat.warn{background:rgba(255,84,112,.12);border:1px solid rgba(255,84,112,.5);color:#ffc2cf}
 </style>
 </head>
 <body data-theme="boss">
@@ -939,7 +944,7 @@ const CONFIG = {
   GAS_URL: 'https://script.google.com/macros/s/AKfycbxP8qOYMEXf9C-25biJWdEB9uKhuky2vZI2ZqGep8bQwSY2oj_WGf3_jzGBwNHqWN4NSg/exec',
   PIN: '7846',          // PIN สำรองเมื่อเชื่อม GAS ไม่ได้
   APP: 'VOCAB BEAT ADVANCE • SET 15-18',
-  VERSION: '4.1'
+  VERSION: '4.2'
 };
 /* ===== การสอบจริง (ด่าน 5) — ครูแก้ค่าได้ที่นี่ ===== */
 const EXAM_CFG = {
@@ -1932,13 +1937,13 @@ function drawLive(){
   const sm=$('#lvSum'); if(sm){ const done=rows.filter(r=>r.exState==='done'); const pass=done.filter(r=>String(r.exResult).indexOf('ผ่าน')===0);
     const avg=done.length?(done.reduce((s,r)=>s+(+r.exRaw||0),0)/done.length).toFixed(1):'–';
     sm.innerHTML='<div>👥 นักเรียน <b>'+rows.length+'</b></div><div>📝 สอบแล้ว <b>'+done.length+'</b> • กำลังสอบ <b>'+rows.filter(r=>r.exState==='started').length+'</b></div>'+
-      '<div>✅ ผ่าน <b>'+pass.length+'</b> • 🔁 ต้องซ่อม <b>'+(done.length-pass.length)+'</b></div><div>📊 เฉลี่ยสอบจริง <b>'+avg+'</b>/30</div>'; }
+      '<div>✅ ผ่าน <b>'+pass.length+'</b> • 🔁 ต้องซ่อม <b>'+(done.length-pass.length)+'</b>'+(rows.some(r=>r.exOverdue)?' • <span class="warn">⌛ เกินเวลา '+rows.filter(r=>r.exOverdue).length+'</span>':'')+'</div><div>📊 เฉลี่ยสอบจริง <b>'+avg+'</b>/30</div>'; }
   const cell=v=>'<td class="n">'+(v===''||v==null?'–':esc(v))+'</td>';
   tb.innerHTML=rows.length?rows.map(r=>{ const pass=String(r.exResult||'').indexOf('ผ่าน')===0;
     return '<tr><td>'+esc(r.cls+'/'+r.room)+'</td><td class="n">'+esc(r.no)+'</td><td>'+esc(r.name+' '+r.sur)+'</td>'+
     [r.s1,r.s2,r.s3,r.s4].map(cell).join('')+'<td class="n" style="color:#ffd23f">'+esc(r.total)+'</td>'+
     cell(r.exRaw)+'<td class="n" style="color:'+(pass?'#2ee59d':'#ffb020')+'">'+(r.exFinal===''||r.exFinal==null?'–':esc(r.exFinal))+'</td>'+
-    '<td>'+(r.exState==='started'?'<span style="color:#22e5e5">📝 กำลังสอบ</span>':esc(r.exResult||'–'))+'</td>'+
+    '<td>'+(r.exState==='started'?(r.exOverdue?'<span class="warn">⌛ เกินเวลา — ยังไม่ส่ง</span>':'<span style="color:#22e5e5">📝 กำลังสอบ</span>'):esc(r.exResult||'–'))+'</td>'+
     '<td class="n">'+(r.remNeed&&+r.remNeed>0?esc(r.remDone||0)+'/'+esc(r.remNeed):'–')+'</td>'+
     '<td class="n">'+(String(r.verify||'').indexOf('code')>=0?'🔑':r.verify?'📷':'–')+'</td>'+
     '<td class="n'+(+r.exViol?' warn':'')+'">'+(r.exViol===''||r.exViol==null?'–':esc(r.exViol))+'</td>'+
@@ -2060,7 +2065,7 @@ function isCorrect(q,a){
 function partsOf(plan){ const out=[]; let s=0; plan.forEach(([t,n],i)=>{ out.push({t,from:s,to:s+n-1,no:i+1}); s+=n; }); return out; }
 
 /* ---------- outbox (never lose an exam result to a bad network) ---------- */
-function outPush(action,data){
+function outPush(action,data,delayMs){
   const o=LS.get('vbx_outbox',[]);
   o.push({action,data,id:Date.now()+'_'+Math.random().toString(36).slice(2,7)});
   while(o.length>30){ const i=o.findIndex(x=>x.action==='photo'); o.splice(i>=0?i:0,1); }
@@ -2068,20 +2073,38 @@ function outPush(action,data){
   if(!LS.get('vbx_outbox',[]).length && action!=='photo'){   // storage full → drop photos and retry once
     LS.set('vbx_outbox',o.filter(x=>x.action!=='photo'));
   }
-  flushOutbox();
+  updSendStat(); if(action!=='photo') flushTries=0;          // a new result is sent quickly, not after a long backoff
+  if(delayMs>0){ clearTimeout(flushRetry); flushRetry=setTimeout(flushOutbox,delayMs); } else flushOutbox();
 }
-let flushing=false;
+let flushing=false, flushRetry=null, flushTries=0;
+const OUT_PRIO={examStart:0,examFinish:0,remFinish:0,photo:2};
 async function flushOutbox(){
-  if(flushing||!getGasUrl()) return; flushing=true;
+  if(flushing||!getGasUrl()) return; flushing=true; clearTimeout(flushRetry);
+  let failed=false;
   try{
     let o=LS.get('vbx_outbox',[]);
     while(o.length){
-      const it=o[0]; const r=await gas(it.action,it.data);
-      if(!r || r.net || r.error==='busy') break;            // network problem → try again later
-      o=LS.get('vbx_outbox',[]).filter(x=>x.id!==it.id);    // delivered (or rejected for good)
-      LS.set('vbx_outbox',o);
+      // exam results go before photos, so a slow photo upload never holds a score back
+      const it=o.slice().sort((a,b)=>(OUT_PRIO[a.action]||1)-(OUT_PRIO[b.action]||1))[0];
+      const r=await gas(it.action,it.data);
+      if(!r || r.net || r.error==='busy'){ failed=true; break; }   // server busy / network → retry below
+      o=LS.get('vbx_outbox',[]).filter(x=>x.id!==it.id);           // delivered (or rejected for good)
+      LS.set('vbx_outbox',o); flushTries=0; updSendStat();
     }
   }finally{ flushing=false; }
+  if(failed || LS.get('vbx_outbox',[]).length){                       // keep trying while the page is open
+    flushTries++;
+    const wait=Math.min(30000,2000*Math.pow(2,Math.min(flushTries-1,4)))+Math.random()*2500;
+    clearTimeout(flushRetry); flushRetry=setTimeout(flushOutbox,wait);
+  }
+  updSendStat();
+}
+function examResultPending(){ return !!PROFILE && LS.get('vbx_outbox',[]).some(x=>(x.action==='examFinish'||x.action==='remFinish')&&x.data&&x.data.key===profKey(PROFILE)); }
+function updSendStat(){
+  const el=document.getElementById('sendStat'); if(!el) return;
+  if(!getGasUrl()){ el.className='sendstat warn'; el.innerHTML='📸 ยังไม่ได้เชื่อมระบบออนไลน์ — กด “บันทึกรูปผลสอบ” แล้วส่งครูนะ'; return; }
+  if(examResultPending()){ el.className='sendstat wait'; el.innerHTML='⏳ กำลังส่งผลถึงครูโอ๊ต… <b>อย่าเพิ่งปิดหน้านี้</b>'+(flushTries>1?' (กำลังลองใหม่ ครั้งที่ '+flushTries+')':''); }
+  else { el.className='sendstat ok'; el.innerHTML='✅ ส่งผลถึงครูโอ๊ตเรียบร้อยแล้ว'; }
 }
 function outboxHasExam(){ return LS.get('vbx_outbox',[]).some(x=>['examStart','examFinish','remFinish'].includes(x.action)&&x.data&&x.data.key===profKey(PROFILE)); }
 function gasT(action,data,ms){ return Promise.race([gas(action,data),new Promise(res=>setTimeout(()=>res({ok:false,net:true,error:'timeout'}),ms||7000))]); }
@@ -2339,11 +2362,20 @@ async function beginExam(kind,resume){
     LS.set('vbx_lastphoto',{key,data:SCAN.photo,at:Date.now()});
     outPush('photo',Object.assign(studentPayload(),{kind:kindTag,verify:SCAN.verify,data:SCAN.photo.split(',')[1]||''}));
   }
-  gas('violation',Object.assign(studentPayload(),{kind:resume?'exam-resume':'exam-begin',stage:kind==='exam'?'EXAM':'REM'+ES.remNo,count:0}));
+  if(resume||kind==='rem') gas('violation',Object.assign(studentPayload(),{kind:resume?'exam-resume':'exam-begin',stage:kind==='exam'?'EXAM':'REM'+ES.remNo,count:0}));
   if(Date.now()>=ES.deadline){ submitExam('หมดเวลา'); return; }
   startExamUI();
 }
+let wakeLock=null;
+async function keepAwake(on){
+  try{
+    if(on){ if(wakeLock||!('wakeLock' in navigator)) return; wakeLock=await navigator.wakeLock.request('screen'); wakeLock.addEventListener&&wakeLock.addEventListener('release',()=>{ wakeLock=null; }); }
+    else if(wakeLock){ const w=wakeLock; wakeLock=null; await w.release(); }
+  }catch(e){ wakeLock=null; }
+}
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden && typeof examActive==='function' && examActive()) keepAwake(true); });
 function startExamUI(){
+  keepAwake(true);
   setTheme('exam');
   document.body.classList.add('examlock');
   $('#wm').innerHTML=Array.from({length:70},()=>'<span>'+esc(PROFILE.name+' '+PROFILE.sur+' • '+PROFILE.cls+'/'+PROFILE.room+' #'+PROFILE.no)+'</span>').join('');
@@ -2434,9 +2466,13 @@ function askSubmit(){
   const cfg=cfgOf(ES.kind); const n=answeredCount(); const left=cfg.N-n; const fl=ES.flags.filter(Boolean).length;
   confirmBox('ส่งข้อสอบเลยไหม?','ตอบแล้ว '+n+'/'+cfg.N+' ข้อ'+(left?' • ⚠️ ยังไม่ตอบ '+left+' ข้อ':'')+(fl?' • 🚩 ทำเครื่องหมายไว้ '+fl+' ข้อ':'')+' — ส่งแล้วแก้ไขไม่ได้นะ',()=>submitExam(''));
 }
+function submitExpiredSession(s){
+  ES=s; ES.qs = (ES.kind==='exam' && ES.bv!==2) ? buildExam(EXAM_CFG.PLAN_V1,ES.seed,false) : buildExam(cfgOf(ES.kind).PLAN,ES.seed,ES.kind==='exam'&&!!EXAM_CFG.HARD);
+  ES.submitted=false; show('exam'); submitExam('หมดเวลา (ปิดหน้าไปก่อนส่ง)');
+}
 function submitExam(reason){
   if(!ES||ES.submitted) return;
-  ES.submitted=true; clearInterval(examTimer);
+  ES.submitted=true; clearInterval(examTimer); keepAwake(false);
   document.body.classList.remove('examlock'); hideGuard(); exitFS();
   $('#cfmModal').classList.add('hidden');
   const cfg=cfgOf(ES.kind);
@@ -2448,14 +2484,14 @@ function submitExam(reason){
   if(ES.kind==='exam'){
     Object.assign(ex,{state:'done',raw:score,need:Math.max(0,EXAM_CFG.PASS-score),remDone:0,remTries:0,log:[],viol:ES.viol,time:secs,verify:ES.verify,at:Date.now(),reason,byType});
     info={kind:'exam',score,secs};
-    outPush('examFinish',Object.assign(studentPayload(),{raw:score,time:secs,viol:ES.viol,verify:(ES.verifyLog||[ES.verify]).join(','),reason,byType:Object.keys(byType).map(t=>t+':'+byType[t].ok+'/'+byType[t].n).join(' '),resumes:ES.resumes||0}));
+    outPush('examFinish',Object.assign(studentPayload(),{raw:score,time:secs,viol:ES.viol,verify:(ES.verifyLog||[ES.verify]).join(','),reason,byType:Object.keys(byType).map(t=>t+':'+byType[t].ok+'/'+byType[t].n).join(' '),resumes:ES.resumes||0}),reason==='หมดเวลา'?Math.random()*8000:0);
   }else{
     const passed=score>=EXAM_CFG.REM.PASS; const before=ex.remDone||0;
     ex.remTries=Math.max(ex.remTries||0,ES.remNo);
     ex.log=(ex.log||[]).concat([{n:ES.remNo,score,passed,at:Date.now(),viol:ES.viol,reason}]);
     if(passed&&ex.remDone<ex.need) ex.remDone++;
     info={kind:'rem',score,secs,passed,gained:ex.remDone>before};
-    outPush('remFinish',Object.assign(studentPayload(),{remNo:ES.remNo,score,time:secs,viol:ES.viol,verify:ES.verify,reason}));
+    outPush('remFinish',Object.assign(studentPayload(),{remNo:ES.remNo,score,time:secs,viol:ES.viol,verify:ES.verify,reason}),reason==='หมดเวลา'?Math.random()*8000:0);
   }
   saveExam(ex);
   const d=db(); const rec=d.profiles[profKey(PROFILE)]; const fresh=rec?checkBadges(rec,{}):[]; if(rec) saveDb(d);
@@ -2487,12 +2523,13 @@ function renderExamResult(o){
     '<div class="tbars">'+cfg.PLAN.map(([t])=>{const b=o.byType[t]||{ok:0,n:0};return '<div class="tbar"><span>'+ETYPES[t].icon+' '+ETYPES[t].name+'</span><div class="tr"><i data-w="'+(b.n?b.ok/b.n*100:0)+'"></i></div><b>'+b.ok+'/'+b.n+'</b></div>';}).join('')+'</div>'+
     remPathHTML(ex)+
     (o.fresh&&o.fresh.length?'<div class="newb"><b>🏅 ปลดล็อกเหรียญใหม่!</b><div class="list">'+o.fresh.map((id,i)=>{const b=BADGES.find(x=>x.id===id);return '<div class="it" style="animation-delay:'+(1.8+i*.25)+'s"><span>'+b.e+'</span>'+esc(b.n)+'</div>';}).join('')+'</div></div>':'')+
-    '<p class="muted" style="font-size:13px">🔒 ไม่แสดงเฉลยเพื่อความยุติธรรมกับเพื่อนที่ยังไม่ได้สอบ • ผลถูกส่งถึงครูโอ๊ตแล้ว</p>'+
+    '<div class="sendstat" id="sendStat"></div>'+
+    '<p class="muted" style="font-size:13px">🔒 ไม่แสดงเฉลยเพื่อความยุติธรรมกับเพื่อนที่ยังไม่ได้สอบ</p>'+
     '<div class="hubfoot">'+
       (!ok&&ex.state==='done'?'<button class="btn gold" id="erRem">🔁 สอบซ่อมครั้งต่อไป</button>':'')+
       '<button class="btn pri" id="erImg">💾 บันทึกรูปผลสอบ</button><button class="btn ghost" id="erHub">← หน้าหลัก</button></div>';
   $('#exresBox').innerHTML=h;
-  show('exres');
+  show('exres'); updSendStat();
   countUp($('#exN'),o.score,1200);
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
     const arc=$('#exArc'); if(arc){ const C=parseFloat(arc.getAttribute('stroke-dasharray')); arc.style.transition='stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)'; arc.style.strokeDashoffset=String(C*(1-o.score/cfg.N)); }
@@ -2567,7 +2604,8 @@ function initExamGuards(){
     new MutationObserver(muts=>{ if(examActive() && muts.some(m=>m.type==='characterData'&&!(m.target.parentNode&&m.target.parentNode.tagName==='INPUT'))) examViolation('translate','ใช้ระบบแปลภาษา'); })
       .observe(document.body,{subtree:true,characterData:true});
   }catch(e){}
-  window.addEventListener('online',flushOutbox);
+  window.addEventListener('online',()=>{ flushTries=0; flushOutbox(); });
+  window.addEventListener('beforeunload',e=>{ if(examResultPending() && getGasUrl()){ e.preventDefault(); e.returnValue=''; } });
 }
 
 /* ---------- RESULT IMAGE ---------- */
@@ -2747,6 +2785,7 @@ function enterApp(){
   ac();SFX.go();sp.classList.add('out');setTimeout(()=>sp.classList.add('hidden'),650);
   if(!PROFILE){ show('reg'); return; }
   const es=LS.get('vbx_exam_sess',null);
+  if(es&&es.key===profKey(PROFILE)&&Date.now()>=es.deadline){ submitExpiredSession(es); return; }
   if(es&&es.key===profKey(PROFILE)){ openLobby(); toast('⏸️ มีการสอบที่ค้างอยู่ — กลับเข้าห้องสอบ',3000); } else renderHub();
 }
 function init(){
